@@ -1,0 +1,51 @@
+
+/* ######################################################################## */
+/* ###### Layout-Einstellungen für die Buttons im Hauptmenü ############### */
+/* ######################################################################## */
+
+#menu button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor:pointer;
+  overflow: hidden;
+
+}
+
+/* negativ abgerundeter Background nach http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/ */
+
+#mainmenu-button {
+	background: #edf60d;
+	background:
+		linear-gradient(135deg, transparent 10px, #edf60d 0) top left,
+		linear-gradient(225deg, transparent 10px, #edf60d 0) top right,
+		linear-gradient(315deg, transparent 10px, #edf60d 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, #edf60d 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  padding-top: 4px;
+  padding-bottom: 15px;
+
+  min-width: 325px;
+}
+
+#mainmenu-button.round {
+	background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, #edf60d 15px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, #edf60d 15px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, #edf60d 15px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, #edf60d 15px);
+
+    font: Thaoma;
+    font-size: 50px;
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 4px 0px  #555,
+            2px 4px 0px #edf60d
+          ;
+}

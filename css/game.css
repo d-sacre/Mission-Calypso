@@ -1,0 +1,66 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+fieldset {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#game-gui-container{
+
+  position: relative;
+
+}
+
+#game-rendering-area{
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#headup-gui-container {
+  position: absolute;
+  z-index: 0;
+
+}
+
+#headup-gui-spaceship{
+  position: absolute;
+  left: 0vw;
+
+  width: 44vw;
+}
+
+#game-timer{
+  position: absolute;
+  left: 45vw;
+
+  width: 4vw;
+}
+
+#headup-gui-mining{
+  position: absolute;
+  left: 50vw;
+
+  width: 45vw;
+
+}
+
+li{
+  display:inline;
+}
+
+#popup-area{
+
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  z-index: 1;
+
+}
