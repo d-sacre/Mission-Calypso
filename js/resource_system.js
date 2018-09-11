@@ -7,8 +7,8 @@ class ResourcesSystem{
 		this.energy = 150;
 		this.time = 0;
 		this.N = 0;
-		this.nIdle=1;
-		this.nWork=2;
+		this.nIdle=0;
+		this.nWork=1;
 		this.v = 1;
 		this.w = 100;
 		this.productivity = 0;
@@ -104,11 +104,12 @@ function setTime() {
 		
 	document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
 	document.querySelector('.time-value').innerHTML= time + 's';
-	document.querySelector('.carbondioxide-value').innerHTML= carbondioxid + '/8.00 %';
-	document.querySelector('.oxygen-value').innerHTML= oxygen + '/21.00 %';
+	document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
+	document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
 	if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
 	window.clearInterval(timeUnit);
 	console.log("Game Over");
+	alert("Game Over");
 	}
 }
 
