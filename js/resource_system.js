@@ -61,7 +61,7 @@ class ResourcesSystem{
 	}
 	
 	carbondioxidFactorCalculation(){
-		carbondioxid=this.carbondioxid;
+		let carbondioxid=this.carbondioxid;
 		  if(0.04<=carbondioxid<=0.08){
 		    return (1-2.5*(carbondioxid-0.04));
 		  }
