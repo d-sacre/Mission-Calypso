@@ -59,6 +59,21 @@ class ResourcesSystem{
 		this.energyConsumption = 0;
 		this.energy = Energy;
 	}
+	
+	carbondioxidFactorCalculation(){
+		carbondioxid=this.carbondioxid;
+		  if(0.04<=carbondioxid<=0.08){
+		    return (1-2.5*(carbondioxid-0.04));
+		  }
+		  if(carbondioxid<=1.5){
+		      return (0.9-(20/141)*(carbondioxid-0.09));
+		  }
+		  if(carbondioxid<=5){
+		    return (0.7-(40/349)*(carbondioxid-1.51));
+		  } else {
+		      return (0.3-(3/29)*(carbondioxid-1.51));
+		  }
+	}
 		
 	myTime() {
 		let oxygenFactor = 4.76/100;
@@ -77,20 +92,7 @@ class ResourcesSystem{
 		};
 	}
 	
-	carbondioxidFactorCalculation(){
-		carbondioxid=this.carbondioxid;
-		  if(0.04<=carbondioxid<=0.08){
-		    return (1-2.5*(carbondioxid-0.04));
-		  }
-		  if(carbondioxid<=1.5){
-		      return (0.9-(20/141)*(carbondioxid-0.09));
-		  }
-		  if(carbondioxid<=5){
-		    return (0.7-(40/349)*(carbondioxid-1.51));
-		  } else {
-		      return (0.3-(3/29)*(carbondioxid-1.51));
-		  }
-	}
+	
 	
 }
 let system = new ResourcesSystem(200);
