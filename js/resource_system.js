@@ -77,7 +77,7 @@ class ResourcesSystem{
 		
 	myTime() {
 		let oxygenFactor = 4.76/100;
-		let carbondioxidFactor = carbondioxidFactorCalculation();
+		let carbondioxidFactor = this.carbondioxidFactorCalculation();
 		//productivity = this v*(this oxygen*oxygenFactor)*(this carbondioxid*)
 		this.oxygen -=1;
 		this.carbondioxid +=1;
