@@ -10,6 +10,8 @@ fieldset {
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
+
+  font-size: 12px;
 }
 
 #game-gui-container{
@@ -63,4 +65,27 @@ li{
   top: 50vh;
   z-index: 1;
 
+}
+
+/* ########################################################################## */
+/* ############ Klassensystem gui ########################################### */
+/* ########################################################################## */
+.energy-value{
+    color: white;
+}
+
+.oxygen-value{
+  color: white;
+}
+
+.carbondioxide-value{
+  color: white;
+}
+
+.weight-value{
+  color: white;
+}
+
+.wear-value{
+  color: white;
 }
