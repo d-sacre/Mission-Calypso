@@ -71,7 +71,7 @@ class ResourcesSystem{
 		  if(carbondioxid<=5){
 		    return (0.7-(40/349)*(carbondioxid-1.51));
 		  } else {
-		      return (0.3-(3/29)*(carbondioxid-1.51));
+		      return (0.3-(3/29)*(carbondioxid-5.01));
 		  }
 	}
 		
@@ -89,6 +89,7 @@ class ResourcesSystem{
 		return {
 			time: this.time,
 			energy: this.energy,
+			carbondioxid: this.carbondioxid
 		};
 	}
 	
@@ -102,6 +103,8 @@ function setTime() {
 	let data = system.myTime(),
 		energy = data.energy,
 		time = data.time;
+		carbondioxid = data.carbondioxid;
 	document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
 	document.querySelector('.time-value').innerHTML= time + 's';
+	document.querySelector('.carbondioxide-value').innerHTML= carbondioxid + '/8.00 %'
 }
