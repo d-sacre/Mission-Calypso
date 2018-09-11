@@ -7,8 +7,8 @@ class ResourcesSystem{
 		this.energy = 150;
 		this.time = 0;
 		this.N = 0;
-		this.nIdle=0;
-		this.nWork=0;
+		this.nIdle=1;
+		this.nWork=2;
 		this.v = 1;
 		this.w = 100;
 		this.productivity = 0;
@@ -16,6 +16,24 @@ class ResourcesSystem{
 		this.energy = Energy;
 		this.weight = Weight;
 		//this.resourceLost = false;
+	}
+	
+	
+/*	getSliderValue(){
+		weightSlider=document.querySelector('#weight-slider').value;
+	}*/
+	
+	refreshOxygenValue(){
+		let workingConsumption = 0.1;
+		let idleConsumption = 0.05;
+		return this.oxygen -(this.nWork*workingConsumption+this.nIdle*idleConsumption);		
+	}
+	
+	refreshCarbondioxidValue(){
+		let workingProduction = 0.1;
+		let idleProduction = 0.05;
+		console.log(this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction));
+		return this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction);
 	}
 	
 	carbondioxidFactorCalculation(){
@@ -32,26 +50,42 @@ class ResourcesSystem{
 		      return (0.3-(3/29)*(carbondioxid-5.01));
 		  }
 	}
+	
+	oxygenFactorCalculation(){
+		return this.oxygen*(4.76/100);
+	}
+		
 		
 	myTime() {
-
-		let oxygenFactor = 4.76/100;
+		// Faktoraktualisierung
 		let carbondioxidFactor = this.carbondioxidFactorCalculation();
-		//productivity = this v*(this oxygen*oxygenFactor)*(this carbondioxid*)
-		this.oxygen -=1;
-		this.carbondioxid +=1;
+		let oxygenFactor= this.oxygenFactorCalculation();
+		let v= this.v;
+		
+		//Wertänderungen
+		let productivity = this.calculateProductivity(v,oxygenFactor, carbondioxidFactor);
+		this.oxygen = this.refreshOxygenValue();
+		
+		this.carbondioxid = this.refreshCarbondioxidValue();
 		this.energy -= 1;
 		this.time += 1;
 		
 		console.log(carbondioxidFactor);
 		
-
+		//Rückgabewerte
 		return {
 			time: this.time,
 			energy: this.energy,
 			carbondioxid: this.carbondioxid,
 			oxygen: this.oxygen
 		};
+		
+	}
+	
+	
+	calculateProductivity(v,oxygenFactor, carbondioxidFactor){
+		console.log(v+"   "+oxygenFactor+"      "+carbondioxidFactor);
+		return v*carbondioxidFactor*oxygenFactor;
 	}
 	
 	
