@@ -34,8 +34,6 @@ function onWindowResize() {
 }
 function animate() {
 	requestAnimationFrame( animate );
-	group.rotation.x += 0.001;
-	group.rotation.y += 0;
 	controls.update();
 	renderer.render( scene, camera );
 }
