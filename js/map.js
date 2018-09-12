@@ -1,24 +1,35 @@
+var group, groupSurface;
+var NUMELEMENTS=20;
+var BOXSIZE = new THREE.Vector3(200, 200, 200);
+var SURFACEMULTI = 1000;
+
 function buildModel() {				
-	NUMELEMENTS=200;		
-	var mesh, mesh1, mesh2, group, groupSurface, model;
+			
+	var mesh, mesh1, mesh2, model;
 	
-	var texture = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/test.jpg" );
-	var texture1 = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/test1.jpg" );
-	var material = new THREE.MeshPhongMaterial( { map: texture, wireframe: false});
-	var material1 = new THREE.MeshPhongMaterial( { map: texture1, wireframe: false});
-	var geometry = new THREE.BoxBufferGeometry( 2 , 2, 2 );
-	var geoSurface = new THREE.BoxBufferGeometry( 2 , 1, 2 );
-	var geoSurface1 = new THREE.BoxBufferGeometry( 2000 , 1, 2000 );
+	var texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_highres_withoutedge_256x256_compress.jpg" );
+	var texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_edge_128x128.jpg" );
+	var texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_top_512x512_compress.jpg" );
 	
+	var matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+	var matEdge = new THREE.MeshPhongMaterial( { map: texEdge, wireframe: false});
+	var matSurface = new THREE.MeshPhongMaterial( { map: texSurface, wireframe: false});
+	var geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
+	var geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
+	var geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
+
+	
+	//creation of the edge 
 	model = new THREE.Group();
 	groupSurface= new THREE.Group();
-	for(var a=-NUMELEMENTS*5; a<NUMELEMENTS*5; a+=2){
-			for(var b=0; b<2; b+=2){
-				mesh1 = new THREE.Mesh( geoSurface, material1 );
-				var pos1 = new THREE.Vector3(a, 1.5, -b);
+	let numberRows =2;
+	for(let x=-NUMELEMENTS; x<NUMELEMENTS; x++){
+			for(let z=0; z<numberRows; z++){
+				mesh1 = new THREE.Mesh( geoEdge, matEdge );
+				var pos1 = new THREE.Vector3(x*BOXSIZE.x, 0.75*BOXSIZE.y, -z*BOXSIZE.x);
 				mesh1.position.copy(pos1);
-				//let name = "(" + a + "|" + b + ")";
-				//mesh1.name= name;
+				let name = "(" + x + ")";
+				mesh1.name= name;
 				mesh1.receiveShadow = true;
 				mesh1.castShadow = true;
 				groupSurface.add( mesh1 );	
@@ -26,24 +37,25 @@ function buildModel() {
 	}
 	model.add(groupSurface);
 	
-	mesh2 = new THREE.Mesh( geoSurface1, material1 );
-	var pos2 = new THREE.Vector3(0, 1.5, -1001);
+	//creation of the plain big surface
+	mesh2 = new THREE.Mesh( geoSurface, matSurface );
+	var pos2 = new THREE.Vector3(0, 0.75*BOXSIZE.y, -((SURFACEMULTI*BOXSIZE.y)/2+BOXSIZE.z*3/2));
 	mesh2.position.copy(pos2);
 	mesh2.receiveShadow = true;
 	mesh2.castShadow = true;
 	groupSurface.add( mesh2 );	
 	
-
-	
+	//creation of the underground boxes
 	group = new THREE.Group();
-	for(var m=0; m<4; m+=2){
-		for(var i=-NUMELEMENTS; i<NUMELEMENTS; i+=2){
-			for(var j=-NUMELEMENTS; j<1; j+=2){
-				mesh = new THREE.Mesh( geometry, material );
-				let pos = new THREE.Vector3(i, j, -m);
+	for(var z=0; z<2; z++){
+		for(var x=-NUMELEMENTS; x<NUMELEMENTS; x++){
+			for(var y=0; y<NUMELEMENTS; y++){
+				let material = matUnderground.clone();
+				mesh = new THREE.Mesh( geoUnderground, material );
+				let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, -z*BOXSIZE.z);
 				mesh.position.copy(pos);
-				if(m===0) {
-					let name = "(" + i + "|" + j + ")";
+				if(z===0) {
+					let name = "(" + x + "|" + y + ")";
 					mesh.name= name;
 				}
 				mesh.receiveShadow = true;
@@ -55,3 +67,9 @@ function buildModel() {
 	model.add(group);
 	return model;		
 }
+
+
+
+	
+
+	
