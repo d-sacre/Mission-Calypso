@@ -75,18 +75,15 @@
 
 
 			<div id="game-rendering-area">
-				<script src="js/resource_system_test.js">
-							/* Hier kommt der für das Rendering relevante three.js-Code hinein */
-							/* Der Rest wird in ./js/... (evtl. mit Unterordnern) ausgelagert */
-				</script>
+				
 			</div>
 
 			<div id="parameter-adjustment">
-				<fieldset>
+				<fieldset onchange="system.refreshSliderDisplay()">
 						<legend> machine speed & work assignement</legend>
 
 						<label for="machine-speed"> machine speed:  </label>
-						<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1">
+						<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1" >
 						<span id="machine-speed-slidervalue" type="text" value="">1</span>
 
 					</br>
@@ -114,7 +111,7 @@
 
 				</fieldset>
 
-					<fieldset>
+					<fieldset onchange="system.refreshSliderDisplay()">
 							<legend> Tuning values for resource system</legend>
 
 							<label for="energy-start-value"> energy start value:  </label>
@@ -157,5 +154,8 @@
 		</div>
 
 	</body>
-
+	<script src="js/resource_system_test.js">
+							/* Hier kommt der für das Rendering relevante three.js-Code hinein */
+							/* Der Rest wird in ./js/... (evtl. mit Unterordnern) ausgelagert */
+	</script>
 </html>

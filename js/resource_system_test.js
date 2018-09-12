@@ -15,28 +15,82 @@ class ResourcesSystem{
 		this.energyConsumption = 0;
 		this.energy = Energy;
 		this.weight = Weight;
-		this.getSliderValue;
+		
+		this.workingConsumptionO = 0.1;
+		this.idleConsumptionO = 0.05;
+		this.workingProductionCO = 0.1;
+		this.idleProductionCO = 0.05;
+		//console.log(this.getSliderValue());
+		//this.refreshSliderDisplay();
 		//this.resourceLost = false;
 	}
 	
 	
 	getSliderValue(){
-		weightSlider=document.querySelector('#machine-speed-slider').value;
-		console.log(weightSlider)
+		let machineSpeed=document.querySelector('#machine-speed-slider').value;
+		let workerIdle=document.querySelector('#worker-idle-slider').value;
+		let workerMining=document.querySelector('#worker-mining-slider').value;
+		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
 		
+		let energyStartvalue=document.querySelector('#energy-startvalue-slider').value;
+		let oxygenConsumptionIdle=document.querySelector('#oxygen-consumption-idle-slider').value;
+		let oxygenConsumptionWork=document.querySelector('#oxygen-consumption-work-slider').value;
+		let carbondioxideProductionIdle=document.querySelector('#carbondioxide-production-idle-slider').value;
+		let carbondioxideProductionWork=document.querySelector('#carbondioxide-production-work-slider').value;
+		return {
+			machineSpeed,
+			workerIdle,
+			workerMining,
+			workerRefinery,
+			energyStartvalue,
+			oxygenConsumptionIdle,
+			oxygenConsumptionWork,
+			carbondioxideProductionIdle,
+			carbondioxideProductionWork	
+		}
 	}
 	
+	refreshSliderDisplay(){
+		
+		let SliderValues=this.getSliderValue();
+		
+		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed;
+		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
+		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
+		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
+		
+		document.querySelector('#energy-startvalue-slidervalue').innerHTML=SliderValues.energyStartvalue;
+		document.querySelector('#oxygen-consumption-idle-slidervalue').innerHTML=SliderValues.oxygenConsumptionIdle;
+		document.querySelector('#oxygen-consumption-work-slidervalue').innerHTML=SliderValues.oxygenConsumptionWork;
+		document.querySelector('#carbondioxide-production-idle-slidervalue').innerHTML=SliderValues.carbondioxideProductionIdle;
+		document.querySelector('#carbondioxide-production-work-slidervalue').innerHTML=SliderValues.carbondioxideProductionWork;
+		
+		this.testSliderValues(SliderValues);
+		//console.log(SliderValues);
+	}
+	
+	testSliderValues(SliderValues){
+		//this.energy = SliderValues.energyStartvalue;
+		
+		this.N = SliderValues.workerIdle+SliderValues.workerMining;
+		this.nIdle=SliderValues.workerIdle;
+		this.nWork=SliderValues.workerMining;
+		this.v = SliderValues.machineSpeed;
+		this.workingConsumptionO = SliderValues.oxygenConsumptionWork;
+		this.idleConsumptionO = SliderValues.oxygenConsumptionIdle;
+		this.idleProductionCO = SliderValues.carbondioxideProductionIdle;
+		this.workingProductionCO = SliderValues.carbondioxideProductionWork;
+	}
+	
+	
 	refreshOxygenValue(){
-		let workingConsumption = 0.1;
-		let idleConsumption = 0.05;
-		return this.oxygen -(this.nWork*workingConsumption+this.nIdle*idleConsumption);		
+		console.log(this.workingConsumptionO);
+		return this.oxygen -(this.nWork*this.workingConsumptionO+this.nIdle*this.idleConsumptionO);		
 	}
 	
 	refreshCarbondioxidValue(){
-		let workingProduction = 0.1;
-		let idleProduction = 0.05;
-		console.log(this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction));
-		return this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction);
+		//console.log(this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction));
+		return this.carbondioxid+(this.nWork*this.workingProductionCO+this.nIdle*this.idleProductionCO);
 	}
 	
 	carbondioxidFactorCalculation(){
@@ -73,7 +127,7 @@ class ResourcesSystem{
 		this.energy -= 1;
 		this.time += 1;
 		
-		console.log(carbondioxidFactor);
+		//console.log(carbondioxidFactor);
 		
 		//Rückgabewerte
 		return {
@@ -87,7 +141,7 @@ class ResourcesSystem{
 	
 	
 	calculateProductivity(v,oxygenFactor, carbondioxidFactor){
-		console.log(v+"   "+oxygenFactor+"      "+carbondioxidFactor);
+		//console.log(v+"   "+oxygenFactor+"      "+carbondioxidFactor);
 		return v*carbondioxidFactor*oxygenFactor;
 	}
 	
@@ -112,7 +166,6 @@ function setTime() {
 	if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
 	window.clearInterval(timeUnit);
 	console.log("Game Over");
-	alert("Game Over");
 	}
 }
 
