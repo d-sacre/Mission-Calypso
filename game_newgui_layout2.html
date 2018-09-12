@@ -76,7 +76,26 @@
 
 
 
+
 				<div id="game-gui-popup" class="game-gui-popup transform">
+
+					<div id="to-rocket-menu" class="box transform">
+					</div>
+
+					<input id="to-rocket-menu-popup" type="button">
+							Detailed overview
+					</input>
+
+					<button onclick="location.href='./index_titletwoline.html';" id="back-to-mainmenu-popup-button" class="popupmenu-button round">
+						Back to Menu
+					</button>
+
+					<button  id="return-to-game-popup-button" class="popupmenu-button round">
+						Return to game
+					</button>
+					
+					<ul id="game-gui-popup-firstrow">
+						<li>
 						<fieldset id="general-popup">
 							 <legend>general:</legend>
 							 <ul>
@@ -105,21 +124,140 @@
 									</li>
 							 </ul>
 						</fieldset>
+					</li>
 
-						<div id="to-rocket-menu" class="box transform">
-						</div>
+					<li>
+						<fieldset id="storage-popupmenu">
+							<legend> storage: </legend>
+							<ul>
+								<li>
+									caloricum ore
+									<div id="raw-caloricum-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+											<img id="caloricum-ore" src="pictures/caloricum_green.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span>15/15</span>
+								</li>
 
-						<input id="to-rocket-menu-popup" type="button">
-								Detailed overview
-						</input>
+								<li>
+									copper ore
+									<div id="copper-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+											<img id="copper-ore" src="pictures/copper.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span>15/15</span>
+								</li>
 
-						<button onclick="location.href='./index_titletwoline.html';" id="back-to-mainmenu-popup-button" class="popupmenu-button round">
-							Back to Menu
-						</button>
+								<li>
+									pottasium ore
+									<div id="raw-pottasium-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+											<img id="pottasium-ore" src="pictures/pottassium.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span>15/15</span>
+								</li>
+							</ul>
+							<ul>
+								<li>
+									energy
+									<div id="energy-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+											<img id="energy-symbol" src="pictures/energy.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span>150/150 HU</span>
+								</li>
 
-						<button  id="return-to-game-popup-button" class="popupmenu-button round">
-							Return to game
-						</button>
+								<li>
+									empty
+									<div id="empty" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+										<!--<img id="energy-symbol" src="pictures/caloricum_green.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">-->
+									</div>
+									<span>empty</span>
+								</li>
+
+								<li>
+									decarbonizer
+									<div id="decarbonizer-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+											<img id="decarbonizer-product" src="pictures/decarbonizer.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+									</div>
+									<span>15/15</span>
+								</li>
+							<ul>
+						</fieldset>
+					</li>
+				</ul>
+
+				<ul id="game-gui-popup-secondrow">
+					<li>
+						<fieldset id="machine-speed-work-assignement-popup">
+							<legend> machine speed & work assignement</legend>
+
+						 <label for="machine-speed"> machine speed:  </label>
+						 <input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1">
+						 <span id="machine-speed-slidervalue" type="text" value="">1</span>
+
+					 </br>
+					 </br>
+						 <strong> <font color="green">work assignement:</font> </strong>
+					 </br>
+
+						 <label for="worker-idle"> worker-idle:  </label>
+						 <input name="worker-idle" id="worker-idle-slider" type="range" min="0" max="3" step="1" default value="3">
+						 <span id="worker-idle-slidervalue" type="text" value="">3</span>
+
+					 </br>
+
+						 <label for="worker-mining"> worker-mining:  </label>
+						 <input name="worker-mining" id="worker-mining-slider" type="range" min="0" max="3" step="1" default value="0">
+						 <span id="worker-mining-slidervalue" type="text" value="">0</span>
+
+					 </br>
+
+						 <label for="worker-refinery"> worker-refinery:  </label>
+						 <input name="worker-refinery" id="worker-refinery-slider" type="range" min="0" max="3" step="1" default value="0">
+						 <span id="worker-refinery-slidervalue" type="text" value="">0</span>
+
+					 </br>
+
+					</fieldset>
+				</li>
+
+				<li>
+					<fieldset id="refinery-popupmenu">
+						<legend> refinery: </legend>
+						<ul>
+							<li>
+								caloricum ore
+								<div id="raw-caloricum-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+										<img id="caloricum-ore" src="pictures/caloricum_green.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+								</div>
+								<span>15/15</span>
+							</li>
+
+							<li>
+								pottasium ore
+								<div id="raw-pottasium-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+										<img id="pottasium-ore" src="pictures/pottassium.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+								</div>
+								<span>15/15</span>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								energy
+								<div id="energy-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+										<img id="energy-symbol" src="pictures/energy.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+								</div>
+								<span>150/150 HU</span>
+							</li>
+
+							<li>
+								decarbonizer
+								<div id="decarbonizer-storage" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
+										<img id="decarbonizer-product" src="pictures/decarbonizer.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+								</div>
+								<span>15/15</span>
+							</li>
+						<ul>
+					</fieldset>
+				</li>
+			</ul>
 
 				</div>
 
