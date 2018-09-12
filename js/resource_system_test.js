@@ -170,7 +170,7 @@ let system = new ResourcesSystem(150);
 let timeUnit = setInterval(system.setTime, 1000);
 
 	
-function setTime() {
+/*function setTime() {
 	let data = system.myTime(),
 		energy = data.energy,
 		time = data.time;
@@ -185,5 +185,5 @@ function setTime() {
 	window.clearInterval(timeUnit);
 	console.log("Game Over");
 	}
-}
+}*/
 
