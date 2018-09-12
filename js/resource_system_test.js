@@ -146,10 +146,28 @@ class ResourcesSystem{
 	}
 	
 	
-	
+
+	setTime() {
+		let data = system.myTime();
+		let	energy = data.energy;
+		let	time = data.time;
+		let	carbondioxid = data.carbondioxid;
+		let	oxygen = data.oxygen;
+			
+		document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
+		document.querySelector('.time-value').innerHTML= time + 's';
+		document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
+		document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
+		if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
+		window.clearInterval(timeUnit);
+		console.log("Game Over");
+		}
+		
+	}
 }
-let system = new ResourcesSystem(200);
-let timeUnit = setInterval(setTime, 1000);
+
+let system = new ResourcesSystem(150);
+let timeUnit = setInterval(system.setTime, 1000);
 
 	
 function setTime() {
