@@ -7,7 +7,7 @@ function getSpotLight() {
 	spotLight.penumbra = 0.05;
 	spotLight.decay = 2;
 	spotLight.distance = 200;
-	spotLight.angle = 0.98;
+	spotLight.angle = 2;
 	spotLight.shadow.mapSize.width = 1024;
 	spotLight.shadow.mapSize.height = 1024;
 	spotLight.shadow.camera.near = 10;
