@@ -1,0 +1,150 @@
+:root {
+
+   --calypsobrass: #edf60d;
+   --calypsocopper: rgb(200, 117, 51);
+
+}
+
+*{
+
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: white;
+  overflow: hidden;
+
+}
+
+/*########################################################################## */
+/*###### definition of headup-gui-popup-style ################################ */
+/*########################################################################## */
+.headup-gui{
+
+  position: absolute;
+  top: 0vh;
+  left: 10vw;
+
+}
+
+#headup-gui-container li {
+  list-style: none;
+  display: inline-block;
+}
+
+#game-timer {
+  position: absolute;
+  top: 1vh;
+  left: 89vw;
+
+  width: 8vw;
+
+}
+
+#headup-gui-spaceship{
+  position: absolute;
+  top: 1vh;
+  left: 2.5vw;
+
+  width: 85vw;
+
+}
+
+
+/*########################################################################## */
+/*###### definition of game-gui-popup-style ################################ */
+/*########################################################################## */
+
+.transform {
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+
+
+
+.game-gui-popup{
+  position: absolute;
+  left: 5vw;
+  bottom: -70vh;
+
+
+  background-color: var(--calypsocopper);
+  border: solid 5px var(--calypsobrass);
+  border-radius: 10px;
+
+
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  font-size: 12px;
+
+  height: 84vh;
+  width: 90vw;
+
+  overflow: hidden;
+
+}
+
+.transform-active {
+  bottom: 0vh;
+}
+
+#game-gui-popup-container{
+  overflow: hidden;
+
+}
+
+
+/*#game-gui-popup{
+
+  padding: 10px;
+
+  height: 84vh;
+  width: 90vw;
+
+}*/
+
+#general-popup{
+
+  position: absolute;
+  top: 10vh;
+  right:10vw;
+
+}
+
+
+/* ########################################################################## */
+/* ############ class-system gui ########################################### */
+/* ########################################################################## */
+.energy-value{
+    color: white;
+}
+
+.oxygen-value{
+  color: white;
+}
+
+.carbondioxide-value{
+  color: white;
+}
+
+.weight-value{
+  color: white;
+}
+
+.wear-value{
+  color: white;
+}
+
+.time-value{
+  color: white;
+}
