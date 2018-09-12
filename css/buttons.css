@@ -19,7 +19,7 @@
 
 /* negativ abgerundeter Background nach http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/ */
 
-#mainmenu-button {
+.mainmenu-button {
 	background: #edf60d;
 	background:
 		linear-gradient(135deg, transparent 10px, #edf60d 0) top left,
@@ -35,7 +35,7 @@
   min-width: 325px;
 }
 
-#mainmenu-button.round {
+.mainmenu-button.round {
 	background-image:
 		radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, #edf60d 15px),
 		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, #edf60d 15px),
