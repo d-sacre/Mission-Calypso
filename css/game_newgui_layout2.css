@@ -70,7 +70,7 @@ body {
 .game-gui-popup{
   position: absolute;
   left: 5vw;
-  bottom: -70vh;
+  bottom: -70vh;/*-70vh;*/
 
 
   background-color: var(--calypsocopper);
@@ -94,6 +94,17 @@ body {
 
 }
 
+.game-gui-popup ul{
+    padding: 10px;
+    margin: 0px;
+}
+
+.game-gui-popup li{
+    list-style: none;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
 .transform-active {
   bottom: 0vh;
 }
@@ -104,22 +115,107 @@ body {
 }
 
 
-/*#game-gui-popup{
-
-  padding: 10px;
-
-  height: 84vh;
-  width: 90vw;
-
-}*/
-
 #general-popup{
 
   position: absolute;
-  top: 10vh;
-  right:10vw;
+  top: 1vh;
+  right:25vw;
+
+  width: 20vw;
+  height: 37.5vh;
+
+  padding: 5px;
+
+  font-size: 12pt;
 
 }
+
+#storage-popupmenu{
+
+  position: absolute;
+  top: 1vh;
+  right: 2.5vw;
+
+  height: 37.5vh;
+  width: 20vw;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#storage-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#refinery-popupmenu{
+
+    position: absolute;
+    top: 40vh;
+    right: 2.5vw;
+
+    height: 37.5vh;
+    width: 20vw;
+
+    font-size: 12pt;
+
+  }
+
+
+#refinery-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#refinery-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#machine-speed-work-assignement-popup{
+  position: absolute;
+  top: 40vh;
+  right: 25vw;
+
+  height: 37.5vh;
+
+  font-size: 12pt;
+}
+
+/* drag and drop Menu */
+.drag-and-drop-menu-material-container {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    border: 1px solid #aaaaaa;
+}
+
+.storage-popupmenu-draganddrop-icon{
+
+  height: 65px;
+  width: 65px;
+
+  padding:  10px;
+}
+
+
 
 
 /* ########################################################################## */
