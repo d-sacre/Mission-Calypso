@@ -1,6 +1,6 @@
 "use strict";
 
-var group, groupSurface;
+var group, group2, groupSurface;
 var NUMELEMENTS=20;
 var BOXSIZE = new THREE.Vector3(200, 200, 200);
 var SURFACEMULTI = 1000;
