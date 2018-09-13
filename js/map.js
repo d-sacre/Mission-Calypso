@@ -79,6 +79,8 @@ function buildModel() {
 	
 	//creation of the underground boxes
 	group = new THREE.Group();
+	group2 = new THREE.Group();
+	let groups = [group, group2];
 	for(var z=0; z<2; z++){
 		for(var x=-NUMELEMENTS; x<NUMELEMENTS; x++){
 			for(var y=0; y<NUMELEMENTS; y++){
@@ -92,7 +94,7 @@ function buildModel() {
 				}
 				mesh.receiveShadow = true;
 				mesh.castShadow = true;
-				group.add( mesh );	
+				groups[z].add( mesh );
 			}
 		}
 	}
@@ -203,7 +205,8 @@ function buildModel() {
 	group.add( groupRocket );
 	*/
 
-	model.add(group);
+	model.add(groups[0]);
+	model.add(groups[1]);
 	
 	return model;		
 }
