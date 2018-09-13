@@ -17,7 +17,7 @@ function buildModel() {
 	var texMetalGreenNor = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_Nor_1k.jpg" );
 	var texMetalGreenAo = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_AO_1k.jpg" );
 	var texMetalGreenRu = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_rough_1k.jpg" );
-	var texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/metal_plate_bump_1k.jpg.jpg" );
+	var texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/metal_plate_bump_1k.jpg" );
 	
 	
 	
