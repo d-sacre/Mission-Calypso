@@ -1,0 +1,341 @@
+:root {
+
+   --calypsobrass: #edf60d;
+   --calypsocopper: rgb(200, 117, 51);
+
+}
+
+*{
+
+  box-sizing: border-box;
+}
+
+body {
+  /*background-color: black;*/
+  background-image: url('../pictures/Screenshot Map.jpg');
+  background-repeat: no-repeat;
+  background: cover;
+  /*background-position: center;*/
+  background-size: 100vw 100vh;
+
+  color: white;
+  overflow: hidden;
+
+}
+
+fieldset {
+  border-radius: 10px;
+
+}
+
+/*########################################################################## */
+/*###### definition of headup-gui-popup-style ################################ */
+/*########################################################################## */
+.headup-gui{
+
+  position: absolute;
+  top: 0vh;
+  left: 10vw;
+
+}
+
+
+#headup-gui-container li {
+  list-style: none;
+  display: inline-block;
+}
+
+#game-timer {
+  position: absolute;
+  top: 1vh;
+  left: 89vw;
+
+  width: 8vw;
+
+}
+
+#headup-gui-spaceship{
+  position: absolute;
+  top: 1vh;
+  left: 2.5vw;
+
+  width: 85vw;
+
+}
+
+
+/*########################################################################## */
+/*###### definition of game-gui-popup-style ################################ */
+/*########################################################################## */
+
+.transform {
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+
+#back-to-mainmenu-popup-button{
+
+  position: absolute;
+  bottom: 12.5vh;
+
+}
+
+#return-to-game-popup-button{
+
+  position: absolute;
+  bottom: 2.5vh;
+
+}
+
+.clickbox-popupmenu{
+  position: absolute;
+  bottom: 80vh;
+  left: -6vw;
+
+  /*background-color: red;*/
+
+  width: 106vw;
+  height: 20vh;
+
+  z-index: 6;
+}
+
+#rocket-img-popupmenu{
+  position: absolute;
+  bottom: 2vh;
+  left: 11vw;
+  height: 87.5vh;
+
+  z-index: 5;
+
+}
+
+
+.game-gui-popup{
+  position: absolute;
+  left: 5vw;
+  bottom: -85vh;/*-70vh;*/
+
+
+  background-color: var(--calypsocopper);
+  border: solid 5px var(--calypsobrass);
+  border-radius: 10px;
+
+  box-shadow: 10px 10px 5px;
+
+
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  font-size: 12px;
+  color: black;
+
+  height: 84vh;
+  width: 90vw;
+
+}
+
+.game-gui-popup ul{
+    padding: 10px;
+    margin: 0px;
+}
+
+.game-gui-popup li{
+    list-style: none;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.transform-active {
+  bottom: 0vh;
+}
+
+.game-gui-popup legend{
+  color: green;
+  font-weight: bold;
+}
+
+.game-gui-popup label{
+  color: black;
+}
+
+#game-gui-popup-firstrow span{
+  color: white;
+
+}
+
+#game-gui-popup-secondrow span{
+  color: white;
+
+}
+
+#game-gui-popup-firstrow li{
+  color: black;
+
+}
+
+#game-gui-popup-secondrow li{
+  color: black;
+
+}
+
+#storage-popupmenu span {
+
+  color: white;
+
+}
+
+#game-gui-popup-container{
+  overflow: hidden;
+
+}
+
+
+#general-popup{
+
+  position: absolute;
+  top: 1vh;
+  right:25vw;
+
+  width: 20vw;
+  height: 37.5vh;
+
+  padding: 5px;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu{
+
+  position: absolute;
+  top: 1vh;
+  right: 2.5vw;
+
+  height: 37.5vh;
+  width: 20vw;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#storage-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#refinery-popupmenu{
+
+    position: absolute;
+    top: 40vh;
+    right: 2.5vw;
+
+    height: 37.5vh;
+    width: 20vw;
+
+    font-size: 12pt;
+
+  }
+
+
+#refinery-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#refinery-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#machine-speed-work-assignement-popup{
+  position: absolute;
+  top: 1vh;
+  right: 25vw;
+
+  height: 37.5vh;
+
+  font-size: 12pt;
+}
+
+#refinery-assignement-popup{
+  position: absolute;
+  top: 40vh;
+  right: 25vw;
+
+  height: 37.5vh;
+  width: 26vw;
+
+  font-size: 12pt;
+}
+
+/* drag and drop Menu */
+.drag-and-drop-menu-material-container {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    border: 1px solid #aaaaaa;
+}
+
+.storage-popupmenu-draganddrop-icon{
+
+  height: 65px;
+  width: 65px;
+
+  padding:  10px;
+}
+
+
+
+
+/* ########################################################################## */
+/* ############ class-system gui ########################################### */
+/* ########################################################################## */
+.energy-value{
+    color: white;
+}
+
+.oxygen-value{
+  color: white;
+}
+
+.carbondioxide-value{
+  color: white;
+}
+
+.weight-value{
+  color: white;
+}
+
+.wear-value{
+  color: white;
+}
+
+.time-value{
+  color: white;
+}
