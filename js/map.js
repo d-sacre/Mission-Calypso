@@ -159,15 +159,15 @@ function buildModel() {
 			groupRocket.add( meshRocketTank );
 	}
 	
-	let meshRocketTank;
-	meshRocketTank = new THREE.Mesh( geoRocketTank, 	matRocketCube1 );
+/*	let meshRocketTank;
+	meshRocketTank = new THREE.Mesh( geoRocketTank, 	matMetalSilver );
 	meshRocketTank.receiveShadow = true;
 	meshRocketTank.castShadow = true;
 	let posRocketCube1 = new THREE.Vector3(0*BOXSIZE.x, 4*BOXSIZE.y, BOXSIZE.z*(-3.3));	
 	meshRocketTank.position.copy(posRocketCube1);
 	groupRocket.add( meshRocketTank );
+	*/
 	group.add( groupRocket );
-	
 	// Rocket bottom:
 	var geoRocketBottom = new THREE.RingBufferGeometry( 1.9*BOXSIZE.x, 5, 32 );
 	var matRocketBottom = new THREE.MeshBasicMaterial( { map: texRocketCube, side: THREE.DoubleSide,  } );
