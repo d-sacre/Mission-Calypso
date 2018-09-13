@@ -5,7 +5,8 @@ function buildFigure(){
 	var geoFig = new THREE.BoxBufferGeometry( BOXSIZE.x/2 , BOXSIZE.y/2,  BOXSIZE.z/2);
 	meshFig = new THREE.Mesh( geoFig, matFig );
 
-	var posFig = new THREE.Vector3(0*BOXSIZE.x, 0*BOXSIZE.y, BOXSIZE.y*2);
+	
+	var posFig = new THREE.Vector3(0*BOXSIZE.x, 1.5*BOXSIZE.y, BOXSIZE.y*0);
 	meshFig.position.copy(posFig);
 	let name = "Fig1";
 	meshFig.name= name;
