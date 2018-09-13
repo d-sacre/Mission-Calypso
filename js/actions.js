@@ -27,6 +27,8 @@ function walk(x, y) {
 	}	
 }
 
+
+
 function drill(fuel) {
 	for(let x=-1; x<2; x++){
 			deleteCubeEdge(x);
@@ -41,7 +43,7 @@ function drill(fuel) {
 
 function sporn(){
 	drill();
-	let fig = scene.getObjectByName( "Fig1");
+
 	var posFig = new THREE.Vector3(0*BOXSIZE.x, -2*BOXSIZE.y, 0);
 	meshFig.position.copy(posFig);	
 }
