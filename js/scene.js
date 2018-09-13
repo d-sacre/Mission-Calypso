@@ -167,10 +167,12 @@ function playerGotoX(posPlayer, posTarget) {
 	
 	
 	if(dX < speed) {
+		deleteCubeUnderground((currentPlayerPos.x / 200)-1, (currentPlayerPos.y / -200));
 		currentPlayerPos.x -= speed;
 		figure.position.copy(currentPlayerPos);
 	}
 	if(dX > speed) {
+		deleteCubeUnderground((currentPlayerPos.x / 200)+1, (currentPlayerPos.y / -200));
 		currentPlayerPos.x += speed;
 		figure.position.copy(currentPlayerPos);
 	}
