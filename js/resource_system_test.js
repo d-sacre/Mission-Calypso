@@ -20,8 +20,9 @@ class ResourcesSystem{
 		this.idleConsumptionO = 0.05;
 		this.workingProductionCO = 0.1;
 		this.idleProductionCO = 0.05;
+		this.workerEnergyConsumption=0.1;
 		
-		this.paused=true;
+		this.paused=false;
 		//console.log(this.getSliderValue());
 		//this.refreshSliderDisplay();
 		//this.resourceLost = false;
@@ -86,7 +87,7 @@ class ResourcesSystem{
 	
 	
 	refreshOxygenValue(){
-		console.log(this.workingConsumptionO);
+		//console.log(this.workingConsumptionO);
 		return this.oxygen -(this.nWork*this.workingConsumptionO+this.nIdle*this.idleConsumptionO);		
 	}
 	
@@ -113,6 +114,25 @@ class ResourcesSystem{
 	oxygenFactorCalculation(){
 		return this.oxygen*(4.76/100);
 	}
+	
+	
+	calculateDrillEnergyConsumption(){
+		
+		let drillEnergyConsumption = 0.1* (this.v)*(this.v);
+		console.log("drillEnergyConsumption=" + drillEnergyConsumption);
+		return drillEnergyConsumption;
+	}
+	
+	
+	
+	
+	
+	refreshEnergyValue(){
+		
+		let energyValue=this.energy-this.workerEnergyConsumption*this.nWork-this.calculateDrillEnergyConsumption();
+		console.log("energyValue=" + energyValue);
+		return energyValue;
+	}
 		
 		
 	myTime() {
@@ -126,7 +146,7 @@ class ResourcesSystem{
 		this.oxygen = this.refreshOxygenValue();
 		
 		this.carbondioxid = this.refreshCarbondioxidValue();
-		this.energy -= 1;
+		this.energy = this.refreshEnergyValue();
 		this.time += 1;
 		
 		//console.log(carbondioxidFactor);
@@ -172,18 +192,34 @@ class ResourcesSystem{
 			let	carbondioxid = data.carbondioxid;
 			let	oxygen = data.oxygen;
 			
-			document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
+			document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/150 HU';
 			document.querySelector('.time-value').innerHTML= time + 's';
 			document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
 			document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
+			console.log(this.calculateProductivity());
+			
 			if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
-				window.clearInterval(timeUnit);
+				this.paused=true;
 				console.log("Game Over");
 			}
 		}	
 }
 
 
+let system = new ResourcesSystem(150);
+//let systemView = new ResourcesSystemView;
+
+function startGame(){
+	let timeUnit = setInterval(function() {
+			let data = system.setTime();
+			//systemView.refreshResourcesView();
+			if (system.paused==true){
+				window.clearInterval(timeUnit);
+			}
+		
+	}, 10);
+}
+	
 
 
 
