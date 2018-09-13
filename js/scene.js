@@ -107,8 +107,7 @@ function init() {
 }
 
 function onMouseClick(event){
-	let posTarget=getTargetPosition(event);
-	targetPosition=posTarget;
+	targetPosition = getTargetPosition(event);
 }
 
 function getPlayerPosition(){
@@ -121,44 +120,24 @@ function getTargetPosition(event){
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 	
-	let targetBlocks = scene.children[6].children[1]
+	let targetBlocks = scene.children[6].children[1];
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 	
 	if(intersections.length > 0) {
 		console.log(intersections[0].object.name);
 		let pos = intersections[0].object.position.clone();
-		console.log("x="+pos.x+"   y="+pos.y);
+		console.log("x="+pos.x+"   y="+pos.y + " z=" + pos.z);
 		console.log("X Figur="+figure.position.x+"  Y Figur="+figure.position.y);
 		return pos;
 	}
+	return targetPosition;
 }
 
 
-function onMouseClickU(event) {
-	event.preventDefault();
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-	
-	let targetBlocks = scene.children[6].children[1]
-	var intersections = raycaster.intersectObjects( targetBlocks.children );
-	
-	if(intersections.length > 0) {
-		console.log(intersections[0].object.name);
-		let pos = intersections[0].object.position.clone();
-		console.log(pos);
-		pos.z += 200;
-		figure.position.copy(pos);
-		pos.x += 100;
-		spotLight.position.copy(pos);
-		pos.x += 100;
-		pos.z -= 100;
-		spotLight.lookAt(pos);
-	}
-	
-}
+
 
 function updatePostitions(posPlayer,posTarget) {
-	posTarget.z = 0;
+	//posTarget.z = 0;
 	if(posPlayer.equals(posTarget)) {
 		
 		return;} 
