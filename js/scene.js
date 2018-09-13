@@ -178,10 +178,41 @@ function render() {
 
 	renderer.render( scene, camera );
 }
-
+/*
+function updatePostitions() {
+	let dX = targetPlayerPos.x - currentPlayerPos.x,
+		dY = targetPlayerPos.y - currentPlayerPos.y,
+		verticalMode = true;
+		
+	if(dX || dY) {	
+		if(dY > speed) {
+			currentPlayerPos.y -= speed;
+		}
+		if(dY < speed) {
+			currentPlayerPos.y += speed;
+		}
+		if(dY < speed && dY > -speed) {
+			currentPlayerPos.y = targetPlayerPos.y;
+			verticalMode = false;
+		}
+		if(!verticalMode) {
+			if(dX > speed) {
+				currentPlayerPos.x -= speed;
+			}
+			if(dX < speed) {
+				currentPlayerPos.x += speed;
+			}
+			if(dX < speed && dX > speed) {
+				currentPlayerPos.x = targetPlayerPos.x;
+				verticalMode = true;
+			}
+		}
+	}
+}
+*/
 function animate() {
 	requestAnimationFrame( animate );
+	//updatePostitions();
 	render();
 	controls.update();
-	renderer.render( scene, camera );
 }
