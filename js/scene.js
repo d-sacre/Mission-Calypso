@@ -4,6 +4,8 @@ var figure, spotLight;
 var container;
 var camera, controls, scene, renderer;
 var sky, sunSphere;
+var targetPosition;
+var verticalMode = true;
 
 
 
@@ -95,6 +97,7 @@ function init() {
 	
 	figure =buildFigure();
 	scene.add(figure);
+	targetPosition = getPlayerPosition();
 	
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -103,7 +106,17 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 }
 
-function onMouseClick(event) {
+function onMouseClick(event){
+	let posTarget=getTargetPosition(event);
+	targetPosition=posTarget;
+}
+
+function getPlayerPosition(){
+	let currentPlayerPos = figure.position.clone();
+	return currentPlayerPos;
+}
+
+function getTargetPosition(event){
 	event.preventDefault();
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -114,6 +127,25 @@ function onMouseClick(event) {
 	if(intersections.length > 0) {
 		console.log(intersections[0].object.name);
 		let pos = intersections[0].object.position.clone();
+		console.log("x="+pos.x+"   y="+pos.y);
+		console.log("X Figur="+figure.position.x+"  Y Figur="+figure.position.y);
+		return pos;
+	}
+}
+
+
+function onMouseClickU(event) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	
+	let targetBlocks = scene.children[6].children[1]
+	var intersections = raycaster.intersectObjects( targetBlocks.children );
+	
+	if(intersections.length > 0) {
+		console.log(intersections[0].object.name);
+		let pos = intersections[0].object.position.clone();
+		console.log(pos);
 		pos.z += 200;
 		figure.position.copy(pos);
 		pos.x += 100;
@@ -123,6 +155,88 @@ function onMouseClick(event) {
 		spotLight.lookAt(pos);
 	}
 	
+}
+
+function updatePostitions(posPlayer,posTarget) {
+	posTarget.z = 0;
+	if(posPlayer.equals(posTarget)) {
+		
+		return;} 
+	console.log(posPlayer);
+	console.log(posTarget);
+	
+	let isInCorrectRow = (posPlayer.y === posTarget.y);
+	let isCentered = (posPlayer.x === 0);
+	let isInCorrectColumn = (posPlayer.x === posTarget.y);
+	
+	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
+		speed = 10;
+		
+	
+	if(!isCentered && !isInCorrectRow) {
+		playerGotoX(posPlayer, nullPositionX);
+	} 
+	if(!isInCorrectRow && isCentered) {
+		playerGotoY(posPlayer, posTarget);
+	}
+	if(isInCorrectRow) {
+		playerGotoX(posPlayer, posTarget);
+	}
+	
+}
+function playerGotoX(posPlayer, posTarget) {
+	let speed = 10;
+	
+	currentPlayerPos = posPlayer;
+	targetPlayerPos = posTarget;
+	
+	let dX = targetPlayerPos.x - currentPlayerPos.x,
+	dY = targetPlayerPos.y - currentPlayerPos.y;
+	
+	
+	if(dX < speed) {
+		console.log("4");
+		currentPlayerPos.x -= speed;
+		figure.position.copy(currentPlayerPos);
+	}
+	if(dX > speed) {
+		console.log("5");
+		currentPlayerPos.x += speed;
+		figure.position.copy(currentPlayerPos);
+	}
+	if(dX <= speed && dX >= -speed) {
+		console.log("6");
+		currentPlayerPos.x = targetPlayerPos.x;
+		figure.position.copy(currentPlayerPos);	
+	}
+}
+
+function playerGotoY(posPlayer, posTarget) {
+	let speed = 10;
+	
+	currentPlayerPos = posPlayer;
+	targetPlayerPos = posTarget;
+	
+	let dX = targetPlayerPos.x - currentPlayerPos.x,
+	dY = targetPlayerPos.y - currentPlayerPos.y;
+
+	if(dY < speed) {
+		console.log("1");
+		currentPlayerPos.y -= speed;
+		figure.position.copy(currentPlayerPos);			
+	}
+	
+	if(dY > speed) {
+		console.log("2");
+		console.log(dY)
+		currentPlayerPos.y += speed;
+		figure.position.copy(currentPlayerPos);	
+	}
+	if(dY <= speed && dY >= -speed) {
+		console.log("3");
+		currentPlayerPos.y = targetPlayerPos.y;
+		figure.position.copy(currentPlayerPos);	
+	}
 }
 
 function onDocumentMouseMove( event ) {
@@ -178,41 +292,13 @@ function render() {
 
 	renderer.render( scene, camera );
 }
-/*
-function updatePostitions() {
-	let dX = targetPlayerPos.x - currentPlayerPos.x,
-		dY = targetPlayerPos.y - currentPlayerPos.y,
-		verticalMode = true;
-		
-	if(dX || dY) {	
-		if(dY > speed) {
-			currentPlayerPos.y -= speed;
-		}
-		if(dY < speed) {
-			currentPlayerPos.y += speed;
-		}
-		if(dY < speed && dY > -speed) {
-			currentPlayerPos.y = targetPlayerPos.y;
-			verticalMode = false;
-		}
-		if(!verticalMode) {
-			if(dX > speed) {
-				currentPlayerPos.x -= speed;
-			}
-			if(dX < speed) {
-				currentPlayerPos.x += speed;
-			}
-			if(dX < speed && dX > speed) {
-				currentPlayerPos.x = targetPlayerPos.x;
-				verticalMode = true;
-			}
-		}
-	}
-}
-*/
+
+
 function animate() {
 	requestAnimationFrame( animate );
-	//updatePostitions();
+	updatePostitions(getPlayerPosition(),targetPosition);
 	render();
 	controls.update();
 }
+
+
