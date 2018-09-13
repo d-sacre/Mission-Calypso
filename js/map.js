@@ -1,7 +1,10 @@
+"use strict";
+
 var group, groupSurface;
 var NUMELEMENTS=20;
 var BOXSIZE = new THREE.Vector3(200, 200, 200);
 var SURFACEMULTI = 1000;
+var ROCKHIGHT=5;
 
 function buildModel() {				
 			
@@ -10,6 +13,35 @@ function buildModel() {
 	var texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_highres_withoutedge_256x256_compress.jpg" );
 	var texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_edge_128x128.jpg" );
 	var texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_top_512x512_compress.jpg" );
+	var texPotassium = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_potassium_256x256_compress.jpg" );
+	var texMetalGreenNor = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_Nor_1k.jpg" );
+	var texMetalGreenAo = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_AO_1k.jpg" );
+	var texMetalGreenRu = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_rough_1k.jpg" );
+	var texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/metal_plate_bump_1k.jpg.jpg" );
+	
+	
+	
+	
+	
+	let matMetalGreen = new THREE.MeshStandardMaterial( {
+		color: 0x888888,
+		roughness: 1,
+		metalness: 0.4,
+		normalMap: texMetalGreenNor,
+		normalScale: new THREE.Vector2( 1, - 1 ), // why does the normal map require negation in this case?
+		aoMap: texMetalGreenAo,
+		aoMapIntensity: 1,
+		//displacementMap: displacementMap,
+		//displacementScale: settings.displacementScale,
+		//displacementBias: - 0.428408, // from original model
+		//envMap: reflectionCube,
+		//envMapIntensity: settings.envMapIntensity,
+		side: THREE.DoubleSide
+	} );
+	
+	let matMetalSilver = new THREE.MeshPhongMaterial( { map: texMetalPlateBump, wireframe: false});
+	
+	
 	
 	var matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	var matEdge = new THREE.MeshPhongMaterial( { map: texEdge, wireframe: false});
@@ -64,7 +96,115 @@ function buildModel() {
 			}
 		}
 	}
+
+	
+	
+	//other stuff like rocket...
+	
+	
+	//Rocket-body:
+	let groupRocket = new THREE.Group();
+	let texRocketCube = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/rocket1.jpg" );
+	let matRocketCube1 = new THREE.MeshPhongMaterial( { map: texRocketCube, wireframe: false});
+	let geoRocketCube1 = new THREE.BoxBufferGeometry( BOXSIZE.x*0.3 , BOXSIZE.y,  BOXSIZE.z);
+	for(x=-2;x<=2;x+=4){
+		for(let y=1.5; y<5.5*ROCKHIGHT; y++){
+			let meshRocketCube1;
+			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, y*BOXSIZE.y, BOXSIZE.y*0);	
+			meshRocketCube1 = new THREE.Mesh( geoRocketCube1, matMetalSilver );
+			meshRocketCube1.position.copy(posRocketCube1);
+			meshRocketCube1.receiveShadow = true;
+			meshRocketCube1.castShadow = true;
+			groupRocket.add( meshRocketCube1 );
+		}
+	}
+	for(x=-1;x<=1;x+=1){
+		for(let y=1.5; y<5.5*ROCKHIGHT; y++){
+			let meshRocketCube1;
+			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, y*BOXSIZE.y, -1*BOXSIZE.z*1.5);	
+
+			meshRocketCube1 = new THREE.Mesh( geoRocketCube1, matRocketCube1 );
+			meshRocketCube1.position.copy(posRocketCube1);
+			meshRocketCube1.receiveShadow = true;
+			meshRocketCube1.castShadow = true;
+			meshRocketCube1.rotateY( Math.PI / 2 );
+			groupRocket.add( meshRocketCube1 );
+		}
+	}
+	
+	for(x=-1.75;x<=1.75;x+=3.5){
+		for(let y=1.5; y<5.5*ROCKHIGHT; y++){
+			let meshRocketCube1;
+			meshRocketCube1 = new THREE.Mesh( geoRocketCube1, 	matRocketCube1 );
+			meshRocketCube1.rotateY( Math.sign(x)* Math.PI / 5.4 );
+			meshRocketCube1.receiveShadow = true;
+			meshRocketCube1.castShadow = true;
+			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, y*BOXSIZE.y, BOXSIZE.z*(-1.0));	
+			meshRocketCube1.position.copy(posRocketCube1);
+			groupRocket.add( meshRocketCube1 );
+		}
+	}
+	
+	//Rocket fuel tanks:
+	
+	
+	var geoRocketTank = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 1.5*BOXSIZE.x, 7*BOXSIZE.x, 32 );
+	for(x=-3.3;x<=3.3;x+=6.6){
+			let meshRocketTank;
+			meshRocketTank = new THREE.Mesh( geoRocketTank, 	matRocketCube1 );
+			meshRocketTank.receiveShadow = true;
+			meshRocketTank.castShadow = true;
+			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, 5*BOXSIZE.y, BOXSIZE.z*(-1.0));	
+			meshRocketTank.position.copy(posRocketCube1);
+			groupRocket.add( meshRocketTank );
+	}
+	
+	let meshRocketTank;
+	meshRocketTank = new THREE.Mesh( geoRocketTank, 	matRocketCube1 );
+	meshRocketTank.receiveShadow = true;
+	meshRocketTank.castShadow = true;
+	let posRocketCube1 = new THREE.Vector3(0*BOXSIZE.x, 4*BOXSIZE.y, BOXSIZE.z*(-3.3));	
+	meshRocketTank.position.copy(posRocketCube1);
+	groupRocket.add( meshRocketTank );
+	group.add( groupRocket );
+	
+	// Rocket bottom:
+	var geoRocketBottom = new THREE.RingBufferGeometry( 1.9*BOXSIZE.x, 5, 32 );
+	var matRocketBottom = new THREE.MeshBasicMaterial( { map: texRocketCube, side: THREE.DoubleSide,  } );
+	let meshRocketBottom;
+	meshRocketBottom = new THREE.Mesh( geoRocketBottom, 	matRocketBottom );
+	meshRocketBottom.receiveShadow = true;
+	meshRocketBottom.castShadow = true;
+	let posRocketBottom = new THREE.Vector3(0*BOXSIZE.x, 5.5*BOXSIZE.y*ROCKHIGHT, BOXSIZE.z*0);	
+	meshRocketBottom.position.copy(posRocketBottom);
+	meshRocketBottom.rotateX( Math.PI / 2 );
+	groupRocket.add( meshRocketBottom );
+	
+	//Rocket tank 
+	
+	var geoRocketTank = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 1.5*BOXSIZE.x, 7*BOXSIZE.x, 32 );
+	for(x=-3.3;x<=3.3;x+=6.6){
+			let meshRocketTank;
+			meshRocketTank = new THREE.Mesh( geoRocketTank, 	matRocketCube1 );
+			meshRocketTank.receiveShadow = true;
+			meshRocketTank.castShadow = true;
+			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, 5*BOXSIZE.y, BOXSIZE.z*(-1.0));	
+			meshRocketTank.position.copy(posRocketCube1);
+			groupRocket.add( meshRocketTank );
+	}
+	/*
+	let meshRocketTank;
+	meshRocketTank = new THREE.Mesh( geoRocketTank, 	matRocketCube1 );
+	meshRocketTank.receiveShadow = true;
+	meshRocketTank.castShadow = true;
+	let posRocketCube1 = new THREE.Vector3(0*BOXSIZE.x, 4*BOXSIZE.y, BOXSIZE.z*(-3.3));	
+	meshRocketTank.position.copy(posRocketCube1);
+	groupRocket.add( meshRocketTank );
+	group.add( groupRocket );
+	*/
+
 	model.add(group);
+	
 	return model;		
 }
 
