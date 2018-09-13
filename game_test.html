@@ -1,0 +1,159 @@
+<html>
+
+	<head>
+
+		<title>
+				Mission Calypso - Now playing!
+		</title>
+
+		<meta charset=UTF-8>
+
+		<link rel="stylesheet" href="./css/vardef.css">
+		<link rel="stylesheet" href="./css/game_resourcesystem-tuning.css">
+		<link rel="stylesheet" href="./css/buttons.css">
+
+	</head>
+
+	<body>
+
+		<div id="game-gui-container">
+			<div id="headup-gui-container">
+				<fieldset id="headup-gui-spaceship">
+					 <legend>spaceship:</legend>
+					 <ul>
+						 	<li>
+									energy: <span class="energy-value"> 150/150 HU</span>
+							</li>
+
+							<li>
+									oxygen: <span class="oxygen-value"> 00.0/21.0 % </span>
+							</li>
+
+							<li>
+									carbon dioxide: <span class="carbondioxide-value"> 0.04/8.00 % </span>
+							</li>
+
+							<li>
+									weight: <span class="weight-value"> 100/150 t </span>
+							</li>
+
+							<li>
+									wear: <span class="wear-value"> 000/100 % </span>
+							</li>
+					 </ul>
+				</fieldset>
+
+				<fieldset id="game-timer">
+						<legend>time:</legend>
+						<span class="time-value"> 0s </span>
+				</fieldset>
+
+				<fieldset id="headup-gui-mining">
+					 <legend>mined resources:</legend>
+					 <ul>
+						 	<li>
+									metal ore: <span> 15/15 t </span>
+							</li>
+
+							<li>
+									caustic potash: <span> 15/15 t </span>
+							</li>
+
+							<li>
+									caloricum: <span> 15/15 t </span>
+							</li>
+					 </ul>
+				</fieldset>
+			</div>
+
+			<!-- Anfang: Nur zu Demonstrations- und Testzwecken!!! -->
+			<!--<div id="game-rendering-area">
+				<script src="js/three.min.js"></script>
+		    <script src="js/main.js" id="game-rendring-area"></script>
+			</div>-->
+			<!-- Ende: Nur zu Demonstrations- und Testzwecken!!! -->
+
+
+			<div id="game-rendering-area">
+				
+			</div>
+
+			<div id="parameter-adjustment">
+				<fieldset onchange="system.refreshSliderDisplay()">
+						<legend> machine speed & work assignement</legend>
+
+						<label for="machine-speed"> machine speed:  </label>
+						<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1" >
+						<span id="machine-speed-slidervalue" type="text" value="">1</span>
+
+					</br>
+					</br>
+						<strong> <font color="green">work assignement:</font> </strong>
+					</br>
+
+						<label for="worker-idle"> worker-idle:  </label>
+						<input name="worker-idle" id="worker-idle-slider" type="range" min="0" max="3" step="1" default value="3">
+						<span id="worker-idle-slidervalue" type="text" value="">3</span>
+
+					</br>
+
+						<label for="worker-mining"> worker-mining:  </label>
+						<input name="worker-mining" id="worker-mining-slider" type="range" min="0" max="3" step="1" default value="0">
+						<span id="worker-mining-slidervalue" type="text" value="">0</span>
+
+					</br>
+
+						<label for="worker-refinery"> worker-refinery:  </label>
+						<input name="worker-refinery" id="worker-refinery-slider" type="range" min="0" max="3" step="1" default value="0">
+						<span id="worker-refinery-slidervalue" type="text" value="">0</span>
+
+					</br>
+
+				</fieldset>
+
+					<fieldset onchange="system.refreshSliderDisplay()">
+							<legend> Tuning values for resource system</legend>
+
+							<label for="energy-start-value"> energy start value:  </label>
+							<input name="energy-start-value" id="energy-startvalue-slider" type="range" min="0" max="200" step="1" default value="150">
+							<span id="energy-startvalue-slidervalue" type="text" value="">150</span>
+
+						</br>
+						</br>
+							<strong> <font color="green">parameters for changes:</font> </strong>
+						</br>
+
+							<label for="oxygen-consumption-idle"> oxygen-consumption-idle:  </label>
+							<input name="oxygen-consumption-idle" id="oxygen-consumption-idle-slider" type="range" min="0" max="0.1" step="0.005" default value="0.05">
+							<span id="oxygen-consumption-idle-slidervalue" type="text" value="">0.05</span>
+
+						</br>
+
+						<label for="oxygen-consumption-work"> oxygen-consumption-work:  </label>
+						<input name="oxygen-consumption-work" id="oxygen-consumption-work-slider" type="range" min="0" max="0.1" step="0.005" default value="0.1">
+						<span id="oxygen-consumption-work-slidervalue" type="text" value="">0.1</span>
+
+					</br>
+
+						<label for="carbondioxide-production-idle"> carbondioxide-production-idle:  </label>
+						<input name="carbondioxide-production-idle" id="carbondioxide-production-idle-slider" type="range" min="0" max="0.1" step="0.005" default value="0.05">
+						<span id="carbondioxide-production-idle-slidervalue" type="text" value="">0.05</span>
+
+					</br>
+
+						<label for="carbondioxide-production-work"> carbondioxide-production-work:  </label>
+						<input name="carbondioxide-production-work" id="carbondioxide-production-work-slider" type="range" min="0" max="0.1" step="0.005" default value="0.1">
+						<span id="carbondioxide-production-work-slidervalue" type="text" value="">0.1</span>
+
+					</fieldset>
+					<button onclick="startGame();">StartGame</button>
+					<button onclick="location.href='./index_titletwoline.html';">
+						Back to Menu
+					</button>
+			</div>
+		</div>
+
+	</body>
+	<script src="js/resource_system_test.js"></script>
+	<script src="js/resource_system_test_controler.js"></script>
+</html>

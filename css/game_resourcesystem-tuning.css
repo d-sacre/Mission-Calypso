@@ -3,7 +3,7 @@ body {
   color: white;
 }
 
-fieldset {
+#headup-gui-spaceship #game-timer #headup-gui-mining {
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 5px;
@@ -67,6 +67,15 @@ li{
 
 }
 
+#parameter-adjustment {
+
+  position: absolute;
+  left: 50vw;
+  top: 25vh;
+  z-index: 1;
+
+}
+
 /* ########################################################################## */
 /* ############ Klassensystem gui ########################################### */
 /* ########################################################################## */
@@ -87,9 +96,5 @@ li{
 }
 
 .wear-value{
-  color: white;
-}
-
-.time-value{
   color: white;
 }
