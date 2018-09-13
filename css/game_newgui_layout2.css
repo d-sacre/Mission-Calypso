@@ -141,8 +141,6 @@ fieldset {
   height: 84vh;
   width: 90vw;
 
-  overflow: overlay;
-
 }
 
 .game-gui-popup ul{
