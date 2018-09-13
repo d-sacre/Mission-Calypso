@@ -18,7 +18,13 @@ function deleteCubeEdge(x){
 
 function walk(x, y) {
 	let fig = scene.getObjectByName( "Fig1");
-	fig.translateX(x);
+	let posStart = 0;
+	let delta = BOXSIZE.x*0.1;
+	
+	var delayInMilliseconds = 100; //1 second
+	for(let pos=posStart; pos==x; x+=delta ){
+		setTimeout(fig.translateX(pos), delayInMilliseconds);
+	}	
 }
 
 function drill(fuel) {
