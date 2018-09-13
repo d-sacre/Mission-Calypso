@@ -153,17 +153,25 @@ class ResourcesSystem{
 		}
 		else{
 			this.paused=true;
-		}	
+		}
+		
+		console.log(this.paused);
+	}
+	
+	testPause(){
+		console.log(paused);
+		a=1+1;
+		return this.paused;
+		
 	}
 
 	setTime() {
-		if (this.paused!=true){
 			let data = system.myTime();
 			let	energy = data.energy;
 			let	time = data.time;
 			let	carbondioxid = data.carbondioxid;
 			let	oxygen = data.oxygen;
-				
+			
 			document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
 			document.querySelector('.time-value').innerHTML= time + 's';
 			document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
@@ -172,29 +180,78 @@ class ResourcesSystem{
 				window.clearInterval(timeUnit);
 				console.log("Game Over");
 			}
-		}
-		
-	}
+		}	
 }
 
-let system = new ResourcesSystem(150);
-let timeUnit = setInterval(system.setTime, 1000);
 
-	
-/*function setTime() {
-	let data = system.myTime(),
-		energy = data.energy,
-		time = data.time;
-		carbondioxid = data.carbondioxid;
-		oxygen = data.oxygen;
-		
-	document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
-	document.querySelector('.time-value').innerHTML= time + 's';
-	document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
-	document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
-	if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
-	window.clearInterval(timeUnit);
-	console.log("Game Over");
+
+
+
+
+
+/*class ResourcesSystemView{	
+
+	refreshResourcesView() {
+
+		let data = system.myTime();
+			console.log(data);
+			energy = data.energy;
+			time = data.time;
+			carbondioxid = data.carbondioxid;
+			oxygen = data.oxygen;
+			
+		document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
+		document.querySelector('.time-value').innerHTML= time + 's';
+		document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
+		document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
+		if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
+		window.clearInterval(timeUnit);
+		console.log("Game Over");
+		}
 	}
-}*/
 
+
+
+	getSliderValue(){
+		let machineSpeed=document.querySelector('#machine-speed-slider').value;
+		let workerIdle=document.querySelector('#worker-idle-slider').value;
+		let workerMining=document.querySelector('#worker-mining-slider').value;
+		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
+		
+		let energyStartvalue=document.querySelector('#energy-startvalue-slider').value;
+		let oxygenConsumptionIdle=document.querySelector('#oxygen-consumption-idle-slider').value;
+		let oxygenConsumptionWork=document.querySelector('#oxygen-consumption-work-slider').value;
+		let carbondioxideProductionIdle=document.querySelector('#carbondioxide-production-idle-slider').value;
+		let carbondioxideProductionWork=document.querySelector('#carbondioxide-production-work-slider').value;
+		return {
+			machineSpeed,
+			workerIdle,
+			workerMining,
+			workerRefinery,
+			energyStartvalue,
+			oxygenConsumptionIdle,
+			oxygenConsumptionWork,
+			carbondioxideProductionIdle,
+			carbondioxideProductionWork	
+		}
+	}
+
+	refreshSliderDisplay(){
+			
+		let SliderValues=system.getSliderValue();
+		
+		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed;
+		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
+		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
+		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
+		
+		document.querySelector('#energy-startvalue-slidervalue').innerHTML=SliderValues.energyStartvalue;
+		document.querySelector('#oxygen-consumption-idle-slidervalue').innerHTML=SliderValues.oxygenConsumptionIdle;
+		document.querySelector('#oxygen-consumption-work-slidervalue').innerHTML=SliderValues.oxygenConsumptionWork;
+		document.querySelector('#carbondioxide-production-idle-slidervalue').innerHTML=SliderValues.carbondioxideProductionIdle;
+		document.querySelector('#carbondioxide-production-work-slidervalue').innerHTML=SliderValues.carbondioxideProductionWork;
+		
+		system.testSliderValues(SliderValues);
+	}
+}
+*/
