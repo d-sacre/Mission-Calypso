@@ -8,7 +8,7 @@ class ResourcesSystem{
 		this.time = 0;
 		this.N = 0;
 		this.nIdle=0;
-		this.nWork=1;
+		this.nWork=0;
 		this.v = 1;
 		this.w = 100;
 		this.productivity = 0;
