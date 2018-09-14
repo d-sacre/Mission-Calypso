@@ -6,7 +6,7 @@ var camera, controls, scene, renderer;
 var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
-
+var SPEED=5;
 
 
 init();
@@ -142,7 +142,7 @@ function updatePostitions(posPlayer,posTarget) {
 	let isInCorrectColumn = (posPlayer.x === posTarget.y);
 	
 	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
-		speed = 10;
+		speed = SPEED;
 		
 	
 	if(!isCentered && !isInCorrectRow) {
@@ -157,7 +157,7 @@ function updatePostitions(posPlayer,posTarget) {
 	
 }
 function playerGotoX(posPlayer, posTarget) {
-	let speed = 10;
+	let speed = SPEED;
 	
 	currentPlayerPos = posPlayer;
 	targetPlayerPos = posTarget;
@@ -183,7 +183,7 @@ function playerGotoX(posPlayer, posTarget) {
 }
 
 function playerGotoY(posPlayer, posTarget) {
-	let speed = 10;
+	let speed = SPEED;
 	
 	currentPlayerPos = posPlayer;
 	targetPlayerPos = posTarget;
