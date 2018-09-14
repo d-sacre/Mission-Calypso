@@ -1,4 +1,4 @@
-		
+
 class ResourcesSystem{
 
 	constructor (Energy, Weight){
@@ -15,27 +15,27 @@ class ResourcesSystem{
 		this.energyConsumption = 0;
 		this.energy = Energy;
 		this.weight = Weight;
-		
-		this.workingConsumptionO = 0.1;
-		this.idleConsumptionO = 0.05;
-		this.workingProductionCO = 0.1;
-		this.idleProductionCO = 0.05;
-		this.workerEnergyConsumption=0.1;
-		
+
+		this.workingConsumptionO = 0.02;
+		this.idleConsumptionO = 0.01;
+		this.workingProductionCO = 0.03;
+		this.idleProductionCO = 0.02;
+		this.workerEnergyConsumption=0.35;
+
 		this.paused=false;
 		//console.log(this.getSliderValue());
 		//this.refreshSliderDisplay();
 		//this.resourceLost = false;
 	}
-	
-	
+
+
 	getSliderValue(){
 		console.log("getSliderValue");
 		let machineSpeed=document.querySelector('#machine-speed-slider').value;
 		let workerIdle=document.querySelector('#worker-idle-slider').value;
 		let workerMining=document.querySelector('#worker-mining-slider').value;
 		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
-		
+
 		//let energyStartvalue=document.querySelector('#energy-startvalue-slider').value;
 		//let oxygenConsumptionIdle=document.querySelector('#oxygen-consumption-idle-slider').value;
 		//let oxygenConsumptionWork=document.querySelector('#oxygen-consumption-work-slider').value;
@@ -50,29 +50,29 @@ class ResourcesSystem{
 			//oxygenConsumptionIdle,
 			//oxygenConsumptionWork,
 			//carbondioxideProductionIdle,
-			//carbondioxideProductionWork	
+			//carbondioxideProductionWork
 		}
 	}
-	
+
 	refreshSliderDisplay(){
 		console.log("refreshSliderDisplay");
 		let SliderValues=this.getSliderValue();
-		
+
 		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed;
 		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
 		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
 		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
-		
+
 		//document.querySelector('#energy-startvalue-slidervalue').innerHTML=SliderValues.energyStartvalue;
 		//document.querySelector('#oxygen-consumption-idle-slidervalue').innerHTML=SliderValues.oxygenConsumptionIdle;
 		//document.querySelector('#oxygen-consumption-work-slidervalue').innerHTML=SliderValues.oxygenConsumptionWork;
 		//document.querySelector('#carbondioxide-production-idle-slidervalue').innerHTML=SliderValues.carbondioxideProductionIdle;
 		//document.querySelector('#carbondioxide-production-work-slidervalue').innerHTML=SliderValues.carbondioxideProductionWork;
-		
+
 		this.testSliderValues(SliderValues);
 		//console.log(SliderValues);
 	}
-	
+
 	testSliderValues(SliderValues){
 		//this.energy = SliderValues.energyStartvalue;
 		console.log("testSliderValues");
@@ -85,18 +85,18 @@ class ResourcesSystem{
 		this.idleProductionCO = 0.02;
 		this.workingProductionCO = 0.03;
 	}
-	
-	
+
+
 	refreshOxygenValue(){
 		//console.log(this.workingConsumptionO);
-		return this.oxygen -(this.nWork*this.workingConsumptionO+this.nIdle*this.idleConsumptionO);		
+		return this.oxygen -(this.nWork*this.workingConsumptionO+this.nIdle*this.idleConsumptionO);
 	}
-	
+
 	refreshCarbondioxidValue(){
 		//console.log(this.carbondioxid+(this.nWork*workingProduction+this.nIdle*idleProduction));
 		return this.carbondioxid+(this.nWork*this.workingProductionCO+this.nIdle*this.idleProductionCO);
 	}
-	
+
 	carbondioxidFactorCalculation(){
 		let carbondioxid=this.carbondioxid;
 		  if(0.04<=carbondioxid<=0.08){
@@ -111,47 +111,47 @@ class ResourcesSystem{
 		      return (0.3-(3/29)*(carbondioxid-5.01));
 		  }
 	}
-	
+
 	oxygenFactorCalculation(){
 		return this.oxygen*(4.76/100);
 	}
-	
-	
+
+
 	calculateDrillEnergyConsumption(){
-		
+
 		let drillEnergyConsumption = 0.1* (this.v)*(this.v);
 		console.log("drillEnergyConsumption=" + drillEnergyConsumption);
 		return drillEnergyConsumption;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	refreshEnergyValue(){
-		
+
 		let energyValue=this.energy-this.workerEnergyConsumption*this.nWork-this.calculateDrillEnergyConsumption();
 		console.log("energyValue=" + energyValue);
 		return energyValue;
 	}
-		
-		
+
+
 	myTime() {
 		// Faktoraktualisierung
 		let carbondioxidFactor = this.carbondioxidFactorCalculation();
 		let oxygenFactor= this.oxygenFactorCalculation();
 		let v= this.v;
-		
+
 		//Wertänderungen
 		let productivity = this.calculateProductivity(v,oxygenFactor, carbondioxidFactor);
 		this.oxygen = this.refreshOxygenValue();
-		
+
 		this.carbondioxid = this.refreshCarbondioxidValue();
 		this.energy = this.refreshEnergyValue();
 		this.time += 1;
-		
+
 		//console.log(carbondioxidFactor);
-		
+
 		//Rückgabewerte
 		return {
 			time: this.time,
@@ -159,15 +159,15 @@ class ResourcesSystem{
 			carbondioxid: this.carbondioxid,
 			oxygen: this.oxygen
 		};
-		
+
 	}
-	
-	
+
+
 	calculateProductivity(v,oxygenFactor, carbondioxidFactor){
 		//console.log(v+"   "+oxygenFactor+"      "+carbondioxidFactor);
 		return v*carbondioxidFactor*oxygenFactor;
 	}
-	
+
 	playPause(){
 		if (this.paused==true){
 			this.paused=false;
@@ -175,15 +175,15 @@ class ResourcesSystem{
 		else{
 			this.paused=true;
 		}
-		
+
 		console.log(this.paused);
 	}
-	
+
 	testPause(){
 		console.log(paused);
 		a=1+1;
 		return this.paused;
-		
+
 	}
 
 	setTime() {
@@ -192,19 +192,52 @@ class ResourcesSystem{
 			let	time = data.time;
 			let	carbondioxid = data.carbondioxid;
 			let	oxygen = data.oxygen;
-			
+
 			document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/150 HU';
 			document.querySelector('.time-value').innerHTML= time + 's';
 			document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
 			document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
 			console.log("Produktivität: " + this.calculateProductivity());
 			//console.log(document.querySelector('.energy-value').innerHTML +"    " document.querySelector('.time-value').innerHTML)
-			
+
+			// Play audio and color
+			if((!(carbondioxid<=6) && (carbondioxid<=8)) || (!(oxygen>=14.5)  && !(oxygen<=10.5)) || (!(energy>=50) && !(energy<50))) {
+					playAudio();
+			}
+
+			if(3<=carbondioxid){
+				if (carbondioxid<=6){
+					document.querySelector('.carbondioxide-value').style.color="orange";
+				} else {
+					document.querySelector('.carbondioxide-value').style.color="red";
+				}
+			}
+
+			if(oxygen<=14){
+				if (oxygen>=12){
+					document.querySelector('.oxygen-value').style.color="orange";
+				} else {
+					document.querySelector('.oxygen-value').style.color="red";
+				}
+			}
+
+			if(energy<=75){
+				if (energy>=60){
+					document.querySelector('.energy-value').style.color="orange";
+				} else {
+					document.querySelector('.energy-value').style.color="red";
+				}
+			}
+
+
 			if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
+				document.querySelector('.game-over-popup').style.display="block";
+				stopAudio();
 				this.paused=true;
 				console.log("Game Over");
+
 			}
-		}	
+		}
 }
 
 
@@ -218,18 +251,19 @@ let system = new ResourcesSystem(150);
 			if (system.paused==true){
 				window.clearInterval(timeUnit);
 			}
-		
+
+
 	}, 1000);
-	
+
 function startGame(){
 }
-	
 
 
 
 
 
-/*class ResourcesSystemView{	
+
+/*class ResourcesSystemView{
 
 	refreshResourcesView() {
 
@@ -239,7 +273,7 @@ function startGame(){
 			time = data.time;
 			carbondioxid = data.carbondioxid;
 			oxygen = data.oxygen;
-			
+
 		document.querySelector('.energy-value').innerHTML=energy+'/150 HU';
 		document.querySelector('.time-value').innerHTML= time + 's';
 		document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
@@ -257,7 +291,7 @@ function startGame(){
 		let workerIdle=document.querySelector('#worker-idle-slider').value;
 		let workerMining=document.querySelector('#worker-mining-slider').value;
 		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
-		
+
 		let energyStartvalue=document.querySelector('#energy-startvalue-slider').value;
 		let oxygenConsumptionIdle=document.querySelector('#oxygen-consumption-idle-slider').value;
 		let oxygenConsumptionWork=document.querySelector('#oxygen-consumption-work-slider').value;
@@ -272,25 +306,25 @@ function startGame(){
 			oxygenConsumptionIdle,
 			oxygenConsumptionWork,
 			carbondioxideProductionIdle,
-			carbondioxideProductionWork	
+			carbondioxideProductionWork
 		}
 	}
 
 	refreshSliderDisplay(){
-			
+
 		let SliderValues=system.getSliderValue();
-		
+
 		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed;
 		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
 		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
 		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
-		
+
 		document.querySelector('#energy-startvalue-slidervalue').innerHTML=SliderValues.energyStartvalue;
 		document.querySelector('#oxygen-consumption-idle-slidervalue').innerHTML=SliderValues.oxygenConsumptionIdle;
 		document.querySelector('#oxygen-consumption-work-slidervalue').innerHTML=SliderValues.oxygenConsumptionWork;
 		document.querySelector('#carbondioxide-production-idle-slidervalue').innerHTML=SliderValues.carbondioxideProductionIdle;
 		document.querySelector('#carbondioxide-production-work-slidervalue').innerHTML=SliderValues.carbondioxideProductionWork;
-		
+
 		system.testSliderValues(SliderValues);
 	}
 }
