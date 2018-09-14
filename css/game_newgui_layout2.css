@@ -28,6 +28,10 @@ fieldset {
 
 }
 
+audio {
+   display:none;
+}
+
 /*########################################################################## */
 /*###### definition of headup-gui-popup-style ################################ */
 /*########################################################################## */
@@ -310,7 +314,26 @@ fieldset {
   padding:  10px;
 }
 
+.game-over-popup{
+  position: absolute;
+  top:40vh;
+  left: 40vw;
 
+  /*width: 20vw;
+  height: 20vh;*/
+
+  text-align: center;
+
+  padding: 2vw 2vw 2vw 2vw;
+
+  font-size: 30px;
+  color: var(--calypsocopper);
+  background-color: var(--calypsobrass);
+
+  display: none;
+
+  z-index: 20;
+}
 
 
 /* ########################################################################## */
