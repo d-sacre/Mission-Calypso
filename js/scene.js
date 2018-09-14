@@ -124,10 +124,7 @@ function getTargetPosition(event){
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 	
 	if(intersections.length > 0) {
-		console.log(intersections[0].object.name);
 		let pos = intersections[0].object.position.clone();
-		console.log("x="+pos.x+"   y="+pos.y + " z=" + pos.z);
-		console.log("X Figur="+figure.position.x+"  Y Figur="+figure.position.y);
 		return pos;
 	}
 	return targetPosition;
@@ -137,12 +134,8 @@ function getTargetPosition(event){
 
 
 function updatePostitions(posPlayer,posTarget) {
-	//posTarget.z = 0;
-	if(posPlayer.equals(posTarget)) {
-		
+	if(posPlayer.equals(posTarget)) {		
 		return;} 
-	console.log(posPlayer);
-	console.log(posTarget);
 	
 	let isInCorrectRow = (posPlayer.y === posTarget.y);
 	let isCentered = (posPlayer.x === 0);
@@ -174,17 +167,16 @@ function playerGotoX(posPlayer, posTarget) {
 	
 	
 	if(dX < speed) {
-		console.log("4");
+		deleteCubeUnderground((currentPlayerPos.x / 200)-1, (currentPlayerPos.y / -200));
 		currentPlayerPos.x -= speed;
 		figure.position.copy(currentPlayerPos);
 	}
 	if(dX > speed) {
-		console.log("5");
+		deleteCubeUnderground((currentPlayerPos.x / 200)+1, (currentPlayerPos.y / -200));
 		currentPlayerPos.x += speed;
 		figure.position.copy(currentPlayerPos);
 	}
 	if(dX <= speed && dX >= -speed) {
-		console.log("6");
 		currentPlayerPos.x = targetPlayerPos.x;
 		figure.position.copy(currentPlayerPos);	
 	}
@@ -200,19 +192,15 @@ function playerGotoY(posPlayer, posTarget) {
 	dY = targetPlayerPos.y - currentPlayerPos.y;
 
 	if(dY < speed) {
-		console.log("1");
 		currentPlayerPos.y -= speed;
 		figure.position.copy(currentPlayerPos);			
 	}
 	
 	if(dY > speed) {
-		console.log("2");
-		console.log(dY)
 		currentPlayerPos.y += speed;
 		figure.position.copy(currentPlayerPos);	
 	}
 	if(dY <= speed && dY >= -speed) {
-		console.log("3");
 		currentPlayerPos.y = targetPlayerPos.y;
 		figure.position.copy(currentPlayerPos);	
 	}
@@ -241,10 +229,6 @@ function render() {
 	// calculate objects intersecting the picking ray
 	let targetBlocks = scene.children[6].children[1]
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
-	var texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_top_512x512_compress.jpg" );
-	//console.log(intersects[0].object);
-	//console.log(intersects[0].object);
-	
 
 		/*
 	if(intersects[0].object.name !== "") {
@@ -260,12 +244,10 @@ function render() {
 					intersected = intersections[ 0 ].object;
 					intersected.material.color.setHex( 0xff0000 );
 				}
-				//document.body.style.cursor = 'pointer';
 			}
 			else if ( intersected ) {
 				intersected.material.color.setHex( 0xffffff );
 				intersected = null;
-				//document.body.style.cursor = 'auto';
 			}
 	
 
