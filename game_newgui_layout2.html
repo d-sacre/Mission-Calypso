@@ -16,6 +16,11 @@
 
 	<body>
 
+		<audio id="warning" controls  loop>
+		  <source src="./audio/berlin-stmospheres_warningalarm_id-0904_4times.mp3" type="audio/mpeg">
+		  Your browser does not support the audio element.
+		</audio>
+
 	<div id="game-gui-popup-container">
 		<div id="headup-gui-container">
 			<fieldset id="headup-gui-spaceship" class="headup-gui">
@@ -241,7 +246,7 @@
 							<li>
 								copper ingot
 								<div id="copper-ingot-refinery" ondrop="drop(event)" ondragover="allowDrop(event)" class="drag-and-drop-menu-material-container">
-										<img id="copper-ingot-refinery" src="pictures/copper-ingot.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
+										<img id="copper-ingot-product-refinery" src="pictures/copper-ingot.png" draggable="true" ondragstart="drag(event)" class="storage-popupmenu-draganddrop-icon">
 								</div>
 								<span>15/15</span>
 							</li>
@@ -341,6 +346,10 @@
 			</div>
 		</div>
 
+		<div class="game-over-popup">
+				Game over!
+		</div>
+
 
 	</body>
 
@@ -348,6 +357,9 @@
 	</script>
 
 	<script src="js/button_interaction.js">
+	</script>
+
+	<script src="js/audio-visualwarning.js">
 	</script>
 
 </html>
