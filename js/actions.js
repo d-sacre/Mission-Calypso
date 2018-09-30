@@ -7,6 +7,14 @@
 
 function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
+	
+	if (cube != null){
+		let positionX = cube.userData.positionX;
+		console.log(positionX);
+		let positionY = cube.userData.positionY;
+		console.log(positionY);
+	}
+	
 	group.remove(cube);
 }
 
@@ -40,7 +48,7 @@ function drill(fuel) {
 	}
 
 	for(let x=-1; x<2; x++){
-		for (let y=0; y<3; y++){
+		for (let y=0; y<6; y++){
 			deleteCubeUnderground(x, y);
 		}
 	}
