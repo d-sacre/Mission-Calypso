@@ -91,6 +91,10 @@ function buildModel() {
 				if(z===0) {
 					let name = "(" + x + "|" + y + ")";
 					mesh.name= name;
+					mesh.userData.positionX = x;
+					mesh.userData.positionY = y;
+					mesh.userData.material = "Gestein";
+					mesh.userData.abb = true;
 				}
 				mesh.receiveShadow = true;
 				mesh.castShadow = true;
