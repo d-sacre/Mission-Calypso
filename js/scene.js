@@ -7,6 +7,7 @@ var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
 var SPEED=5;
+var stages = 6;
 
 
 init();
@@ -123,7 +124,7 @@ function getTargetPosition(event){
 	let targetBlocks = scene.children[6].children[1];
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 	
-	if(intersections.length > 0) {
+	if(intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
 		let pos = intersections[0].object.position.clone();
 		return pos;
 	}
@@ -238,7 +239,7 @@ function render() {
 
 	}
 */
-			if ( intersections.length > 0 ) {
+			if ( intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
 				if ( intersected != intersections[ 0 ].object ) {
 					if ( intersected ) intersected.material.color.setHex( 0xffffff );
 					intersected = intersections[ 0 ].object;
