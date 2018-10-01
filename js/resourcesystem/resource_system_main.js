@@ -126,7 +126,7 @@ class ResourcesSystem{
 			//console.log('pottasium slider: '+this.pottasiumProcessing);
 			let processEnergy=this.productivity*this.caloricumProcessing*0.2+this.productivity*this.copperProcessing*0.4+this.productivity*this.pottasiumProcessing*0.3;
 			let refineryEnergyConsumption = (processEnergy*this.workerRefinery).toFixed(2);
-			console.log('refineryEnergyConsumption: '+  refineryEnergyConsumption);
+			//console.log('refineryEnergyConsumption: '+  refineryEnergyConsumption);
 			return refineryEnergyConsumption;
 	}
 
@@ -150,7 +150,7 @@ class ResourcesSystem{
 		let caloricumProcessingOutput=this.productivity*this.caloricumProcessing*this.workerRefinery*40;
 		let copperProcessingOutput=this.productivity*this.copperProcessing*this.workerRefinery*0.5;
 		let pottasiumProcessingOutput=this.productivity*this.pottasiumProcessing*this.workerRefinery*1;
-
+		
 		if ((this.caloricum-caloricumProcessingOreConsumption>=0) && (this.energy-caloricumProcessingEnergyConsumption>=0)){
 				document.querySelector('#raw-caloricum-storage-value').value=this.caloricum-caloricumProcessingOreConsumption.toFixed(2);
 				document.querySelector('#raw-caloricum-storage-value').innerHTML=this.caloricum-caloricumProcessingOreConsumption.toFixed(2)+ '/15 t';
@@ -408,7 +408,7 @@ let timeUnit = setInterval(function() {
 				window.clearInterval(timeUnit);
 			}
 
-	}, 250); //1000
+	}, 1000); //10000
 
 function startGame(){
 
