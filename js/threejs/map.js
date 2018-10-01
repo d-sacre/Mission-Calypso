@@ -81,10 +81,21 @@ function buildModel() {
 	group = new THREE.Group();
 	group2 = new THREE.Group();
 	let groups = [group, group2];
+	
+	let array=[1,2,1,2,1,2,1,2,0,0,0,0,1,2,1,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,1,2,2,3,3,2,1,0,0,2,1,2,1,2,1,2,0,0,0,0,1,2,1,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,1
+						   ,2,2,3,3,2,1,0,0];
 	for(var z=0; z<2; z++){
 		for(var x=-NUMELEMENTS; x<NUMELEMENTS; x++){
+			let xt=x+20;
 			for(var y=0; y<NUMELEMENTS; y++){
-				let material = matUnderground.clone();
+				let material= matUnderground.clone();
+				if (z===0){
+					let xyt=xt+y;
+					let materialMapContent=array[xyt];
+					if (materialMapContent==1){
+						material = matEdge.clone();
+					} 
+				}
 				mesh = new THREE.Mesh( geoUnderground, material );
 				let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, -z*BOXSIZE.z);
 				mesh.position.copy(pos);
