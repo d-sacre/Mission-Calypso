@@ -84,7 +84,7 @@ function init() {
 	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
 	scene.add( helper );
 	
-	spotLight = getSpotLight();
+	var spotLight = getSpotLight();
 	scene.add( spotLight );
 	
 	let hemiLight = getHemiLight();
