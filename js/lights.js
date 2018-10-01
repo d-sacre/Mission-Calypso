@@ -1,11 +1,11 @@
 function getSpotLight() {
 	let spotLight = new THREE.SpotLight( 0xffffff );
-	spotLight.position.set( 0, 200, -400 );
-	spotLight.lookAt(0,0,0);
+	spotLight.position.set( 0, -20, 70 );
+	//spotLight.lookAt(0,0,0);
 
 	spotLight.castShadow = true;
 	spotLight.penumbra = 0.05;
-	spotLight.decay = 2;
+	spotLight.decay = 0;
 	spotLight.distance = 200;
 	spotLight.angle = 2;
 	spotLight.shadow.mapSize.width = 1024;
@@ -17,8 +17,7 @@ function getSpotLight() {
 }
 
 function getHemiLight(){
-	let hemiLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1);
+	let hemiLight = new THREE.HemisphereLight( 0xffffff, 0x080820, 1.2);
+	hemiLight.position.set(0,100,000);
 	return hemiLight;
-	
-	
 }
