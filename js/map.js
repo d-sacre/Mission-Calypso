@@ -44,8 +44,8 @@ function buildModel() {
 	
 	
 	var matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
-	var matEdge = new THREE.MeshPhongMaterial( { map: texEdge, wireframe: false});
-	var matSurface = new THREE.MeshPhongMaterial( { map: texSurface, wireframe: false});
+	var matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+	var matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	var geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
 	var geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
 	var geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
