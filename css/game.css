@@ -1,66 +1,431 @@
+:root {
+
+   --calypsobrass: #edf60d;
+   --calypsocopper: rgb(200, 117, 51);
+
+}
+
+*{
+
+  box-sizing: border-box;
+}
+
 body {
-  background-color: black;
+  /*background-color: black;*/
+  /*background-image: url('../pictures/Screenshot Map.jpg');
+  background-repeat: no-repeat;
+  background: cover;*/
+  /*background-position: center;*/
+  /*background-size: 100vw 100vh;*/
+
+  margin: 0;
+
   color: white;
+  overflow: hidden;
+
 }
 
 fieldset {
+  border-radius: 10px;
+
+}
+
+audio {
+   display:none;
+}
+
+/*########################################################################## */
+/*###### definition of headup-gui-popup-style ################################ */
+/*########################################################################## */
+.headup-gui{
+
+  position: absolute;
+  top: 0vh;
+  left: 10vw;
+
+}
+
+
+#headup-gui-container li {
+  list-style: none;
+  display: inline-block;
+}
+
+#game-timer {
+  position: absolute;
+  top: 1vh;
+  left: 89vw;
+
+  width: 8vw;
+
+}
+
+#headup-gui-spaceship{
+  position: absolute;
+  top: 1vh;
+  left: 2.5vw;
+
+  width: 85vw;
+
+}
+
+
+/*########################################################################## */
+/*###### definition of game-gui-popup-style ################################ */
+/*########################################################################## */
+
+.transform {
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+
+#back-to-mainmenu-popup-button{
+
+  position: absolute;
+  bottom: 12.5vh;
+
+}
+
+#return-to-game-popup-button{
+
+  position: absolute;
+  bottom: 2.5vh;
+
+}
+
+.clickbox-popupmenu{
+  position: absolute;
+  bottom: 80vh;
+  left: -6vw;
+
+  /*background-color: red;*/
+
+  width: 106vw;
+  height: 20vh;
+
+  z-index: 6;
+}
+
+#rocket-img-popupmenu{
+  position: absolute;
+  bottom: 2vh;
+  left: 11vw;
+  height: 87.5vh;
+  width: 20vw;
+
+  z-index: 5;
+
+}
+
+
+.game-gui-popup{
+  position: absolute;
+  left: 5vw;
+  bottom: -85vh;/*-70vh;*/
+
+
+  background-color: var(--calypsocopper);
+  border: solid 5px var(--calypsobrass);
+  border-radius: 10px;
+
+  box-shadow: 10px 10px 5px;
+
+
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
+
+  font-size: 12px;
+  color: black;
+
+  height: 84vh;
+  width: 90vw;
+
 }
 
-#game-gui-container{
+.game-gui-popup ul{
+    padding: 10px;
+    margin: 0px;
+}
 
-  position: relative;
+.game-gui-popup li{
+    list-style: none;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.transform-active {
+  bottom: 0vh;
+}
+
+.game-gui-popup legend{
+  color: green;
+  font-weight: bold;
+}
+
+.game-gui-popup label{
+  color: black;
+}
+
+#game-gui-popup-firstrow span{
+  color: white;
 
 }
 
-#game-rendering-area{
+#game-gui-popup-secondrow span{
+  color: white;
+
+}
+
+#game-gui-popup-firstrow li{
+  color: black;
+
+}
+
+#game-gui-popup-secondrow li{
+  color: black;
+
+}
+
+#storage-popupmenu span {
+
+  color: white;
+
+}
+
+#game-gui-popup-container{
+  overflow: hidden;
+
+}
+
+
+#general-popup{
+
   position: absolute;
-  pointer-events: none;
-  z-index: -1;
-}
+  top: 1vh;
+  right:25vw;
 
-#headup-gui-container {
-  position: absolute;
-  z-index: 0;
+  width: 20vw;
+  height: 37.5vh;
 
-}
+  padding: 5px;
 
-#headup-gui-spaceship{
-  position: absolute;
-  left: 0vw;
-
-  width: 44vw;
-}
-
-#game-timer{
-  position: absolute;
-  left: 45vw;
-
-  width: 4vw;
-}
-
-#headup-gui-mining{
-  position: absolute;
-  left: 50vw;
-
-  width: 45vw;
+  font-size: 12pt;
 
 }
 
-li{
-  display:inline;
-}
-
-#popup-area{
+#storage-popupmenu{
 
   position: absolute;
-  left: 50vw;
-  top: 50vh;
-  z-index: 1;
+  top: 1vh;
+  right: 2.5vw;
 
+  height: 37.5vh;
+  width: 20vw;
+
+  font-size: 12pt;
+
+}
+
+#storage-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#storage-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#use-item-popupmenu{
+
+    position: absolute;
+    top: 40vh;
+    right: 2.5vw;
+
+    height: 37.5vh;
+    width: 20vw;
+
+    font-size: 12pt;
+
+  }
+
+
+#use-item-popupmenu ul{
+
+  margin: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+
+}
+
+#use-item-popupmenu li{
+  list-style: none;
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+#machine-speed-work-assignement-popup{
+  position: absolute;
+  top: 1vh;
+  right: 26.5vw;
+
+  height: 37.5vh;
+
+  font-size: 12pt;
+  width: 28vw;
+}
+
+#refinery-assignement-popup{
+  position: absolute;
+  top: 40vh;
+  right: 26.5vw;
+
+  height: 37.5vh;
+  width: 28vw;
+
+  font-size: 12pt;
+}
+
+/* drag and drop Menu */
+.drag-and-drop-menu-material-container {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    border: 1px solid #aaaaaa;
+}
+
+.storage-popupmenu-draganddrop-icon{
+
+  height: 65px;
+  width: auto;
+
+  padding:  10px;
+}
+
+.game-over-popup{
+  position: absolute;
+  top:33vh;
+  left: 35vw;
+
+  width: 30vw;
+  height: 37vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 20px;
+  color: var(--calypsocopper);
+  /*background-color: var(--calypsobrass);*/
+
+  /*display: none;*/
+
+  z-index: 20;
+}
+
+.game-over-popup h1{
+
+  text-align: center;
+}
+
+.game-over-popup a{
+
+  padding-bottom: 2vw;
+}
+
+.game-over-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+}
+
+/* ########################################################################## */
+/* ############ game over popup specification ############################### */
+/* ########################################################################## */
+
+#supplies-game-over-popup{
+  display: none;
+
+}
+
+/* ########################################################################## */
+/* ############ class-system gui ########################################### */
+/* ########################################################################## */
+.energy-value{
+    color: white;
+}
+
+.oxygen-value{
+  color: white;
+}
+
+.carbondioxide-value{
+  color: white;
+}
+
+.weight-value{
+  color: white;
+}
+
+.wear-value{
+  color: white;
+}
+
+.time-value{
+  color: white;
+}
+
+.productivity-value{
+  color: white;
+}
+
+.energy-storage-value{
+  color: white;
+}
+
+.decarbonizer-storage-value{
+  color: white;
+}
+
+.carbondioxide-beforeuseitem-value{
+  color: white;
+}
+
+.carbondioxide-afteruseitem-value{
+  color: green;
 }
