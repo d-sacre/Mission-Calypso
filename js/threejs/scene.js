@@ -1,6 +1,6 @@
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2(), intersected;
-var figure, spotLight;
+var figure, drill, spotLight;
 var container;
 var camera, controls, scene, renderer;
 var sky, sunSphere;
@@ -100,6 +100,9 @@ function init() {
 	scene.add(figure);
 	targetPosition = getPlayerPosition();
 
+	drill =buildDrill();
+	scene.add(drill);
+	//targetPosition = getPlayerPosition();
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'click', onMouseClick, false);
@@ -134,7 +137,7 @@ function getTargetPosition(event){
 
 
 
-function updatePostitions(posPlayer,posTarget) {
+function updateFigPostitions(posPlayer,posTarget) {
 	if(posPlayer.equals(posTarget)) {
 		return;}
 
@@ -220,7 +223,22 @@ function onWindowResize() {
 	render();
 }
 
+/*function updateDrillPosition(speedDrill){
+	let currentDrillPos = drill.position.clone();
+	if(posPlayer.equals(posTarget)) {
+		return;}
+	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
+		speedD = speedDrill;
+	//drill.position.copy(currentPlayerPos);
+}
 
+function drillGotoY(posPlayer, posTarget) {
+	let speedD = SPEED;
+
+	currentPlayerPos = posPlayer;
+	targetPlayerPos = posTarget;
+}
+*/
 
 function render() {
 	// update the picking ray with the camera and mouse position
@@ -257,7 +275,7 @@ function render() {
 
 function animate() {
 	requestAnimationFrame( animate );
-	updatePostitions(getPlayerPosition(),targetPosition);
+	updateFigPostitions(getPlayerPosition(),targetPosition);
 	render();
 	controls.update();
 }
