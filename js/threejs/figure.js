@@ -14,3 +14,18 @@ function buildFigure(){
 	meshFig.castShadow = true;
 	return meshFig;
 }
+
+function buildDrill(){
+	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/pink-and-green-lined-background.jpg" );
+	let matDrill = new THREE.MeshPhongMaterial( {  wireframe: true});
+	var geoDrill = new THREE.CylinderBufferGeometry( 0.5*BOXSIZE.x, 0*BOXSIZE.x, 1*BOXSIZE.x, 5 );
+	let meshDrill;
+	meshDrill = new THREE.Mesh( geoDrill, 	matDrill );
+	//meshDrill.rotateY( Math.sign(x)* Math.PI / 5.4 );
+	meshDrill.receiveShadow = true;
+	meshDrill.castShadow = true;
+	let posDrill = new THREE.Vector3(0, 0, BOXSIZE.z*(4.0));
+	let name = "Drill";
+	meshDrill.name= name;
+	return meshDrill;
+}
