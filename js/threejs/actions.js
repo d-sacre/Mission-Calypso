@@ -9,10 +9,10 @@ function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
 	
 	if (cube != null){
-		let positionX = cube.userData.positionX;
-		console.log(positionX);
-		let positionY = cube.userData.positionY;
-		console.log(positionY);
+		let material = cube.userData.material;
+		console.log(material);
+		//FunktionDanielInsHTMLSchreiben
+
 	}
 	
 	group.remove(cube);
