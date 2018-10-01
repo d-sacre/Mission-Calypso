@@ -13,7 +13,13 @@ function buildModel() {
 	var texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_highres_withoutedge_256x256_compress.jpg" );
 	var texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_edge_128x128.jpg" );
 	var texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/sand_highres_top_512x512_compress.jpg" );
+
+	//Resources
 	var texPotassium = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_potassium_256x256_compress.jpg" );
+	var texCaloricum = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_caloricum_256x256_compress.jpg" );
+	var texCopper = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_copper_256x256_compress.jpg" );
+
+
 	var texMetalGreenNor = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_Nor_1k.jpg" );
 	var texMetalGreenAo = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_AO_1k.jpg" );
 	var texMetalGreenRu = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/green_metal_rust_rough_1k.jpg" );
@@ -45,7 +51,12 @@ function buildModel() {
 
 	var matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	var matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
-	var matTest = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
+	
+	//resources
+	var matPot = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
+	var matCal = new THREE.MeshPhongMaterial( { map: texCaloricum, wireframe: false});
+	var matCop = new THREE.MeshPhongMaterial( { map: texCopper, wireframe: false});
+	
 	var matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	var geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
 	var geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
@@ -83,8 +94,28 @@ function buildModel() {
 	group2 = new THREE.Group();
 	let groups = [group, group2];
 
-	let array=[1,2,1,2,1,2,1,2,0,0,0,0,1,2,1,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,1,2,2,3,3,2,1,0,0,2,1,2,1,2,1,2,0,0,0,0,1,2,1,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,1
-						   ,2,2,3,3,2,1,0,0];
+	function randMat(){
+		let ranNum=Math.random();
+		//console.log(returnVal);
+		let returnVal;
+		if(ranNum<0.8){
+			returnVal=0;
+			return returnVal;
+		}
+		if(0.8<=ranNum&&ranNum<0.9){
+			returnVal=1;
+			return returnVal;
+		}
+		if(0.9<=ranNum&&ranNum<0.95){
+			returnVal=2;
+			return returnVal;
+		}
+		if(0.95<=ranNum&&ranNum<=1){
+			returnVal=3;
+			return returnVal;
+		}
+	}
+	
 	for(var z=0; z<2; z++){
 		for(var x=-NUMELEMENTS; x<NUMELEMENTS; x++){
 			let xt=x+20;
@@ -92,15 +123,23 @@ function buildModel() {
 				let material;
 				if (z===0){
 					let xyt=xt+y;
-					let materialMapContent=array[xyt];
+					//bitte var lassen 
+					var materialMapContent=randMat();
+					if (materialMapContent==0){
+						material = matUnderground.clone();
+					}
 					if (materialMapContent==1){
-						material = matTest.clone();
-					} else {
-						material= matUnderground.clone();
+						material = matPot.clone();
+					}
+					if (materialMapContent==2){
+						material = matCal.clone();
+					}
+					if (materialMapContent==3){
+						material = matCop.clone();
 					}
 				} else {
 					material= matUnderground.clone();
-				}
+			}
 
 
 				mesh = new THREE.Mesh( geoUnderground, material );
@@ -111,7 +150,7 @@ function buildModel() {
 					mesh.name= name;
 					mesh.userData.positionX = x;
 					mesh.userData.positionY = y;
-					mesh.userData.material = "Gestein";
+					mesh.userData.material = materialMapContent;
 					mesh.userData.abb = true;
 				}
 				mesh.receiveShadow = true;
@@ -121,13 +160,13 @@ function buildModel() {
 		}
 	}
 
-
+	
 
 	//other stuff like rocket...
 
 
 	//Rocket-body:
-	let groupRocket = new THREE.Group();
+	let groupRocket =new THREE.Group();
 	let texRocketCube = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/rocket1.jpg" );
 	let matRocketCube1 = new THREE.MeshPhongMaterial( { map: texRocketCube, wireframe: false});
 	let geoRocketCube1 = new THREE.BoxBufferGeometry( BOXSIZE.x*0.3 , BOXSIZE.y,  BOXSIZE.z);
@@ -205,7 +244,6 @@ function buildModel() {
 	groupRocket.add( meshRocketBottom );
 
 	//Rocket tank
-
 	var geoRocketTank = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 1.5*BOXSIZE.x, 7*BOXSIZE.x, 32 );
 	for(x=-3.3;x<=3.3;x+=6.6){
 			let meshRocketTank;
@@ -226,7 +264,6 @@ function buildModel() {
 	groupRocket.add( meshRocketTank );
 	group.add( groupRocket );
 	*/
-
 	model.add(groups[0]);
 	model.add(groups[1]);
 
