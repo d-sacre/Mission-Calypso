@@ -1,6 +1,6 @@
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2(), intersected;
-var figure, drill, spotLight;
+var figure, drillObj, spotLight;
 var container;
 var camera, controls, scene, renderer;
 var sky, sunSphere;
@@ -12,6 +12,57 @@ var stages = 6;
 
 init();
 animate();
+
+
+function init() {
+
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 30, 2000000 );
+	renderer = new THREE.WebGLRenderer({antialias: true});
+
+	//PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
+	camera.position.set( 0, 3*BOXSIZE.x, 100*BOXSIZE.x );
+	camera.lookAt( 0, 0, 0 );
+	//camera.setLens(20);
+
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.addEventListener( 'change', render );
+	controls.maxPolarAngle = Math.PI / 2;
+	controls.enableZoom = false;
+	controls.enablePan = false;
+	initSky();
+
+	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
+	scene.add( helper );
+
+	var spotLight = getSpotLight();
+	scene.add( spotLight );
+	
+	let lightHelper = new THREE.SpotLightHelper( spotLight );
+	scene.add( lightHelper );	
+
+	let hemiLight = getHemiLight();
+	scene.add( hemiLight );
+
+	let model = buildModel();
+	scene.add(model);
+
+	figure = buildFigure();
+	scene.add(figure);
+	targetPosition = getPlayerPosition();
+
+	drillObj = buildDrill();
+	scene.add(drillObj);
+	//targetDrillPos = drillObj.position.clone();
+
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	document.addEventListener( 'click', onMouseClick, false);
+
+	window.addEventListener( 'resize', onWindowResize, false );
+}
 
 
 function initSky() {
@@ -56,58 +107,6 @@ function initSky() {
 		renderer.render( scene, camera );
 	}
 	guiChanged();
-}
-
-
-
-function init() {
-
-	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 30, 2000000 );
-	renderer = new THREE.WebGLRenderer({antialias: true});
-
-	//PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
-	camera.position.set( 0, 3*BOXSIZE.x, 100*BOXSIZE.x );
-	camera.lookAt( 0, 0, 0 );
-	//camera.setLens(20);
-
-	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
-	controls = new THREE.OrbitControls( camera, renderer.domElement );
-	controls.addEventListener( 'change', render );
-	controls.maxPolarAngle = Math.PI / 2;
-	controls.enableZoom = false;
-	controls.enablePan = false;
-	initSky();
-
-	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
-	scene.add( helper );
-
-	var spotLight = getSpotLight();
-	scene.add( spotLight );
-
-	let hemiLight = getHemiLight();
-	scene.add( hemiLight );
-
-	let lightHelper = new THREE.SpotLightHelper( spotLight );
-	scene.add( lightHelper );
-
-	let model = buildModel();
-	scene.add(model);
-
-	figure =buildFigure();
-	scene.add(figure);
-	targetPosition = getPlayerPosition();
-
-	drill =buildDrill();
-	scene.add(drill);
-	//targetPosition = getPlayerPosition();
-
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.addEventListener( 'click', onMouseClick, false);
-
-	window.addEventListener( 'resize', onWindowResize, false );
 }
 
 function onMouseClick(event){
@@ -223,22 +222,85 @@ function onWindowResize() {
 	render();
 }
 
-/*function updateDrillPosition(speedDrill){
-	let currentDrillPos = drill.position.clone();
-	if(posPlayer.equals(posTarget)) {
+
+function updateDrillPosition(){
+	let speedDrill = 6; //Fkt Daniel: getSpeedForDrill()
+	//let drillObj = scene.getObjectByName( "Drill");
+	let currentDrillPos = drillObj.position.clone();
+	let targetDrillPos = getTargetDrillPos(stages); //stages würde vom Daniel aktualisiert werden
+	
+	
+	if(currentDrillPos.equals(targetDrillPos)) {
 		return;}
-	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
-		speedD = speedDrill;
-	//drill.position.copy(currentPlayerPos);
+	
+	
+	let dY = targetDrillPos.y - currentDrillPos.y;
+
+	if(dY < speedDrill) {
+		currentDrillPos.y -= speedDrill;
+		drillObj.position.copy(currentDrillPos);
+		//drill();
+		//drill((currentDrillPos.y / -200));
+	}
+
+	if(dY > speedDrill) {
+		currentDrillPos.y += speedDrill;
+		drillObj.position.copy(currentDrillPos);
+		//drill((currentDrillPos.y / -200));
+
+	}
+	
+	if(dY <= speedDrill && dY >= -speedDrill) {
+		currentDrillPos.y = targetDrillPos.y;
+		drillObj.position.copy(currentDrillPos);
+	}
 }
 
-function drillGotoY(posPlayer, posTarget) {
-	let speedD = SPEED;
 
-	currentPlayerPos = posPlayer;
-	targetPlayerPos = posTarget;
+/*function updateDrillPosition(){
+	let speedDrill = 6; //Fkt Daniel: getSpeedForDrill()
+	//let drillObj = scene.getObjectByName( "Drill");
+	let currentDrillPos = drillObj.position.clone();
+	let targetDrillPos = getTargetDrillPos(stages); // Anpassung auf klickbaren Bereich?
+	
+	
+	if(currentDrillPos.equals(targetDrillPos)) {
+		return;}
+	
+	
+	let dY = targetDrillPos.y - currentDrillPos.y;
+	
+	if (currentDrillPos <= targetDrillPos){
+
+		if(dY < speedDrill) {
+			currentDrillPos.y -= speedDrill;
+			drillObj.position.copy(currentDrillPos);
+			//drill((currentDrillPos.y / -200));
+		}
+
+		if(dY > speedDrill) {
+			currentDrillPos.y += speedDrill;
+			drillObj.position.copy(currentDrillPos);
+			//drill((currentDrillPos.y / -200));
+
+		}
+		
+		if(dY <= speedDrill && dY >= -speedDrill) {
+			currentDrillPos.y = targetDrillPos.y;
+			drillObj.position.copy(currentDrillPos);
+		}
+		
+	}
 }
 */
+
+function getTargetDrillPos(stages){
+	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
+	let targetPosDrill = cubeObj.position.clone();
+	return targetPosDrill;	
+}
+
+
 
 function render() {
 	// update the picking ray with the camera and mouse position
@@ -275,6 +337,8 @@ function render() {
 
 function animate() {
 	requestAnimationFrame( animate );
+	//updateDrillPosition(drillObj.position.clone(), getTargetDrillPos());
+	updateDrillPosition();
 	updateFigPostitions(getPlayerPosition(),targetPosition);
 	render();
 	controls.update();
