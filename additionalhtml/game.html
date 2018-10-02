@@ -77,7 +77,28 @@
 				<div id="to-rocket-menu-clickbox" class="clickbox-popupmenu">
 				</div>
 
-				<img id="rocket-img-popupmenu" src="../pictures/gamepopupmenu/rocket_rotated_recolored.png"></img>
+				<img id="rocket-img-popupmenu" src="../pictures/gamepopupmenu/rocket_rotated_recolored.png"></img><!--rocket_rotated_recolored.png"></img>-->
+
+				<fieldset id="drill-storey-setup" onchange="system.refreshSliderDisplay()">
+					<legend>main drill depth</legend>
+					</br>
+					</br>
+					<input id="drill-storey-slider" type="range" min="1" max="9" default value="1" value="">
+					</br>
+					</br>
+					<span id="drill-storey-slider-current-value" value="">0</span><span id="drill-storey-slider-target-value" value="">/0 storeys</span>
+					<span id="drill-storey-target-confirmed" value="0"><span>
+					</br>
+					</br>
+					current state:
+					</br>
+					<span id="current-main-drill-state">starting position</span>
+					</br>
+					</br>
+					<button id="start-main-drill-button" class="popupmenu-button round">
+						Start main drill!
+					</button>
+				</fieldset>
 
 				<button id="back-to-mainmenu-popup-button" class="popupmenu-button round">
 					Back to Menu
@@ -90,7 +111,7 @@
 				<ul id="game-gui-popup-firstrow">
 					<li>
 						<fieldset id="machine-speed-work-assignement-popup" onchange="system.refreshSliderDisplay()">
-								<legend> Machine speed & work assignement</legend>
+								<legend> machine speed & work assignement</legend>
 
 								<label for="machine-speed"> machine speed:  </label>
 								<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1">
@@ -103,7 +124,7 @@
 
 								</br>
 								</br>
-								<strong> <font color="green">Work assignement:</font> </strong>
+								<strong> <font color="green">work assignement:</font> </strong>
 								</br>
 								</br>
 
@@ -129,7 +150,7 @@
 
 					<li>
 						<fieldset id="storage-popupmenu">
-							<legend> storage: </legend>
+							<legend> storage </legend>
 							<ul>
 								<li>
 									caloricum ore
@@ -222,7 +243,7 @@
 
 				<li>
 					<fieldset id="use-item-popupmenu">
-						<legend> use item: </legend>
+						<legend> use item </legend>
 						number of decarbonizers:
 						</br>
 						</br>
