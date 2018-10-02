@@ -11,12 +11,6 @@
 }
 
 body {
-  /*background-color: black;*/
-  /*background-image: url('../pictures/Screenshot Map.jpg');
-  background-repeat: no-repeat;
-  background: cover;*/
-  /*background-position: center;*/
-  /*background-size: 100vw 100vh;*/
 
   margin: 0;
 
@@ -483,46 +477,10 @@ audio {
 /* ########################################################################## */
 /* ############ class-system gui ########################################### */
 /* ########################################################################## */
-.energy-value{
-    color: white;
-}
-
-.oxygen-value{
-  color: white;
-}
-
-.carbondioxide-value{
-  color: white;
-}
-
-.weight-value{
-  color: white;
-}
-
-.wear-value{
-  color: white;
-}
-
-.time-value{
-  color: white;
-}
-
-.productivity-value{
-  color: white;
-}
-
-.energy-storage-value{
-  color: white;
-}
-
-.decarbonizer-storage-value{
-  color: white;
-}
-
-.carbondioxide-beforeuseitem-value{
-  color: white;
-}
-
+.energy-value .oxygen-value .carbondioxide-value
+.weight-value .wear-value .time-value .productivity-value
+.energy-storage-value .decarbonizer-storage-value
+.decarbonizer-storage-value .carbondioxide-beforeuseitem-value
 .carbondioxide-afteruseitem-value{
-  color: green;
+    color: white;
 }
