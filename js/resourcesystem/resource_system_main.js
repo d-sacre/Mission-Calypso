@@ -17,6 +17,7 @@ class ResourcesSystem{
 		document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value;
 
 		/* write initial storage values in innerHTML */
+		document.querySelector('.energy-value').innerHTML=Energy+'/'+Energy+' HU';
 		document.querySelector('#raw-caloricum-storage-value').innerHTML=CaloricumStart + '/15 t';
 		document.querySelector('#copper-ore-value').innerHTML=CopperOreStart + '/15 t';
 		document.querySelector('#pottasium-ore-value').innerHTML=PottasiumOreStart + '/30 kg';
@@ -35,6 +36,7 @@ class ResourcesSystem{
 		this.caloricumProcessing=parseFloat(document.querySelector('#caloricum-processing-slider').value);
 		this.copperProcessing=parseFloat(document.querySelector('#copper-processing-slider').value);
 		this.pottasiumProcessing=parseFloat(document.querySelector('#pottasium-processing-slider').value);
+		this.EnergyStartValue=Energy;
 
 
 		this.N = WorkerTotal;
@@ -150,7 +152,7 @@ class ResourcesSystem{
 		let caloricumProcessingOutput=this.productivity*this.caloricumProcessing*this.workerRefinery*40;
 		let copperProcessingOutput=this.productivity*this.copperProcessing*this.workerRefinery*0.5;
 		let pottasiumProcessingOutput=this.productivity*this.pottasiumProcessing*this.workerRefinery*1;
-		
+
 		if ((this.caloricum-caloricumProcessingOreConsumption>=0) && (this.energy-caloricumProcessingEnergyConsumption>=0)){
 				document.querySelector('#raw-caloricum-storage-value').value=this.caloricum-caloricumProcessingOreConsumption.toFixed(2);
 				document.querySelector('#raw-caloricum-storage-value').innerHTML=this.caloricum-caloricumProcessingOreConsumption.toFixed(2)+ '/15 t';
@@ -322,10 +324,10 @@ class ResourcesSystem{
 			let productivity = data.productivity;
 			let co2ReduxTheo=data.carbonizerReductionCalculationValue;
 
-			document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/150 HU';
+			document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+this.EnergyStartValue+' HU';
 			document.querySelector('.energy-value').value=energy.toFixed(2); // storing value in html for easier access without js-interfaces
 			// readout of headup-gui-energy value and copying to storage energy value
-			document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/150 HU';
+			document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+this.EnergyStartValue+' HU';
 
 			document.querySelector('.productivity-value').innerHTML=(100*productivity).toFixed(2)+'/100 %';
 			document.querySelector('.productivity-value').value=productivity;
@@ -400,7 +402,7 @@ class ResourcesSystem{
 }
 
 
-let system = new ResourcesSystem(150,150,3,15,5,10,5);// order of arguments: Energy, Weight,WorkerTotal,CaloricumStart,CopperOreStart,PottasiumOreStart,DecarbStart
+let system = new ResourcesSystem(500,150,3,15,5,10,5);// order of arguments: Energy, Weight,WorkerTotal,CaloricumStart,CopperOreStart,PottasiumOreStart,DecarbStart
 
 let timeUnit = setInterval(function() {
 			let data = system.setTime();
