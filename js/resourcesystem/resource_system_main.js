@@ -38,7 +38,7 @@ class ResourcesSystem{
 		this.pottasiumProcessing=parseFloat(document.querySelector('#pottasium-processing-slider').value);
 		this.EnergyStartValue=Energy;
 
-		this.CopperStatemachine="enough";
+		this.CopperStatemachine="not-enough";
 
 
 		this.N = WorkerTotal;
@@ -68,7 +68,7 @@ class ResourcesSystem{
 		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
 
 		let userselectNCarbonizer=document.querySelector('#use-decarbonizer-slider').value;
-		//console.log(userselectNCarbonizer); // wird nur refreshed, wenn einer der oberen drei Slider verändert wird
+
 		let caloricumProcessing=document.querySelector('#caloricum-processing-slider').value;
 		let copperProcessing=document.querySelector('#copper-processing-slider').value;
 		let pottasiumProcessing=document.querySelector('#pottasium-processing-slider').value;
@@ -91,15 +91,14 @@ class ResourcesSystem{
 
 		let SliderValues=this.getSliderValue();
 
-		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed;
+		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed+'&times;';
 		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
 		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
 		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
 
-		document.querySelector('#caloricum-processing-slidervalue').innerHTML=SliderValues.caloricumProcessing;
-		document.querySelector('#copper-processing-slidervalue').innerHTML=SliderValues.copperProcessing;
-		document.querySelector('#pottasium-processing-slidervalue').innerHTML=SliderValues.pottasiumProcessing;
-
+		document.querySelector('#caloricum-processing-slidervalue').innerHTML=SliderValues.caloricumProcessing+'&times;';
+		document.querySelector('#copper-processing-slidervalue').innerHTML=SliderValues.copperProcessing+'&times;';
+		document.querySelector('#pottasium-processing-slidervalue').innerHTML=SliderValues.pottasiumProcessing+'&times;';
 
 		document.querySelector('#use-decarbonizer-slidervalue').innerHTML=SliderValues.userselectNCarbonizer + '/' + document.querySelector('#decarbonizer-storage-value').value;
 		document.querySelector('#use-decarbonizer-slider').max=parseFloat(document.querySelector('#decarbonizer-storage-value').value);
@@ -194,6 +193,18 @@ class ResourcesSystem{
 		return drillEnergyConsumption;
 	}
 
+	calculateRefreshMainDrillAndMinerSpeed(){
+		let mainDrillSpeed, minerSpeed;
+		mainDrillSpeed=0.5*this.v;
+		minerSpeed=0.5*this.v;
+
+		document.querySelector('#main-drill-speed').value=mainDrillSpeed;
+		document.querySelector('#miner-speed').value=minerSpeed;
+
+		document.querySelector('#main-drill-speed').innerHTML=mainDrillSpeed+' blocks/s';
+		document.querySelector('#miner-speed').innerHTML=minerSpeed+' blocks/s';
+	}
+
 	carbondioxidFactorCalculation(){
 		this.carbondioxid = parseFloat(document.querySelector('.carbondioxide-value').value);
 		let carbondioxid=this.carbondioxid;
@@ -275,6 +286,7 @@ class ResourcesSystem{
 		let productivity = this.calculateProductivity(v,oxygenFactor, carbondioxidFactor);
 
 		this.refineryProductionCalculation();
+		this.calculateRefreshMainDrillAndMinerSpeed();
 
 		this.oxygen = this.refreshOxygenValue();
 
@@ -450,6 +462,9 @@ let timeUnit = setInterval(function() {
 						document.addEventListener( 'mousemove', onDocumentMouseMove, false ); // re-establish click event listeners for three.js
 						document.addEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
 						system.CopperStatemachine="not-enough";
+						break;
+
+				case "enough-prepare-takeoff":
 						break;
 			}
 
