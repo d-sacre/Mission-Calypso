@@ -35,9 +35,13 @@ function drill(stage) {
 
 	let cubeEdge = scene.getObjectByName( "(" + 0 + ")");
 	if (cubeEdge != null){
+		deleteCubeEdge(-1);
 		deleteCubeEdge(0);
+		deleteCubeEdge(1);
 	}else{
+		deleteCubeUnderground(-1, stage);
 		deleteCubeUnderground(0, stage);
+		deleteCubeUnderground(1, stage);
 	}
 
 
