@@ -233,9 +233,9 @@ function updateDrillPosition(){
 	let dY = targetDrillPos.y - currentDrillPos.y;
 
 	if(dY < speedDrill) {
-		drill((currentDrillPos.y / -200));
 		currentDrillPos.y -= speedDrill;
 		drillObj.position.copy(currentDrillPos);
+		//drillObj.rotation.y = (- Math.PI / speedDrill);
 		drill((currentDrillPos.y / -200));	
 	}
 
