@@ -11,6 +11,19 @@ function getActualMinerSpeed(){
     return ActualMinerSpeed;
 }
 
+// destination of main drill
+function getMainDrillDestination(){
+    let MainDrillDestination=document.querySelector('#drill-storey-target-confirmed').value;
+    let MainDrillClearanceForStart=0;
+    if(MainDrillDestination!=0){
+      MainDrillClearanceForStart=1;
+    }
+    return {
+      destination: MainDrillDestination,
+      ClearanceForStart: MainDrillClearanceForStart
+    }
+}
+
 // transfer mined resources to gui storage in html
 function storeMinedResources(resource){//resource=elementID (still to be defined); each resource block only contains 1 unit of material
     if (resource==1){
