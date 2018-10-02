@@ -38,12 +38,6 @@ function init() {
 	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
 	scene.add( helper );
 
-	var spotLight = getSpotLight();
-	scene.add( spotLight );
-	
-	let lightHelper = new THREE.SpotLightHelper( spotLight );
-	scene.add( lightHelper );	
-
 	let hemiLight = getHemiLight();
 	scene.add( hemiLight );
 
@@ -123,7 +117,7 @@ function getTargetPosition(event){
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-	let targetBlocks = scene.children[6].children[1];
+	let targetBlocks = scene.children[4].children[1];
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 
 	if(intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
@@ -308,7 +302,7 @@ function render() {
 	raycaster.setFromCamera( mouse, camera );
 
 	// calculate objects intersecting the picking ray
-	let targetBlocks = scene.children[6].children[1]
+	let targetBlocks = scene.children[4].children[1]
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 
 		/*
