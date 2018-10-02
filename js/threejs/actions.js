@@ -20,7 +20,7 @@ function deleteCubeEdge(x){
 
 
 
-function drill() {
+function drill(stage) {
 	/*for(let x=-1; x<2; x++){
 			deleteCubeEdge(x);
 	}
@@ -32,7 +32,7 @@ function drill() {
 	}
 	*/
 
-/*
+
 	let cubeEdge = scene.getObjectByName( "(" + 0 + ")");
 	if (cubeEdge != null){
 		deleteCubeEdge(0);
@@ -40,7 +40,7 @@ function drill() {
 		deleteCubeUnderground(0, stage);
 	}
 
-*/
+
 	
 }
 

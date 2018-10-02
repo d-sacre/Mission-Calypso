@@ -218,7 +218,7 @@ function onWindowResize() {
 
 
 function updateDrillPosition(){
-	let speedDrill = 6; //Fkt Daniel: getSpeedForDrill()
+	let speedDrill = 5; //Fkt Daniel: getSpeedForDrill()
 	//let drillObj = scene.getObjectByName( "Drill");
 	let currentDrillPos = drillObj.position.clone();
 	let targetDrillPos = getTargetDrillPos(stages); //stages würde vom Daniel aktualisiert werden
@@ -231,10 +231,10 @@ function updateDrillPosition(){
 	let dY = targetDrillPos.y - currentDrillPos.y;
 
 	if(dY < speedDrill) {
+		drill((currentDrillPos.y / -200));
 		currentDrillPos.y -= speedDrill;
-		drillObj.position.copy(currentDrillPos);
-		//drill();
-		//drill((currentDrillPos.y / -200));
+		//drillObj.position.copy(currentDrillPos);
+		//drill();		
 	}
 
 	if(dY > speedDrill) {
