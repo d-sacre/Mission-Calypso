@@ -72,8 +72,11 @@ function buildModel() {
 				mesh1 = new THREE.Mesh( geoEdge, matEdge );
 				var pos1 = new THREE.Vector3(x*BOXSIZE.x, 0.75*BOXSIZE.y, -z*BOXSIZE.x);
 				mesh1.position.copy(pos1);
-				let name = "(" + x + ")";
-				mesh1.name= name;
+				if(z===0) {
+					let name = "(" + x + ")";
+					mesh1.name= name;
+				}
+				
 				mesh1.receiveShadow = true;
 				mesh1.castShadow = true;
 				groupSurface.add( mesh1 );
