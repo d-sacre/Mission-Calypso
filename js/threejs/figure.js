@@ -23,7 +23,7 @@ function buildDrill(){
 	//meshDrill.rotateY( Math.sign(x)* Math.PI / 5.4 );
 	meshDrill.receiveShadow = true;
 	meshDrill.castShadow = true;
-	let posDrill = new THREE.Vector3(0, 0, BOXSIZE.z*(1));
+	let posDrill = new THREE.Vector3(0, 0.5*BOXSIZE.y, BOXSIZE.z*(1));
 	meshDrill.position.copy(posDrill);
 	let name = "Drill";
 	meshDrill.name= name;
