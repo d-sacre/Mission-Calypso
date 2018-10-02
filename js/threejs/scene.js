@@ -6,8 +6,8 @@ var camera, controls, scene, renderer;
 var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
-var SPEED=5;
-var stages = 6;
+var SPEED=5; //only multiples of 5 allowed
+var stages = 0; //maximum 9 allowed, because max 9 rows are visible
 
 
 init();
@@ -218,8 +218,7 @@ function onWindowResize() {
 
 
 function updateDrillPosition(){
-	let speedDrill = 5; //Fkt Daniel: getSpeedForDrill()
-	//let drillObj = scene.getObjectByName( "Drill");
+	let speedDrill = SPEED;
 	let currentDrillPos = drillObj.position.clone();
 	let targetDrillPos = getTargetDrillPos(stages); //stages würde vom Daniel aktualisiert werden
 	
@@ -233,14 +232,13 @@ function updateDrillPosition(){
 	if(dY < speedDrill) {
 		drill((currentDrillPos.y / -200));
 		currentDrillPos.y -= speedDrill;
-		//drillObj.position.copy(currentDrillPos);
-		//drill();		
+		drillObj.position.copy(currentDrillPos);
+		drill((currentDrillPos.y / -200));	
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
-		//drill((currentDrillPos.y / -200));
 
 	}
 	
@@ -290,8 +288,11 @@ function updateDrillPosition(){
 
 function getTargetDrillPos(stages){
 	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
-	let targetPosDrill = cubeObj.position.clone();
-	return targetPosDrill;	
+	if(cubeObj != null){
+			let targetPosDrill = cubeObj.position.clone();
+			return targetPosDrill;	
+	}
+	return drillObj.position.clone();
 }
 
 
