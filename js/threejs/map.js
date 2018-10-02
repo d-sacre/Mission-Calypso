@@ -151,7 +151,6 @@ function buildModel() {
 					mesh.userData.positionX = x;
 					mesh.userData.positionY = y;
 					mesh.userData.material = materialMapContent;
-					mesh.userData.abb = true;
 				}
 				mesh.receiveShadow = true;
 				mesh.castShadow = true;
