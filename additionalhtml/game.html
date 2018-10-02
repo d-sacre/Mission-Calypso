@@ -69,7 +69,6 @@
 			<script src="../js/threejs/figure.js" ></script>
 			<script src="../js/threejs/actions.js" ></script>
 			<script src="../js/threejs/scene.js" ></script>
-			
 		</div>
 
 		<div id="game-gui-popup" class="game-gui-popup transform">
@@ -92,10 +91,14 @@
 						<fieldset id="machine-speed-work-assignement-popup" onchange="system.refreshSliderDisplay()">
 								<legend> Machine speed & work assignement</legend>
 
-								</br>
 								<label for="machine-speed"> machine speed:  </label>
 								<input name="machine-speed" id="machine-speed-slider" type="range" min="0" max="2" step="0.5" default value="1">
-								<span id="machine-speed-slidervalue" type="text" value="">1</span>
+								<span id="machine-speed-slidervalue" type="text" value="">1 &times;</span>
+								</br>
+								</br>
+								main drill: <span id="main-drill-speed" value="">1 block/s</span>
+								</br>
+								worker-mining: <span id="miner-speed" value="">1 block/s</span>
 
 								</br>
 								</br>
@@ -187,19 +190,19 @@
 
 						 <label for="caloricum-processing"> caloricum rate:  </label>
 						 <input name="caloricum-processing" id="caloricum-processing-slider" type="range" min="0" max="2" step="0.1" default value="2">
-						 <span id="caloricum-processing-slidervalue" type="text" value="">0</span>
+						 <span id="caloricum-processing-slidervalue" type="text" value="">0 &times;</span>
 
 					 </br>
 
 						 <label for="copper-processing"> copper rate:  </label>
 						 <input name="copper-processing" id="copper-processing-slider" type="range" min="0" max="2" step="0.1" default value="0">
-						 <span id="copper-processing-slidervalue" type="text" value="">0</span>
+						 <span id="copper-processing-slidervalue" type="text" value="">0 &times;</span>
 
 					 </br>
 
 						 <label for="pottasium-processing"> pottasium rate:  </label>
 						 <input name="pottasium-processing" id="pottasium-processing-slider" type="range" min="0" max="2" step="0.1" default value="0">
-						 <span id="pottasium-processing-slidervalue" type="text" value="">0</span>
+						 <span id="pottasium-processing-slidervalue" type="text" value="">0 &times;</span>
 
 					 </br>
 					 </br>
@@ -256,7 +259,12 @@
 			enough copper ore and ingots in our storage.
 			</br>
 			</br>
-			<button id='continue-mining-popup-button'> Continue mining </button>
+			There are two options now: With higher probability for a safe arrival, return to Earth or
+			being patriotic and produce more ore for her majesty to adore.
+			</br>
+			</br>
+			<button id='continue-mining-popup-button'> Continue mining !</button>
+			<button id='order-to-takeoff-popup-button'> Prepare take off! </button>
 			<!--<a href="../mission-calypso.html"> Back to Menu </a>-->
 		</div>
 
