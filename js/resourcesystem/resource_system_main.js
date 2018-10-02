@@ -62,6 +62,8 @@ class ResourcesSystem{
 
 
 	getSliderValue(){
+		document.querySelector('#drill-storey-slider-target-value').value=document.querySelector('#drill-storey-slider').value;
+
 		let machineSpeed=document.querySelector('#machine-speed-slider').value;
 		let workerIdle=document.querySelector('#worker-idle-slider').value;
 		let workerMining=document.querySelector('#worker-mining-slider').value;
@@ -90,6 +92,8 @@ class ResourcesSystem{
 	refreshSliderDisplay(){
 
 		let SliderValues=this.getSliderValue();
+
+		document.querySelector('#drill-storey-slider-target-value').innerHTML='/'+document.querySelector('#drill-storey-slider-target-value').value+' storeys';
 
 		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed+'&times;';
 		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
