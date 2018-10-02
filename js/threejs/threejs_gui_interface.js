@@ -13,14 +13,15 @@ function getActualMinerSpeed(){
 
 // destination of main drill
 function getMainDrillDestination(){
-    let MainDrillDestination=document.querySelector('#drill-storey-target-confirmed').value;
-    let MainDrillClearanceForStart=0;
-    if(MainDrillDestination!=0){
+    let MainDrillDestination=0;
+    let MainDrillClearanceForStart=document.querySelector('#drill-start-confirmed').value; // says it is not a number????
+    if(MainDrillClearanceForStart==1){
+      MainDrillDestination=document.querySelector('#drill-storey-slider-target-value').value;
       MainDrillClearanceForStart=1;
     }
     return {
       destination: MainDrillDestination,
-      ClearanceForStart: MainDrillClearanceForStart
+      clearanceForStart: MainDrillClearanceForStart
     }
 }
 
