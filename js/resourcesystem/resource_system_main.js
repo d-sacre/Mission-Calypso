@@ -394,9 +394,21 @@ class ResourcesSystem{
 			}
 
 			if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
-				document.querySelector('#supplies-game-over-popup').style.display="block";
-				stopAudioById('warning');
-				this.paused=true;
+				document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
+			  document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+
+				// unbind gameGUIPopup-buttons
+				document.querySelector('#to-rocket-menu-clickbox').removeEventListener("click",gameGUIPopupMenuAnimation);
+				document.querySelector('#return-to-game-popup-button').removeEventListener("click", gameGUIPopupMenuAnimation);
+
+				// slide down gameGUIPopup if visible
+				if (document.querySelector('#game-gui-popup').classList[2]=='transform-active') {
+						document.querySelector('.transform').classList.toggle('transform-active');
+				}
+
+				document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
+				stopAudioById('warning'); // stop warning buzzer
+				this.paused=true; // end game loop
 			}
 		}
 }
