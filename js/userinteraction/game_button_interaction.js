@@ -8,6 +8,12 @@ document.querySelector('#game-over-back-to-mainmenu-popup-button').addEventListe
   window.location='../mission-calypso.html';
 });
 
+/* start drill */
+document.querySelector('#start-main-drill-button').addEventListener("click", function(){
+    document.querySelector('#drill-start-confirmed').value=1;
+    document.querySelector('drill-storey-slider').max=document.querySelector('drill-storey-slider').value;
+});
+
 /* buttons/clickboxes for slide up/down of menu */
 /* function for buttons*/
 function gameGUIPopupMenuAnimation(){
