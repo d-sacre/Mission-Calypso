@@ -38,6 +38,8 @@ class ResourcesSystem{
 		this.pottasiumProcessing=parseFloat(document.querySelector('#pottasium-processing-slider').value);
 		this.EnergyStartValue=Energy;
 
+		this.CopperStatemachine="enough";
+
 
 		this.N = WorkerTotal;
 		this.nIdle=this.N;
@@ -234,7 +236,6 @@ class ResourcesSystem{
 		} else {
 			return 0.04;
 		}
-
 	}
 
 	refreshOxygenValue(){
@@ -263,7 +264,7 @@ class ResourcesSystem{
 	}
 
 
-	myTime() {
+	myMiningTime() {
 		// Faktoraktualisierung
 		let carbondioxidFactor = this.carbondioxidFactorCalculation();
 		let oxygenFactor= this.oxygenFactorCalculation();
@@ -289,13 +290,12 @@ class ResourcesSystem{
 			carbondioxid: this.carbondioxid,
 			oxygen: this.oxygen,
 			productivity,
-			carbonizerReductionCalculationValue
+			carbonizerReductionCalculationValue,
+			CopperStatemachine: this.CopperStatemachine
+
 		};
 
 	}
-
-
-
 
 	playPause(){
 		if (this.paused==true){
@@ -315,8 +315,8 @@ class ResourcesSystem{
 
 	}
 
-	setTime() {
-			let data = system.myTime();
+	setMiningTime() {
+			let data = system.myMiningTime();
 			let	energy =data.energy;
 			let	time = data.time;
 			let	carbondioxid = data.carbondioxid;
@@ -395,29 +395,64 @@ class ResourcesSystem{
 
 			if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
 				document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
-			  document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+				document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
 
 				// unbind gameGUIPopup-buttons
 				document.querySelector('#to-rocket-menu-clickbox').removeEventListener("click",gameGUIPopupMenuAnimation);
 				document.querySelector('#return-to-game-popup-button').removeEventListener("click", gameGUIPopupMenuAnimation);
 
-				// slide down gameGUIPopup if visible
-				if (document.querySelector('#game-gui-popup').classList[2]=='transform-active') {
-						document.querySelector('.transform').classList.toggle('transform-active');
-				}
+				// hide complete gui
+				document.querySelector('#game-gui-popup').style.display="none";
+				document.querySelector('#headup-gui-container').style.display="none";
 
 				document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
 				stopAudioById('warning'); // stop warning buzzer
 				this.paused=true; // end game loop
 			}
+
+			//}
+
+		/*if ((this.CopperStatemachine=="enough-but-continue")){
+					this.CopperStatemachine="not-enough";
+			}*/
 		}
+
+		setStorageTime(){
+					document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
+					document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+					document.querySelector("#enough-copper-popup").style.display="block";
+					document.querySelector("#continue-mining-popup-button").addEventListener("click",function(){
+							//this.CopperStatemachine=="enough-but-continue";
+							console.log("button clicked");
+							document.querySelector("#enough-copper-popup").style.display="none";
+							system.CopperStatemachine="enough-but-continue-mining";
+					});
+		}
+
 }
 
 
 let system = new ResourcesSystem(500,150,3,15,5,10,5);// order of arguments: Energy, Weight,WorkerTotal,CaloricumStart,CopperOreStart,PottasiumOreStart,DecarbStart
 
 let timeUnit = setInterval(function() {
-			let data = system.setTime();
+			let data;
+
+			switch (system.CopperStatemachine) {
+				case "not-enough":
+						data=system.setMiningTime();
+						break;
+				case "enough":
+						data=system.setStorageTime();
+						console.log("case enough");
+						break;
+
+				case "enough-but-continue-mining":
+						document.addEventListener( 'mousemove', onDocumentMouseMove, false ); // re-establish click event listeners for three.js
+						document.addEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+						system.CopperStatemachine="not-enough";
+						break;
+			}
+
 			if (system.paused==true){
 				window.clearInterval(timeUnit);
 			}
