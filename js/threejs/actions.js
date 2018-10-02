@@ -1,17 +1,11 @@
 
-
-
-
-
-
-
 function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
 	
 	if (cube != null){
 		let material = cube.userData.material;
 		console.log(material);
-		//FunktionDanielInsHTMLSchreiben
+		//FunktionDaniel: InsHTMLSchreiben
 
 	}
 	
@@ -24,26 +18,10 @@ function deleteCubeEdge(x){
 }
 
 
-function walk(x, y) {
-	let fig = scene.getObjectByName( "Fig1");
-	let posStart = 0;
-	let delta = BOXSIZE.x*0.1;
-	
-	/*var delayInMilliseconds = 100; //1 second
-	for(let pos=posStart; pos==x; x+=delta ){
-		setTimeout(fig.translateX(pos), delayInMilliseconds);
-	}
-	*/
-
-	
-	
-	
-}
 
 
-
-function drill(fuel) {
-	for(let x=-1; x<2; x++){
+function drill() {
+	/*for(let x=-1; x<2; x++){
 			deleteCubeEdge(x);
 	}
 
@@ -52,14 +30,20 @@ function drill(fuel) {
 			deleteCubeUnderground(x, y);
 		}
 	}
+	*/
+
+/*
+	let cubeEdge = scene.getObjectByName( "(" + 0 + ")");
+	if (cubeEdge != null){
+		deleteCubeEdge(0);
+	}else{
+		deleteCubeUnderground(0, stage);
+	}
+
+*/
+	
 }
 
-function sporn(){
-	drill();
-
-	var posFig = new THREE.Vector3(0*BOXSIZE.x, -2*BOXSIZE.y, 0);
-	meshFig.position.copy(posFig);	
-}
 
 
 
