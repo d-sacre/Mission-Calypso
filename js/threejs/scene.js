@@ -7,7 +7,7 @@ var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
 var SPEED=5; //only multiples of 5 allowed
-var stages = 0; //maximum 9 allowed, because max 9 rows are visible
+var stages = 4; //maximum 9 allowed, because max 9 rows are visible
 
 
 init();
@@ -38,8 +38,11 @@ function init() {
 	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
 	scene.add( helper );
 
-	let hemiLight = getHemiLight();
-	scene.add( hemiLight );
+	//let hemiLight = getHemiLight();
+	//scene.add( hemiLight );
+	
+	let directLight = getDirectLight();
+	scene.add( directLight );
 
 	let model = buildModel();
 	scene.add(model);
