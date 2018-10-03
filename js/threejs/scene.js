@@ -1,6 +1,6 @@
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2(), intersected;
-var figure, drillObj, spotLight;
+var figure, drillObj, pointLight;
 var container;
 var camera, controls, scene, renderer;
 var sky, sunSphere;
@@ -36,15 +36,7 @@ function init() {
 	controls.enablePan = false;
 	initSky();
 
-	var helper = new THREE.GridHelper( 10000, 2, 0xffffff, 0xffffff );
-	scene.add( helper );
-
-	//let hemiLight = getHemiLight();
-	//scene.add( hemiLight );
-	
-	let directLight = getDirectLight();
-	scene.add( directLight );
-
+		
 	let model = buildModel();
 	scene.add(model);
 
@@ -56,6 +48,32 @@ function init() {
 	scene.add(drillObj);
 	//targetDrillPos = drillObj.position.clone();
 	
+	let directLight1 = getDirectLight();
+	scene.add( directLight1 );
+	
+	let directLight2 = getDirectLight();
+	directLight1.position.set( 100, 100, -100 );
+	directLight1.intensity=1;
+	scene.add( directLight2 );
+	
+	pointLight = getPointLight();
+	scene.add( pointLight );
+	pointLight.position.set(targetPosition.x, (targetPosition.y + 1*BOXSIZE.x), targetPosition.z);
+	
+	var sphereSize = 300;
+	var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+	//scene.add( pointLightHelper );
+	
+	let spotLight = getSpotLight();
+	scene.add( spotLight );
+	
+	let rectLight = getRectLight();
+	scene.add( rectLight );
+	
+	let rectLightMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial() );
+	rectLightMesh.scale.x = rectLight.width;
+	rectLightMesh.scale.y = rectLight.height;
+	rectLight.add( rectLightMesh );
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'click', onMouseClick, false);
@@ -122,7 +140,7 @@ function getTargetPosition(event){
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-	let targetBlocks = scene.children[4].children[1];
+	let targetBlocks = scene.children[2].children[1];
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 
 	if(intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
@@ -144,7 +162,7 @@ function updateFigPostitions(posPlayer,posTarget) {
 	let isInCorrectColumn = (posPlayer.x === posTarget.y);
 
 	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
-		speed = SPEED;
+	speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js;
 
 
 	if(!isCentered && !isInCorrectRow) {
@@ -225,6 +243,8 @@ function onWindowResize() {
 function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
+	let currentStage = getCurrentStage(currentDrillPos);
+	//Fkt. Daniel: Übergabe currentStage
 	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	let targetDrillPos = getTargetDrillPos(stages);
 	
@@ -255,42 +275,18 @@ function updateDrillPosition(){
 }
 
 
-/*function updateDrillPosition(){
-	let speedDrill = 6; //Fkt Daniel: getSpeedForDrill()
-	//let drillObj = scene.getObjectByName( "Drill");
-	let currentDrillPos = drillObj.position.clone();
-	let targetDrillPos = getTargetDrillPos(stages); // Anpassung auf klickbaren Bereich?
+function getCurrentStage(currentDrillPos){
+	if(currentDrillPos.y > -0.5 * BOXSIZE.y && currentDrillPos.y < 0.5 * BOXSIZE.y){
+			return 1;
+	}
 	
-	
-	if(currentDrillPos.equals(targetDrillPos)) {
-		return;}
-	
-	
-	let dY = targetDrillPos.y - currentDrillPos.y;
-	
-	if (currentDrillPos <= targetDrillPos){
-
-		if(dY < speedDrill) {
-			currentDrillPos.y -= speedDrill;
-			drillObj.position.copy(currentDrillPos);
-			//drill((currentDrillPos.y / -200));
+	for(let i = 1; i <=8; i++){
+		if((currentDrillPos.y < -0.5 * BOXSIZE.y * i) && (currentDrillPos.y > -1.5 * BOXSIZE.y * i)){
+			return i+1;
 		}
-
-		if(dY > speedDrill) {
-			currentDrillPos.y += speedDrill;
-			drillObj.position.copy(currentDrillPos);
-			//drill((currentDrillPos.y / -200));
-
-		}
-		
-		if(dY <= speedDrill && dY >= -speedDrill) {
-			currentDrillPos.y = targetDrillPos.y;
-			drillObj.position.copy(currentDrillPos);
-		}
-		
 	}
 }
-*/
+
 
 function getTargetDrillPos(stages){
 	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
@@ -309,7 +305,7 @@ function render() {
 	raycaster.setFromCamera( mouse, camera );
 
 	// calculate objects intersecting the picking ray
-	let targetBlocks = scene.children[4].children[1]
+	let targetBlocks = scene.children[2].children[1]
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 
 		/*
@@ -341,6 +337,7 @@ function animate() {
 	//updateDrillPosition(drillObj.position.clone(), getTargetDrillPos());
 	updateDrillPosition();
 	updateFigPostitions(getPlayerPosition(),targetPosition);
+	pointLight.position.set(getPlayerPosition().x, (getPlayerPosition().y + 0.41*BOXSIZE.y), getPlayerPosition().z+ 0.0*BOXSIZE.z);
 	render();
 	controls.update();
 }
