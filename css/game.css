@@ -516,7 +516,7 @@ audio {
     z-index: 20;
 }
 
-#enough-copper-popup{
+#enough-copper-popup #prepare-takeoff-popup{
   display: none;
 }
 
