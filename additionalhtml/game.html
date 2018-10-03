@@ -71,7 +71,7 @@
 			<script src="../js/threejs/figure.js" ></script>
 			<script src="../js/threejs/actions.js" ></script>
 			<script src="../js/threejs/scene.js" ></script>
-		
+
 		</div>*-->
 
 		<div id="game-gui-popup" class="game-gui-popup transform">
@@ -85,7 +85,7 @@
 					<legend>main drill depth</legend>
 					</br>
 					</br>
-					<input id="drill-storey-slider" type="range" min="1" max="9" default value="1" value="">
+					<input id="drill-storey-slider" type="range" min="1" max="8" default value="1" value="">
 					</br>
 					</br>
 					<span id="drill-storey-slider-current-value" value="">0</span><span id="drill-storey-slider-target-value" value="">/0 storeys</span>
@@ -292,6 +292,24 @@
 			<!--<a href="../mission-calypso.html"> Back to Menu </a>-->
 		</div>
 
+		<div id="prepare-takeoff-popup"class="prepare-takeoff-popup round">
+			<h1> Chief Engineer James What</h1>
+			Commander Been, I calculated the nessecary parameters for the take-off.
+			</br>
+			</br>
+			energy: 500 HU weight: 150/150 t wear: 90%
+			</br>
+			</br>
+			The Mechanical Colossus Computer (MCC) determined a probability of 50 %
+			for sucessful take-off. We could relief weight to enlarge the probability or give
+			a dam and take off.
+			</br>
+			</br>
+			<button id='relief-weight-button'> Relief weight!</button>
+			<button id='takeoff-button'> Take off! </button>
+			<!--<a href="../mission-calypso.html"> Back to Menu </a>-->
+		</div>
+
 
 	</body>
 
@@ -306,7 +324,7 @@
 
 	<script src="../js/userinteraction/warnings/audio-visualwarning.js">
 	</script>
-	
+
 	<div id="game-rendering-area">
 			<script src="../js/threejs/three.js"></script>
 			<script src="../js/threejs/threejs_gui_interface.js" ></script>
@@ -317,6 +335,6 @@
 			<script src="../js/threejs/figure.js" ></script>
 			<script src="../js/threejs/actions.js" ></script>
 			<script src="../js/threejs/scene.js" ></script>
-		
+
 		</div>
 </html>

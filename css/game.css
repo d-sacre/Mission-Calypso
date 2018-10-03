@@ -469,6 +469,53 @@ audio {
     z-index: 20;
 }
 
+.prepare-takeoff-popup{
+  position: absolute;
+  top:33vh;
+  left: 30vw;
+
+  width: 40vw;
+  height: 45vh; /*37vh 15vw*/
+  /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
+
+  background: var(--calypsobrass);
+	background:
+		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+  text-align: center;
+
+  padding: 0vw 4vw 4vw 4vw;
+
+  font-size: 15px;
+  color: var(--calypsocopper);
+
+  z-index: 20;
+}
+
+.prepare-takeoff-popup h1{
+  font-size: 20px;
+}
+
+.prepare-takeoff-popup.round{
+  background-image:
+		radial-gradient(circle at 0 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px),
+		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 20px, var(--calypsobrass) 21px);
+
+    color: rgb(200, 117, 51);
+    text-shadow: 0px 1px 0px  #555,
+            0.5px 2px 0px var(--calypsobrass)
+          ;
+
+    z-index: 20;
+}
+
 #enough-copper-popup{
   display: none;
 }
