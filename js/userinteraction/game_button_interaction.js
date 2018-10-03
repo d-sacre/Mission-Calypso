@@ -11,7 +11,7 @@ document.querySelector('#game-over-back-to-mainmenu-popup-button').addEventListe
 /* start drill */
 document.querySelector('#start-main-drill-button').addEventListener("click", function(){
     document.querySelector('#drill-start-confirmed').value=1;
-    document.querySelector('#drill-storey-slider').max=document.querySelector('#drill-storey-slider').value;
+    document.querySelector('#drill-storey-slider').min=document.querySelector('#drill-storey-slider').value;
 });
 
 /* buttons/clickboxes for slide up/down of menu */
