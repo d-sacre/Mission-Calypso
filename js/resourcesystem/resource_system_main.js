@@ -15,6 +15,8 @@ class ResourcesSystem{
 		document.querySelector('#pottasium-ore-value').value=PottasiumOreStart;
 		document.querySelector('#decarbonizer-storage-value').value=DecarbStart;
 		document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value;
+		document.querySelector('#copper-ingot-value').value=0;
+		document.querySelector('#copper-max').value=15;
 
 		/* write initial storage values in innerHTML */
 		document.querySelector('.energy-value').innerHTML=Energy+'/'+Energy+' HU';
@@ -165,6 +167,7 @@ class ResourcesSystem{
 		let copperProcessingOutput=this.productivity*this.copperProcessing*this.workerRefinery*0.5;
 		let pottasiumProcessingOutput=this.productivity*this.pottasiumProcessing*this.workerRefinery*1;
 
+		//console.log("\ncaloricum: "+this.caloricum+ " \ncaloricumProcessingOreConsumption: "+caloricumProcessingOreConsumption+"\nenergy: "+this.energy+"\ncaloricumProcessingEnergyConsumption: "+caloricumProcessingEnergyConsumption)
 		if ((this.caloricum-caloricumProcessingOreConsumption>=0) && (this.energy-caloricumProcessingEnergyConsumption>=0)){
 				document.querySelector('#raw-caloricum-storage-value').value=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2);
 				document.querySelector('#raw-caloricum-storage-value').innerHTML=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2)+ '/15 t';
@@ -172,7 +175,7 @@ class ResourcesSystem{
 
 
 				//console.log('energy:'+ document.querySelector('.energy-value').value);
-				console.log('caloricumProcessingOutput:'+ caloricumProcessingOutput);
+				//console.log('caloricumProcessingOutput:'+ caloricumProcessingOutput);
 		} /*else {
 				document.querySelector('#caloricum-rate-equation').innerHTML='0 t caloricum + ' + '0 HU → '+ '0 HU';
 
@@ -348,6 +351,16 @@ class ResourcesSystem{
 			let productivity = data.productivity;
 			let co2ReduxTheo=data.carbonizerReductionCalculationValue;
 
+			let copperStorageValue=parseFloat(document.querySelector('#copper-ingot-value').value)+0.5*parseFloat(document.querySelector('#copper-ore-value').value);
+
+			//console.log("copperStorageValue: "+document.querySelector('#copper-ingot-value').value);
+
+			if (copperStorageValue>=document.querySelector('#copper-max').value){
+					document.querySelector('#enough-copper-popup').style.display="block";
+					this.CopperStatemachine="enough";
+
+			}
+
 			document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+this.EnergyStartValue+' HU';
 			document.querySelector('.energy-value').value=energy.toFixed(2); // storing value in html for easier access without js-interfaces
 			// readout of headup-gui-energy value and copying to storage energy value
@@ -447,10 +460,34 @@ class ResourcesSystem{
 					document.querySelector("#enough-copper-popup").style.display="block";
 					document.querySelector("#continue-mining-popup-button").addEventListener("click",function(){
 							//this.CopperStatemachine=="enough-but-continue";
-							console.log("button clicked");
+							//console.log("button clicked");
 							document.querySelector("#enough-copper-popup").style.display="none";
+							document.querySelector('#copper-max').value=1500;
 							system.CopperStatemachine="enough-but-continue-mining";
 					});
+
+					document.querySelector("#order-to-takeoff-popup-button").addEventListener("click",function(){
+							document.querySelector("#enough-copper-popup").style.display="none";
+							system.CopperStatemachine="enough-prepare-takeoff";
+					});
+		}
+
+		setTakeoffTime(){
+					document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
+					document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+					document.querySelector("#prepare-takeoff-popup").style.display="block";
+					/*document.querySelector("#continue-mining-popup-button").addEventListener("click",function(){
+							//this.CopperStatemachine=="enough-but-continue";
+							//console.log("button clicked");
+							document.querySelector("#enough-copper-popup").style.display="none";
+							document.querySelector('#copper-max').value=1500;
+							system.CopperStatemachine="enough-but-continue-mining";
+					});
+
+					document.querySelector("#order-to-takeoff-popup-button").addEventListener("click",function(){
+							document.querySelector("#enough-copper-popup").style.display="none";
+							system.CopperStatemachine="enough-prepare-takeoff";
+					});*/
 		}
 
 }
@@ -467,7 +504,7 @@ let timeUnit = setInterval(function() {
 						break;
 				case "enough":
 						data=system.setStorageTime();
-						console.log("case enough");
+						//console.log("case enough");
 						break;
 
 				case "enough-but-continue-mining":
@@ -477,6 +514,7 @@ let timeUnit = setInterval(function() {
 						break;
 
 				case "enough-prepare-takeoff":
+						data=system.setTakeoffTime();
 						break;
 			}
 
