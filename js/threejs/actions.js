@@ -4,9 +4,7 @@ function deleteCubeUnderground(x, y){
 	
 	if (cube != null){
 		let material = cube.userData.material;
-		console.log(material);
-		//FunktionDaniel: InsHTMLSchreiben
-
+		storeMinedResources(material); //./threejs_gui_interface.js
 	}
 	
 	group.remove(cube);

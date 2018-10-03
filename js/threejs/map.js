@@ -97,6 +97,7 @@ function buildModel() {
 	group2 = new THREE.Group();
 	let groups = [group, group2];
 
+	//set probability of rescourses
 	function randMat(){
 		let ranNum=Math.random();
 		//console.log(returnVal);
@@ -132,13 +133,13 @@ function buildModel() {
 						material = matUnderground.clone();
 					}
 					if (materialMapContent==1){
-						material = matPot.clone();
-					}
-					if (materialMapContent==2){
 						material = matCal.clone();
 					}
-					if (materialMapContent==3){
+					if (materialMapContent==2){
 						material = matCop.clone();
+					}
+					if (materialMapContent==3){
+						material = matPot.clone();
 					}
 				} else {
 					material= matUnderground.clone();

@@ -157,7 +157,7 @@ function updateFigPostitions(posPlayer,posTarget) {
 
 }
 function playerGotoX(posPlayer, posTarget) {
-	let speed = SPEED;
+	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
 
 	currentPlayerPos = posPlayer;
 	targetPlayerPos = posTarget;
@@ -183,7 +183,7 @@ function playerGotoX(posPlayer, posTarget) {
 }
 
 function playerGotoY(posPlayer, posTarget) {
-	let speed = SPEED;
+	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
 
 	currentPlayerPos = posPlayer;
 	targetPlayerPos = posTarget;
@@ -221,7 +221,7 @@ function onWindowResize() {
 
 
 function updateDrillPosition(){
-	let speedDrill = SPEED;
+	let speedDrill = SPEED * getActualMainDrillSpeed();
 	let currentDrillPos = drillObj.position.clone();
 	let targetDrillPos = getTargetDrillPos(stages); //stages würde vom Daniel aktualisiert werden
 	
