@@ -164,7 +164,8 @@ class ResourcesSystem{
 		let caloricumProcessingOutput=this.productivity*this.caloricumProcessing*this.workerRefinery*40;
 		let copperProcessingOutput=this.productivity*this.copperProcessing*this.workerRefinery*0.5;
 		let pottasiumProcessingOutput=this.productivity*this.pottasiumProcessing*this.workerRefinery*1;
-
+		
+		console.log("\ncaloricum: "+this.caloricum+ " \ncaloricumProcessingOreConsumption: "+caloricumProcessingOreConsumption+"\nenergy: "+this.energy+"\ncaloricumProcessingEnergyConsumption: "+caloricumProcessingEnergyConsumption)
 		if ((this.caloricum-caloricumProcessingOreConsumption>=0) && (this.energy-caloricumProcessingEnergyConsumption>=0)){
 				document.querySelector('#raw-caloricum-storage-value').value=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2);
 				document.querySelector('#raw-caloricum-storage-value').innerHTML=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2)+ '/15 t';
