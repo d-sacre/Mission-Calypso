@@ -37,9 +37,9 @@ function drill(stage) {
 		deleteCubeEdge(0);
 		deleteCubeEdge(1);
 	}else{
-		deleteCubeUnderground(-1, stage);
-		deleteCubeUnderground(0, stage);
-		deleteCubeUnderground(1, stage);
+		deleteCubeUnderground(-1, stage-1);
+		deleteCubeUnderground(0, stage-1);
+		deleteCubeUnderground(1, stage-1);
 	}
 
 

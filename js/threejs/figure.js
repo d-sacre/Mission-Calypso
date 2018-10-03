@@ -17,14 +17,27 @@ function buildFigure(){
 
 
 function buildDrill(){
-	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/pink-and-green-lined-background.jpg" );
-	let matDrill = new THREE.MeshPhongMaterial( {  wireframe: true});
-	let geoDrill = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 0*BOXSIZE.x, 1*BOXSIZE.x, 5 );
+	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
+	let matDrill = new THREE.MeshBasicMaterial( {color:0x535353, wireframe: true});
+	let geoDrill = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 0*BOXSIZE.x, 1.5*BOXSIZE.x, 32 );
 	let meshDrill = new THREE.Mesh( geoDrill, matDrill );
-	//meshDrill.rotateY( Math.sign(x)* Math.PI / 5.4 );
-	meshDrill.receiveShadow = true;
-	meshDrill.castShadow = true;
-	let posDrill = new THREE.Vector3(0, 0.5*BOXSIZE.y, BOXSIZE.z*(1));
+	meshDrill.receiveShadow = false;
+	meshDrill.castShadow = false;
+	let posDrill = new THREE.Vector3(0, 0.5*BOXSIZE.y, BOXSIZE.z*(0.8));
+	meshDrill.position.copy(posDrill);
+	let name = "Drill";
+	meshDrill.name= name;
+	return meshDrill;
+}
+
+function buildInnerDrill(){
+	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
+	let matDrill = new THREE.MeshBasicMaterial( {color:0xFFD700, wireframe: false}); //0xB5B5B5
+	let geoDrill = new THREE.CylinderBufferGeometry( 1.3*BOXSIZE.x, 0*BOXSIZE.x, 1.3*BOXSIZE.x, 32 );
+	let meshDrill = new THREE.Mesh( geoDrill, matDrill );
+	meshDrill.receiveShadow = false;
+	meshDrill.castShadow = false;
+	let posDrill = new THREE.Vector3(0, 0.5*BOXSIZE.y, BOXSIZE.z*(0.8));
 	meshDrill.position.copy(posDrill);
 	let name = "Drill";
 	meshDrill.name= name;

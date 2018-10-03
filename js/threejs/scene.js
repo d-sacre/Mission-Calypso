@@ -48,12 +48,15 @@ function init() {
 	scene.add(drillObj);
 	//targetDrillPos = drillObj.position.clone();
 	
+	drillObj1 = buildInnerDrill();
+	scene.add(drillObj1);
+	
 	let directLight1 = getDirectLight();
 	scene.add( directLight1 );
 	
 	let directLight2 = getDirectLight();
-	directLight1.position.set( 100, 100, -100 );
-	directLight1.intensity=1;
+	directLight1.position.set( 0, -BOXSIZE.y*8, BOXSIZE.z * (8));
+	directLight1.intensity=0.3;
 	scene.add( directLight2 );
 	
 	pointLight = getPointLight();
@@ -258,19 +261,22 @@ function updateDrillPosition(){
 	if(dY < speedDrill) {
 		currentDrillPos.y -= speedDrill;
 		drillObj.position.copy(currentDrillPos);
-		//drillObj.rotation.y = (- Math.PI / speedDrill);
-		drill((currentDrillPos.y / -200));	
+		drillObj1.position.copy(currentDrillPos);
+		drillObj.rotation.y += speedDrill*100;
+		drill((currentDrillPos.y / -200));
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
+		drillObj1.position.copy(currentDrillPos);
 
 	}
 	
 	if(dY <= speedDrill && dY >= -speedDrill) {
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
+		drillObj1.position.copy(currentDrillPos);
 	}
 }
 
