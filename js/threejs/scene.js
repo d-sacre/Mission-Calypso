@@ -221,9 +221,9 @@ function onWindowResize() {
 
 
 function updateDrillPosition(){
-	let speedDrill = SPEED * getActualMainDrillSpeed();
+	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
-	stages = getMainDrillDestination().destination;
+	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	let targetDrillPos = getTargetDrillPos(stages);
 	
 	
