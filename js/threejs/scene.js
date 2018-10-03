@@ -7,7 +7,7 @@ var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
 var SPEED=5; //only multiples of 5 allowed
-var stages = 4; //maximum 9 allowed, because max 9 rows are visible
+var stages; //maximum 9 allowed, because max 9 rows are visible
 
 
 init();
@@ -221,9 +221,10 @@ function onWindowResize() {
 
 
 function updateDrillPosition(){
-	let speedDrill = SPEED * getActualMainDrillSpeed();
+	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
-	let targetDrillPos = getTargetDrillPos(stages); //stages würde vom Daniel aktualisiert werden
+	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
+	let targetDrillPos = getTargetDrillPos(stages);
 	
 	
 	if(currentDrillPos.equals(targetDrillPos)) {

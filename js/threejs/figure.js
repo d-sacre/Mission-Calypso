@@ -15,6 +15,7 @@ function buildFigure(){
 	return meshFig;
 }
 
+/*
 function buildDrill(){
 	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/pink-and-green-lined-background.jpg" );
 	let matDrill = new THREE.MeshPhongMaterial( {  wireframe: true});
@@ -29,3 +30,4 @@ function buildDrill(){
 	meshDrill.name= name;
 	return meshDrill;
 }
+*/
