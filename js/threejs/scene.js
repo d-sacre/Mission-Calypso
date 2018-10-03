@@ -10,6 +10,7 @@ var SPEED=5; //only multiples of 5 allowed
 var stages; //maximum 9 allowed, because max 9 rows are visible
 
 
+
 init();
 animate();
 
@@ -51,26 +52,9 @@ function init() {
 	scene.add(figure);
 	targetPosition = getPlayerPosition();
 
-	//drillObj = buildDrill();
-	//scene.add(drillObj);
+	drillObj = buildDrill();
+	scene.add(drillObj);
 	//targetDrillPos = drillObj.position.clone();
-	
-	
-	var loader = new THREE.FBXLoader();
-	loader.load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/3dmodels/maindrill.fbx", function ( drillObj ) {
-		drillObj.mixer = new THREE.AnimationMixer( drillObj );
-		mixers.push( drillObj.mixer );
-		
-		//var action = drillObj.mixer.clipAction( drillObj.animations[ 0 ] );
-		//action.play();
-		drillObj.traverse( function ( child ) {
-			if ( child.isMesh ) {
-				child.castShadow = true;
-				child.receiveShadow = true;
-			}
-		} );
-		scene.add(drillObj);
-	} );
 	
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
