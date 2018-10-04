@@ -116,7 +116,7 @@ audio {
 #rocket-img-popupmenu{
   position: absolute;
   bottom: 2vh;
-  left: 13vw; /*11vw*/
+  left: 15vw; /*13vw, 11vw*/
   height: 87.5vh;
   width: 20vw; /*values for 2D art*/
 
@@ -325,7 +325,7 @@ audio {
   left: 1vw;
 
   height: 57.5vh;
-  width: 18vw;
+  width: 15vw;
 
   font-size: 12pt;
 
