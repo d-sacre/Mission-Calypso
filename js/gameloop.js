@@ -1,6 +1,6 @@
 // Start definition of FSM-states
 function setMiningTime() {
-    let data = system.myMiningTime(); // class object myMiningTime defined in /js/resourcesystem/resource_system_main.js 
+    let data = system.myMiningTime(); // class object myMiningTime defined in /js/resourcesystem/resource_system_main.js
     let	energy =data.energy;
     let	time = data.time;
     let	carbondioxid = data.carbondioxid;
@@ -21,7 +21,7 @@ function setMiningTime() {
     document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+system.EnergyStartValue+' HU';
     document.querySelector('.energy-value').value=energy.toFixed(2); // storing value in html for easier access without js-interfaces
     // readout of headup-gui-energy value and copying to storage energy value
-    document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+this.EnergyStartValue+' HU';
+    document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+system.EnergyStartValue+' HU';
 
     document.querySelector('.productivity-value').innerHTML=(100*productivity).toFixed(2)+'/100 %';
     document.querySelector('.productivity-value').value=productivity;
