@@ -31,6 +31,8 @@ function gameGUIPopupMenuAnimation(){
 /* attach event listeners to slide up/down buttons/clickboxes for menu*/
 document.querySelector('#to-rocket-menu-clickbox').addEventListener("click",gameGUIPopupMenuAnimation);
 document.querySelector('#return-to-game-popup-button').addEventListener("click", gameGUIPopupMenuAnimation);
+/* attach addEventListener to headup-gameGUIPopup*/
+document.querySelector('#headup-gui-container-clickbox').addEventListener("click", gameGUIPopupMenuAnimation);
 
 /* button for carbonizer useage */
 document.querySelector('#use-carbonizer-button').addEventListener("click", function() {
