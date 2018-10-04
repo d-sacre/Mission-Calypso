@@ -91,12 +91,12 @@ class ResourcesSystem{
 
 	}
 
-	updateStorageDisplay(){
+	/*updateStorageDisplay(){
 			document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+this.EnergyStartValue+' HU';
 			document.querySelector('#raw-caloricum-storage-value').innerHTML=document.querySelector('#raw-caloricum-storage-value').value+'/15 t';
 			document.querySelector('#copper-ore-value').innerHTML=document.querySelector('#copper-ore-value').value+'/15 t';
 			document.querySelector('#pottasium-ore-value').innerHTML=document.querySelector('#pottasium-ore-value').value+'/30 kg';
-	}
+	}*/
 
 	refreshSliderDisplay(){
 
@@ -172,14 +172,23 @@ class ResourcesSystem{
 				document.querySelector('#raw-caloricum-storage-value').value=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2);
 				document.querySelector('#raw-caloricum-storage-value').innerHTML=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2)+ '/15 t';
 				document.querySelector('#caloricum-rate-equation').innerHTML=caloricumProcessingEnergyConsumption.toFixed(2)+' t caloricum + ' + caloricumProcessingOreConsumption.toFixed(2) +' HU → '+ caloricumProcessingOutput.toFixed(2) +' HU';
+		}
+
+	/*	if ((document.querySelector('#copper-ore-value').value-copperProcessingOreConsumption>=0) && (this.energy-copperProcessingEnergyConsumption>=0)){
+				document.querySelector('#copper-ore-value').value=(document.querySelector('#copper-ore-value').value-copperProcessingOreConsumption).toFixed(2);
+				document.querySelector('#copper-ore-value').innerHTML=(document.querySelector('#copper-ore-value').value-copperProcessingOreConsumption).toFixed(2)+ '/15 t';
+				document.querySelector('#copper-ingot-value').value=parseFloat(document.querySelector('#copper-ingot-value').value)+copperProcessingOutput.toFixed(2);
+				document.querySelector('#copper-rate-equation').innerHTML=copperProcessingEnergyConsumption.toFixed(2)+' t copper ore + ' + copperProcessingOreConsumption.toFixed(2) +' HU → '+ copperProcessingOutput.toFixed(2) +' t copper ingots';
+		}
+
+		if ((document.querySelector('#pottasium-ore-value').value-pottasiumProcessingOreConsumption>=0) && (this.energy-pottasiumProcessingEnergyConsumption>=0)){
+				document.querySelector('#pottasium-ore-value').value=(document.querySelector('#pottasium-ore-value').value-pottasiumProcessingOreConsumption).toFixed(2);
+				document.querySelector('#pottasium-ore-value').innerHTML=(document.querySelector('#pottasium-ore-value').value-pottasiumProcessingOreConsumption).toFixed(2)+ '/15 t';
+				document.querySelector('#decarbonizer-storage-value').value+=pottasiumProcessingOutput.toFixed(0);
+				document.querySelector('#pottasium-rate-equation').innerHTML=pottasiumProcessingEnergyConsumption.toFixed(2)+' t pottasium ore + ' + pottasiumProcessingOreConsumption.toFixed(2) +' HU → '+ pottasiumProcessingOutput.toFixed(2) +' kg carbonizer';
+		}*/ // writes wrong values!!
 
 
-				//console.log('energy:'+ document.querySelector('.energy-value').value);
-				//console.log('caloricumProcessingOutput:'+ caloricumProcessingOutput);
-		} /*else {
-				document.querySelector('#caloricum-rate-equation').innerHTML='0 t caloricum + ' + '0 HU → '+ '0 HU';
-
-		}*/
 	}
 
 	refineryEnergyOutput(){
@@ -301,7 +310,8 @@ class ResourcesSystem{
 
 		this.refineryProductionCalculation();
 		this.calculateRefreshMainDrillAndMinerSpeed();
-		this.updateStorageDisplay();
+		//this.
+		updateStorageDisplay();//function defined in js/resourcesystem/resource_system_storage-and-refinery.js
 
 		this.oxygen = this.refreshOxygenValue();
 
