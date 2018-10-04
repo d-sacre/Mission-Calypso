@@ -95,7 +95,7 @@ class ResourcesSystem{
 
 		let SliderValues=this.getSliderValue();
 
-		document.querySelector('#drill-storey-slider-target-value').innerHTML='/'+document.querySelector('#drill-storey-slider-target-value').value+' storeys';
+		document.querySelector('#drill-storey-slider-target-value').innerHTML='/'+document.querySelector('#drill-storey-slider-target-value').value+' floors';
 
 		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed+'&times;';
 		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
