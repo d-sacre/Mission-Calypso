@@ -17,12 +17,30 @@ function getMainDrillDestination(){
     let MainDrillClearanceForStart=document.querySelector('#drill-start-confirmed').value; // says it is not a number????
     if(MainDrillClearanceForStart==1){
       MainDrillDestination=document.querySelector('#drill-storey-slider-target-value').value;
-      MainDrillClearanceForStart=1;
+    } else {
+      MainDrillDestination=document.querySelector('#drill-storey-slider-current-value').value;
     }
+
+    if (document.querySelector('#drill-storey-slider-current-value').value==MainDrillDestination) {
+        document.querySelector('#drill-start-confirmed').value=0;
+    }
+
     return {
       destination: MainDrillDestination,
       clearanceForStart: MainDrillClearanceForStart
     }
+}
+
+//write actual position of the drill into gameGUIPopupMenu
+function writeCurrentMainDrillPosition(position){
+    document.querySelector('#drill-storey-slider-current-value').value=position;
+    document.querySelector('#drill-storey-slider-current-value').innerHTML=document.querySelector('#drill-storey-slider-current-value').value;
+    if (position!==parseFloat(document.querySelector('#drill-storey-slider-target-value').value)) {
+        document.querySelector('#current-main-drill-state').innerHTML='drilling - floor '+position;
+    } else {
+        document.querySelector('#current-main-drill-state').innerHTML='idle @ target - floor '+position;
+    }
+
 }
 
 // transfer mined resources to gui storage in html
