@@ -28,7 +28,7 @@ function getMainDrillDestination(){
 // transfer mined resources to gui storage in html
 function storeMinedResources(resource){//resource=elementID (still to be defined); each resource block only contains 1 unit of material
     if (resource==1){
-        document.querySelector('#raw-caloricum-storage-value').value=document.querySelector('#raw-caloricum-storage-value').value+1;
+        document.querySelector('#raw-caloricum-storage-value').value=parseFloat(document.querySelector('#raw-caloricum-storage-value').value)+1;
     }
 
     if (resource==2){
