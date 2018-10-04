@@ -3,6 +3,9 @@
    --calypsobrass: #edf60d;
    --calypsocopper: rgb(200, 117, 51);
 
+   --headupgui-stop: rgba(55,55,55,0.75); /* orange=rgba(155,155,0,0.75), red=rgba(255,0,0,0.75)*/
+   --headupgui-start: rgba(55,55,55,0);
+
 }
 
 *{
@@ -111,6 +114,27 @@ audio {
   height: 10vh;
 
   z-index: 6;
+}
+
+.headup-gui-container-clickbox{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 20vh;
+
+  /*background-color: red;*/
+
+  /*background: var(--calypsobrass);*/
+	background-image:
+    linear-gradient(to bottom, var(--headupgui-stop),var(--headupgui-start));
+	background-repeat: no-repeat;
+
+    /*linear-gradient(
+      red, #f06d06
+    );*/
+
+  z-index=20;
 }
 
 #rocket-img-popupmenu{
