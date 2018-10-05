@@ -2,8 +2,8 @@
 function buildFigure(){
 	//var texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/granite_highres_withoutedge_256x256_compress.jpg" );
 	//var matFig = new THREE.MeshPhongMaterial( {color:0xff0000, wireframe: false});
-	let texFig = new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/vinzentp/Mission-Calypso/graphics/pictures/textures/flametest_256x256px.png' );
-	var matFig = new THREE.MeshPhongMaterial( { map: texFig, transparent: true, opacity: 0.5});
+	let texFig = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/flametest_256x256px.png" );
+	var matFig = new THREE.MeshPhongMaterial( { map: texFig, transparent: true, opacity: 1});
 	let geoFig = new THREE.BoxBufferGeometry( BOXSIZE.x/2 , BOXSIZE.y/2,  BOXSIZE.z/2);
 	let meshFig = new THREE.Mesh( geoFig, matFig );
 
