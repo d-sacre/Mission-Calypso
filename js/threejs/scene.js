@@ -179,6 +179,12 @@ function updateFigPostitions(posPlayer,posTarget) {
 	}
 
 }
+
+function roundBox(number){
+	
+	
+}
+
 function playerGotoX(posPlayer, posTarget) {
 	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
 
@@ -190,12 +196,12 @@ function playerGotoX(posPlayer, posTarget) {
 
 
 	if(dX < speed) {
-		deleteCubeUnderground((currentPlayerPos.x / 200)-1, (currentPlayerPos.y / -200));
+		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x))-1, Math.round((currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x -= speed;
 		figure.position.copy(currentPlayerPos);
 	}
 	if(dX > speed) {
-		deleteCubeUnderground((currentPlayerPos.x / 200)+1, (currentPlayerPos.y / -200));
+		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x))+1, Math.round((currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x += speed;
 		figure.position.copy(currentPlayerPos);
 	}
@@ -253,6 +259,7 @@ function updateDrillPosition(){
 	
 	
 	if(currentDrillPos.equals(targetDrillPos)) {
+		//console.log("if 1");
 		return;}
 	
 	
@@ -263,13 +270,15 @@ function updateDrillPosition(){
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
-		drill((currentDrillPos.y / -200));
+		drill(Math.round((currentDrillPos.y / -BOXSIZE.y)));
+		//console.log("if 2");
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
+		//console.log("if 3");
 
 	}
 	
@@ -277,6 +286,7 @@ function updateDrillPosition(){
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
+		console.log("if 4");
 	}
 }
 
@@ -298,8 +308,10 @@ function getTargetDrillPos(stages){
 	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
 	if(cubeObj != null){
 			let targetPosDrill = cubeObj.position.clone();
+			//console.log(targetPosDrill);
 			return targetPosDrill;	
 	}
+	//console.log(drillObj.position.clone());
 	return drillObj.position.clone();
 }
 
@@ -343,6 +355,7 @@ function animate() {
 	//updateDrillPosition(drillObj.position.clone(), getTargetDrillPos());
 	updateDrillPosition();
 	updateFigPostitions(getPlayerPosition(),targetPosition);
+	console.log(getPlayerPosition().x);
 	pointLight.position.set(getPlayerPosition().x, (getPlayerPosition().y + 0.41*BOXSIZE.y), getPlayerPosition().z+ 0.0*BOXSIZE.z);
 	render();
 	controls.update();
