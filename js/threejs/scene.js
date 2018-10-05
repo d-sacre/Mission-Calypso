@@ -180,10 +180,7 @@ function updateFigPostitions(posPlayer,posTarget) {
 
 }
 
-function roundBox(number){
-	
-	
-}
+
 
 function playerGotoX(posPlayer, posTarget) {
 	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
@@ -253,7 +250,8 @@ function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
 	let currentStage = getCurrentStage(currentDrillPos);
-	//Fkt. Daniel: Übergabe currentStage
+	console.log(currentDrillPos);
+	writeCurrentMainDrillPosition(currentStage);
 	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	let targetDrillPos = getTargetDrillPos(stages);
 	
@@ -270,7 +268,7 @@ function updateDrillPosition(){
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
-		drill(Math.round((currentDrillPos.y / -BOXSIZE.y)));
+		drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
 		//console.log("if 2");
 	}
 
@@ -286,7 +284,7 @@ function updateDrillPosition(){
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
-		console.log("if 4");
+		//console.log("if 4");
 	}
 }
 
@@ -355,7 +353,7 @@ function animate() {
 	//updateDrillPosition(drillObj.position.clone(), getTargetDrillPos());
 	updateDrillPosition();
 	updateFigPostitions(getPlayerPosition(),targetPosition);
-	console.log(getPlayerPosition().x);
+	//console.log(getPlayerPosition().x);
 	pointLight.position.set(getPlayerPosition().x, (getPlayerPosition().y + 0.41*BOXSIZE.y), getPlayerPosition().z+ 0.0*BOXSIZE.z);
 	render();
 	controls.update();

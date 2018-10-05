@@ -19,7 +19,7 @@ function buildFigure(){
 function buildDrill(){
 	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
 	let matDrill = new THREE.MeshBasicMaterial( {color:0x535353, wireframe: true});
-	let geoDrill = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 0*BOXSIZE.x, 1.5*BOXSIZE.x, 32 );
+	let geoDrill = new THREE.CylinderBufferGeometry( 1.5*BOXSIZE.x, 0*BOXSIZE.x, 1.0*BOXSIZE.x, 32 );
 	let meshDrill = new THREE.Mesh( geoDrill, matDrill );
 	meshDrill.receiveShadow = false;
 	meshDrill.castShadow = false;
@@ -33,7 +33,7 @@ function buildDrill(){
 function buildInnerDrill(){
 	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
 	let matDrill = new THREE.MeshBasicMaterial( {color:0xFFD700, wireframe: false}); //0xB5B5B5
-	let geoDrill = new THREE.CylinderBufferGeometry( 1.3*BOXSIZE.x, 0*BOXSIZE.x, 1.3*BOXSIZE.x, 32 );
+	let geoDrill = new THREE.CylinderBufferGeometry( 1.3*BOXSIZE.x, 0*BOXSIZE.x, 0.9*BOXSIZE.x, 32 );
 	let meshDrill = new THREE.Mesh( geoDrill, matDrill );
 	meshDrill.receiveShadow = false;
 	meshDrill.castShadow = false;
