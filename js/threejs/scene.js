@@ -190,21 +190,27 @@ function playerGotoX(posPlayer, posTarget) {
 
 	let dX = targetPlayerPos.x - currentPlayerPos.x,
 	dY = targetPlayerPos.y - currentPlayerPos.y;
-
-
-	if(dX < speed) {
-		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x))-1, Math.round((currentPlayerPos.y / -BOXSIZE.y)));
+	console.log("dX: "+ dX);
+	console.log("speed: "+ speed);
+	console.log("target: "+ targetPlayerPos.x);
+	console.log("current: "+ currentPlayerPos.x);
+	
+	
+	if(dX+0.0*BOXSIZE.x < speed) {
+		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x -= speed;
 		figure.position.copy(currentPlayerPos);
 	}
-	if(dX > speed) {
-		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x))+1, Math.round((currentPlayerPos.y / -BOXSIZE.y)));
+	if(dX-0.0*BOXSIZE.x > speed) {
+		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x += speed;
 		figure.position.copy(currentPlayerPos);
+		console.log("delete");
 	}
 	if(dX <= speed && dX >= -speed) {
 		currentPlayerPos.x = targetPlayerPos.x;
 		figure.position.copy(currentPlayerPos);
+		console.log("end");
 	}
 }
 
@@ -268,7 +274,8 @@ function updateDrillPosition(){
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
-		drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
+		drill(Math.round(currentDrillPos.y / -BOXSIZE.y));
+		//drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
 		//console.log("if 2");
 	}
 
