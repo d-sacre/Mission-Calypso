@@ -74,3 +74,18 @@ document.querySelector("#order-to-takeoff-popup-button").addEventListener("click
 document.querySelector("#back-to-prepare-takeoff-button").addEventListener("click", function(){
     system.CopperStatemachine="enough-prepare-takeoff";
 });
+
+/* Button for getting to weight-relief */
+document.querySelector('#relief-weight-button').addEventListener("click", function(){
+    document.querySelector("#weight-relief-popup").style.display="block";
+});
+
+/* Button for discarding changes of weight-relief and direct redirection back to prepare take-off*/
+document.querySelector('#no-relief-weight-button').addEventListener("click", function(){
+    document.querySelector("#weight-relief-popup").style.display="none";
+});
+
+/* Button for committing changes of weight-relief and redirection back to prepare take-off after probability calulation*/
+document.querySelector('#yes-relief-weight-button').addEventListener("click", function(){
+    document.querySelector("#weight-relief-popup").style.display="none";
+});
