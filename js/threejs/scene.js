@@ -162,77 +162,65 @@ function updateFigPostitions(posPlayer,posTarget) {
 
 	let isInCorrectRow = (posPlayer.y === posTarget.y);
 	let isCentered = (posPlayer.x === 0);
-	let isInCorrectColumn = (posPlayer.x === posTarget.y);
-
-	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0),
-	speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js;
+	let nullPositionX = new THREE.Vector3(0,posPlayer.y,0);
+	//let isInCorrectColumn = (posPlayer.x === posTarget.y);
+	
+	let speedFig = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js;
 
 
 	if(!isCentered && !isInCorrectRow) {
-		playerGotoX(posPlayer, nullPositionX);
+		playerGotoX(posPlayer, nullPositionX, speedFig);
 	}
 	if(!isInCorrectRow && isCentered) {
-		playerGotoY(posPlayer, posTarget);
+		playerGotoY(posPlayer, posTarget, speedFig);
 	}
 	if(isInCorrectRow) {
-		playerGotoX(posPlayer, posTarget);
+		playerGotoX(posPlayer, posTarget, speedFig);
 	}
 
 }
 
 
 
-function playerGotoX(posPlayer, posTarget) {
-	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
-
-	currentPlayerPos = posPlayer;
-	targetPlayerPos = posTarget;
-
-	let dX = targetPlayerPos.x - currentPlayerPos.x,
-	dY = targetPlayerPos.y - currentPlayerPos.y;
+function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
+	let dX = targetPlayerPos.x - currentPlayerPos.x;
 	console.log("dX: "+ dX);
-	console.log("speed: "+ speed);
+	console.log("speed: "+ speedFig);
 	console.log("target: "+ targetPlayerPos.x);
 	console.log("current: "+ currentPlayerPos.x);
 	
 	
-	if(dX+0.0*BOXSIZE.x < speed) {
+	if(dX+0.0*BOXSIZE.x < speedFig) {
 		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
-		currentPlayerPos.x -= speed;
+		currentPlayerPos.x -= speedFig;
 		figure.position.copy(currentPlayerPos);
 	}
-	if(dX-0.0*BOXSIZE.x > speed) {
+	if(dX-0.0*BOXSIZE.x > speedFig) {
 		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
-		currentPlayerPos.x += speed;
+		currentPlayerPos.x += speedFig;
 		figure.position.copy(currentPlayerPos);
 		console.log("delete");
 	}
-	if(dX <= speed && dX >= -speed) {
+	if(dX <= speedFig && dX >= -speedFig) {
 		currentPlayerPos.x = targetPlayerPos.x;
 		figure.position.copy(currentPlayerPos);
 		console.log("end");
 	}
 }
 
-function playerGotoY(posPlayer, posTarget) {
-	let speed = SPEED * getActualMinerSpeed(); //./threejs_gui_interface.js
+function playerGotoY(currentPlayerPos, targetPlayerPos, speedFig) {
+	let dY = targetPlayerPos.y - currentPlayerPos.y;
 
-	currentPlayerPos = posPlayer;
-	targetPlayerPos = posTarget;
-
-	let dX = targetPlayerPos.x - currentPlayerPos.x,
-	dY = targetPlayerPos.y - currentPlayerPos.y;
-
-	if(dY < speed) {
-		currentPlayerPos.y -= speed;
+	if(dY < speedFig) {
+		currentPlayerPos.y -= speedFig;
 		figure.position.copy(currentPlayerPos);
 	}
 
-	if(dY > speed) {
-		currentPlayerPos.y += speed;
+	if(dY > speedFig) {
+		currentPlayerPos.y += speedFig;
 		figure.position.copy(currentPlayerPos);
 	}
-	if(dY <= speed && dY >= -speed) {
+	if(dY <= speedFig && dY >= -speedFig) {
 		currentPlayerPos.y = targetPlayerPos.y;
 		figure.position.copy(currentPlayerPos);
 	}
