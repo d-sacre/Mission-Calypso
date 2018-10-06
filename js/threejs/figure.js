@@ -4,7 +4,7 @@ function buildFigure(){
 	//var matFig = new THREE.MeshPhongMaterial( {color:0xff0000, wireframe: false});
 	let texFig = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/spacer_try3.png" ); //old: "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/flametest_256x256px.png"
 	var matFig = new THREE.MeshPhongMaterial( { map: texFig, transparent: true, opacity: 1});
-	let geoFig = new THREE.BoxBufferGeometry( BOXSIZE.x/2 , BOXSIZE.y/2,  BOXSIZE.z/2);
+	let geoFig = new THREE.BoxBufferGeometry( BOXSIZE.x, BOXSIZE.y,  BOXSIZE.z/2); // default: ( BOXSIZE.x/2 , BOXSIZE.y/2,  BOXSIZE.z/2)
 	let meshFig = new THREE.Mesh( geoFig, matFig );
 
 	
