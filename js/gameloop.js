@@ -10,8 +10,6 @@ function setMiningTime() {
 
     let copperStorageValue=parseFloat(document.querySelector('#copper-ingot-value').value)+0.5*parseFloat(document.querySelector('#copper-ore-value').value);
 
-    //console.log("copperStorageValue: "+document.querySelector('#copper-ingot-value').value);
-
     if (copperStorageValue>=document.querySelector('#copper-max').value){
         document.querySelector('#enough-copper-popup').style.display="block";
         this.CopperStatemachine="enough";
@@ -127,6 +125,11 @@ function setStorageTime(){
   function setTakeoffTime(){
         document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
         document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+
+        // hide complete gui
+        document.querySelector('#game-gui-popup').style.display="none";
+        document.querySelector('#headup-gui-container').style.display="none";
+
         document.querySelector("#prepare-takeoff-popup").style.display="block";
         /*document.querySelector("#continue-mining-popup-button").addEventListener("click",function(){
             //this.CopperStatemachine=="enough-but-continue";
