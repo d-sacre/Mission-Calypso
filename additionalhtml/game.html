@@ -66,7 +66,7 @@
 				<div id="to-rocket-menu-clickbox" class="clickbox-popupmenu">
 				</div>
 
-				<img id="rocket-img-popupmenu" src="../pictures/gamepopupmenu/rockettest2_withtop.png"></img><!--rocket_rotated_recolored.png"></img>-->
+				<img id="rocket-img-popupmenu" src="../pictures/gamepopupmenu/rockettest2_collada.png"></img><!--rocket_rotated_recolored.png"></img>-->
 
 				<fieldset id="drill-storey-setup" onchange="system.refreshSliderDisplay()">
 					<legend>main drill depth</legend>
@@ -89,12 +89,18 @@
 					</button>
 				</fieldset>
 
-				<button id="back-to-mainmenu-popup-button" class="popupmenu-button round">
-					Back to Menu
-				</button>
+				<div id="return-button-align-box">
+						<button id="back-to-mainmenu-popup-button" class="popupmenu-button round">
+							Back to Menu
+						</button>
 
-				<button  id="return-to-game-popup-button" class="popupmenu-button round">
-					Return to Game
+						<button  id="return-to-game-popup-button" class="popupmenu-button round">
+							Return to Game
+						</button>
+				</div>
+
+				<button id="back-to-prepare-takeoff-button" class="popupmenu-button round">
+					Take-off!
 				</button>
 
 				<ul id="game-gui-popup-firstrow">
@@ -245,7 +251,9 @@
 						CO<sub>2</sub> after: <span id="carbondioxide-afteruseitem-value" class="carbondioxide-afteruseitem-value" value="0.04">0.04/8.00 %</span>
 						</br>
 						</br>
-						<button id="use-carbonizer-button" class="popupmenu-button round">Decarbonize!</button>
+						<div id="use-carbonizer-button-align-box">
+									<button id="use-carbonizer-button" class="popupmenu-button round">Decarbonize!</button>
+						</div>
 					</fieldset>
 
 				</li>
