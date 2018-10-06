@@ -89,19 +89,18 @@ audio {
 }
 
 
-#back-to-mainmenu-popup-button{
+/*#back-to-mainmenu-popup-button{
 
   position: absolute;
-  bottom: 12.5vh;
+  bottom: 10vh;
 
 }
 
 #return-to-game-popup-button{
-
   position: absolute;
-  bottom: 2.5vh;
+  bottom: 0vh;
+}*/
 
-}
 
 .clickbox-popupmenu{
   position: absolute;
@@ -139,10 +138,10 @@ audio {
 
 #rocket-img-popupmenu{
   position: absolute;
-  bottom: 2vh;
-  left: 15vw; /*13vw, 11vw*/
-  height: 87.5vh;
-  width: 20vw; /*values for 2D art*/
+  bottom: 7vh; /* 3vh */
+  left: 18vw; /*15vw, 13vw, 11vw*/
+  height: 83.5vh;
+  width: 14vw; /* 20vw values for 2D art*/
 
   /*position: absolute;
   bottom: 2vh;
@@ -153,6 +152,7 @@ audio {
   z-index: 5;
 
 }
+
 
 .game-gui-popup{
   position: absolute;
@@ -548,7 +548,32 @@ audio {
   display: none;
 }
 
+#back-to-prepare-takeoff-button{
+  position: absolute;
+  bottom: 0vh;
+  left: 18.5vw;
 
+  display: none;
+
+  z-index: 6;
+
+}
+
+#use-carbonizer-button-align-box{
+    text-align: center;
+}
+
+#return-button-align-box{
+  position: absolute;
+
+  bottom: 0vh;
+  left: 1vw;
+
+  height: 22.5vh;
+  width: 15vw;
+
+  text-align: center;
+}
 /* ########################################################################## */
 /* ############ class-system gui ########################################### */
 /* ########################################################################## */
