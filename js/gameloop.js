@@ -100,7 +100,7 @@ function setMiningTime() {
 function setStorageTime(){
         document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
         document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
-        document.querySelector("#enough-copper-popup").style.display="block";
+        document.querySelector("#enough-copper-popup").style.display="block"; //  lay enough-copper-popup over other popups; do not hide them!
   }
 
   function setTakeoffTime(){
@@ -111,19 +111,8 @@ function setStorageTime(){
         document.querySelector('#game-gui-popup').style.display="none";
         document.querySelector('#headup-gui-container').style.display="none";
 
-        document.querySelector("#prepare-takeoff-popup").style.display="block";
-        /*document.querySelector("#continue-mining-popup-button").addEventListener("click",function(){
-            //this.CopperStatemachine=="enough-but-continue";
-            //console.log("button clicked");
-            document.querySelector("#enough-copper-popup").style.display="none";
-            document.querySelector('#copper-max').value=1500;
-            system.CopperStatemachine="enough-but-continue-mining";
-        });
+        document.querySelector("#prepare-takeoff-popup").style.display="block"; // show the prepare-takeoff-popup
 
-        document.querySelector("#order-to-takeoff-popup-button").addEventListener("click",function(){
-            document.querySelector("#enough-copper-popup").style.display="none";
-            system.CopperStatemachine="enough-prepare-takeoff";
-        });*/
   }
 
 
@@ -157,6 +146,7 @@ let timeUnit = setInterval(function() {
       case "enough-but-continue-mining": // reached the specified amount of copper, but player wants to continue mining
           document.addEventListener( 'mousemove', onDocumentMouseMove, false ); // re-establish click event listeners for three.js
           document.addEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+          document.querySelector('#back-to-prepare-takeoff-button').style.display="block";
           system.CopperStatemachine="not-enough";
           console.log("case enough-but-continue-mining");
           break;
