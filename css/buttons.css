@@ -32,7 +32,21 @@
   border: none;
   outline:none;
 
-  cursor:pointer;
+  cursor: pointer;
+  overflow: hidden;
+
+}
+
+#weight-relief-popup button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor: pointer;
   overflow: hidden;
 
 }
