@@ -4,7 +4,7 @@
 
 /* return to menu*/
 document.querySelector('#back-to-mainmenu-popup-button').addEventListener("click", function(){
-  window.location='../mission-calypso.html';
+    window.location='../mission-calypso.html';
 });
 
 /* start drill */
@@ -15,13 +15,13 @@ document.querySelector('#start-main-drill-button').addEventListener("click", fun
 
 /* button for carbonizer useage */
 document.querySelector('#use-carbonizer-button').addEventListener("click", function() {
-  document.querySelector('.carbondioxide-value').value=document.querySelector('.carbondioxide-afteruseitem-value').value;// reduce C02 to calculated value
-  document.querySelector('#decarbonizer-storage-value').value=document.querySelector('#decarbonizer-storage-value').value-document.querySelector('#use-decarbonizer-slider').value // substract number of used decarbonizers from storage
-  document.querySelector('#decarbonizer-storage-value').innerHTML=document.querySelector('#decarbonizer-storage-value').value+'/15 kg'; // display changes
-  document.querySelector('#use-decarbonizer-slider').value=0; // reset desired number of decarbonizers to 0
-  document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value; // set maximum slider value to available decarbonizers in storage
-  document.querySelector('#use-decarbonizer-slidervalue').innerHTML=document.querySelector('#use-decarbonizer-slider').value+'/'+document.querySelector('#decarbonizer-storage-value').value; // write actual value of slider and max into gui
-  document.querySelector('#carbondioxide-afteruseitem-value').value=0.04; // reset value for possible reduction
+    document.querySelector('.carbondioxide-value').value=document.querySelector('.carbondioxide-afteruseitem-value').value;// reduce C02 to calculated value
+    document.querySelector('#decarbonizer-storage-value').value=document.querySelector('#decarbonizer-storage-value').value-document.querySelector('#use-decarbonizer-slider').value // substract number of used decarbonizers from storage
+    document.querySelector('#decarbonizer-storage-value').innerHTML=document.querySelector('#decarbonizer-storage-value').value+'/15 kg'; // display changes
+    document.querySelector('#use-decarbonizer-slider').value=0; // reset desired number of decarbonizers to 0
+    document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value; // set maximum slider value to available decarbonizers in storage
+    document.querySelector('#use-decarbonizer-slidervalue').innerHTML=document.querySelector('#use-decarbonizer-slider').value+'/'+document.querySelector('#decarbonizer-storage-value').value; // write actual value of slider and max into gui
+    document.querySelector('#carbondioxide-afteruseitem-value').value=0.04; // reset value for possible reduction
 });
 
 /*##################################################################################################################*/
@@ -50,7 +50,7 @@ document.querySelector('#headup-gui-container-clickbox').addEventListener("click
 /*############################### Button run-out-of-suplies-game-over-button #######################################*/
 /*##################################################################################################################*/
 document.querySelector('#game-over-back-to-mainmenu-popup-button').addEventListener("click", function(){
-  window.location='../mission-calypso.html';
+    window.location='../mission-calypso.html';
 });
 
 /*##################################################################################################################*/
@@ -67,5 +67,10 @@ document.querySelector("#continue-mining-popup-button").addEventListener("click"
 /* Button for directly preparing take-off when copper limit is reached*/
 document.querySelector("#order-to-takeoff-popup-button").addEventListener("click",function(){
     document.querySelector("#enough-copper-popup").style.display="none";
+    system.CopperStatemachine="enough-prepare-takeoff";
+});
+
+/* Button for preparing take-off after continuing mining */
+document.querySelector("#back-to-prepare-takeoff-button").addEventListener("click", function(){
     system.CopperStatemachine="enough-prepare-takeoff";
 });
