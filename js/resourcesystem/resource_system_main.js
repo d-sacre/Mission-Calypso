@@ -39,8 +39,11 @@ class ResourcesSystem{
 		this.copperProcessing=parseFloat(document.querySelector('#copper-processing-slider').value);
 		this.pottasiumProcessing=parseFloat(document.querySelector('#pottasium-processing-slider').value);
 		this.EnergyStartValue=Energy;
+		this.WeightStartValue=Weight;
 
-		this.CopperStatemachine="not-enough";
+
+
+		this.CopperStatemachine="not-enough";//"enough-prepare-takeoff";//has to be set to default "not-enough";
 
 
 		this.N = WorkerTotal;
@@ -310,6 +313,7 @@ class ResourcesSystem{
 		this.carbondioxid = this.refreshCarbondioxidValue();
 		this.energy = this.refreshEnergyValue();
 
+
 		updateStorageDisplay();//function defined in js/resourcesystem/resource_system_storage-and-refinery.js
 
 		this.time += 1;
@@ -322,8 +326,8 @@ class ResourcesSystem{
 			oxygen: this.oxygen,
 			productivity,
 			carbonizerReductionCalculationValue,
-			CopperStatemachine: this.CopperStatemachine
-
+			CopperStatemachine: this.CopperStatemachine,
+			weight: this.Weight
 		};
 
 	}
