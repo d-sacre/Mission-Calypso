@@ -7,7 +7,13 @@ function setMiningTime() {
     let	oxygen = data.oxygen;
     let productivity = data.productivity;
     let co2ReduxTheo=data.carbonizerReductionCalculationValue;
+    let weight=system.weight;
 
+    weight=parseFloat(system.caloricum)+0.5*parseFloat(system.energy)+parseFloat(document.querySelector('#copper-ore-value').value)+parseFloat(document.querySelector('#pottasium-ore-value').value)/1000+parseFloat(document.querySelector('#decarbonizer-storage-value').value)/1000+parseFloat(document.querySelector('#copper-ingot-value').value);
+    weight=weight.toFixed(2);
+
+    document.querySelector('.weight-value').value=weight;
+    document.querySelector('.weight-value').innerHTML=weight+'/'+ system.WeightStartValue +' t';
 
     document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+system.EnergyStartValue+' HU';
     document.querySelector('.energy-value').value=energy.toFixed(2); // storing value in html for easier access without js-interfaces
