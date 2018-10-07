@@ -10,7 +10,6 @@ var SPEED=5; //only multiples of 5 allowed
 var stages; //maximum 9 allowed, because max 9 rows are visible
 
 
-
 init();
 animate();
 
@@ -39,17 +38,21 @@ function init() {
 		
 	let model = buildModel();
 	scene.add(model);
-
+	
 	figure = buildFigure();
 	scene.add(figure);
 	targetPosition = getPlayerPosition();
 
 	drillObj = buildDrill();
 	scene.add(drillObj);
+	let start = drillObj.position.clone();
+	console.log("start position: " + start.x + ", " + start.y + ", " + start.z);
 	//targetDrillPos = drillObj.position.clone();
 	
 	drillObj1 = buildInnerDrill();
 	scene.add(drillObj1);
+	let start1 = drillObj1.position.clone();
+	console.log("start position 1: " + start1.x + ", " + start1.y + ", " + start1.z);
 	
 	let directLight1 = getDirectLight();
 	scene.add( directLight1 );
@@ -190,13 +193,13 @@ function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
 	console.log("current: "+ currentPlayerPos.x);
 	
 	
-	if(dX+0.0*BOXSIZE.x < speedFig) {
-		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
+	if(dX < speedFig) {
+		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x -= speedFig;
 		figure.position.copy(currentPlayerPos);
 	}
-	if(dX-0.0*BOXSIZE.x > speedFig) {
-		deleteCubeUnderground(Math.round((currentPlayerPos.x / BOXSIZE.x)), Math.round((currentPlayerPos.y / -BOXSIZE.y)));
+	if(dX > speedFig) {
+		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x += speedFig;
 		figure.position.copy(currentPlayerPos);
 		console.log("delete");
@@ -243,15 +246,19 @@ function onWindowResize() {
 function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
+	console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
 	let currentStage = getCurrentStage(currentDrillPos);
-	console.log(currentDrillPos);
 	writeCurrentMainDrillPosition(currentStage);
+	console.log("currentStage: " +  currentStage);
 	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
+	//stages = 7;
+	console.log("stages: " + stages);
 	let targetDrillPos = getTargetDrillPos(stages);
+	console.log("targetDrillPos: " + targetDrillPos.x + ", " + targetDrillPos.y + ", " + targetDrillPos.z);
 	
 	
 	if(currentDrillPos.equals(targetDrillPos)) {
-		//console.log("if 1");
+		console.log("if 1");
 		return;}
 	
 	
@@ -262,16 +269,17 @@ function updateDrillPosition(){
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
-		drill(Math.round(currentDrillPos.y / -BOXSIZE.y));
+		//drill(currentDrillPos.y / -BOXSIZE.y);
+		drill((Math.round(currentDrillPos.y / -BOXSIZE.y)));
 		//drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
-		//console.log("if 2");
+		console.log("if 2");
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
-		//console.log("if 3");
+		console.log("if 3");
 
 	}
 	
@@ -279,24 +287,11 @@ function updateDrillPosition(){
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
-		//console.log("if 4");
+		console.log("if 4");
 	}
 }
 
-
-function getCurrentStage(currentDrillPos){
-	if(currentDrillPos.y > -0.5 * BOXSIZE.y && currentDrillPos.y < 0.5 * BOXSIZE.y){
-			return 1;
-	}
-	
-	for(let i = 1; i <=8; i++){
-		if((currentDrillPos.y < -0.5 * BOXSIZE.y * i) && (currentDrillPos.y > -1.5 * BOXSIZE.y * i)){
-			return i+1;
-		}
-	}
-}
-
-
+/*
 function getTargetDrillPos(stages){
 	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
 	if(cubeObj != null){
@@ -307,6 +302,62 @@ function getTargetDrillPos(stages){
 	//console.log(drillObj.position.clone());
 	return drillObj.position.clone();
 }
+*/
+
+function getTargetDrillPos(stages){	
+	let targetPosDrill = new THREE.Vector3(drillObj.position.clone().x, (-stages * BOXSIZE.y), drillObj.position.clone().z);
+	return targetPosDrill;	
+}
+
+
+
+function getCurrentStage(currentDrillPos){
+	switch (true){
+
+    case currentDrillPos.y <= BOXSIZE.y * (0.5) && currentDrillPos.y >= BOXSIZE.y * (-0.5): // from 100 to -100
+        return 0;
+        break; 
+		
+    case currentDrillPos.y < BOXSIZE.y * (-0.5) && currentDrillPos.y >= BOXSIZE.y * (-1.5): // from -100 to -300
+        return 1;
+        break;
+
+    case currentDrillPos.y < BOXSIZE.y * (-1.5) && currentDrillPos.y >= BOXSIZE.y * (-2.5): // from -300 to -500
+        return 2;
+        break;
+
+    case currentDrillPos.y < BOXSIZE.y * (-2.5) && currentDrillPos.y >= BOXSIZE.y * (-3.5): // from -500 to -700
+        return 3;
+        break;
+	case currentDrillPos.y < BOXSIZE.y * (-3.5) && currentDrillPos.y >= BOXSIZE.y * (-4.5): // from -700 to -900
+        return 4;
+        break;
+
+    case currentDrillPos.y < BOXSIZE.y * (-4.5) && currentDrillPos.y >= BOXSIZE.y * (-5.5): // from -900 to -1100
+        return 5;
+        break;
+
+    case currentDrillPos.y < BOXSIZE.y * (-5.5) && currentDrillPos.y >= BOXSIZE.y * (-6.5): // from -1100 to -1300
+        return 6;
+        break;
+		
+	case currentDrillPos.y < BOXSIZE.y * (-6.5) && currentDrillPos.y >= BOXSIZE.y * (-7.5): // from -1300 to -1500
+        return 7;
+        break;
+		
+	case currentDrillPos.y < BOXSIZE.y * (-7.5) && currentDrillPos.y >= BOXSIZE.y * (-8.5): // from -1500 to -1700
+        return 8;
+        break;
+		
+	case currentDrillPos.y < BOXSIZE.y * (-8.5) && currentDrillPos.y >= BOXSIZE.y * (-9.5): // from -1700 to -1900
+        return 9;
+        break;
+		
+    default:
+        return "Error";
+	}
+}
+
 
 
 
