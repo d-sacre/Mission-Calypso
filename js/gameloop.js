@@ -117,12 +117,36 @@ function setStorageTime(){
   }
 
   function setTakeoffTime(){
+        let successfulTakeoffProbability;
+        let energyProbability, weightProbability, wearProbability;
+
+        let energy=document.querySelector('.energy-value').value;
+        let weight=document.querySelector('.weight-value').value;
+        let wear=document.querySelector('.wear-value').value;
+
+        if(energy<=150){
+            energyProbability=(energy-50)/100;
+        } else {
+            energyProbability=(1-((energy-150)/energy));
+        }
+
+        weightProbability=1-(weight/150);
+        wearProbability=1-(wear/100);
+
+        successfulTakeoffProbability=(energyProbability+weightProbability+wearProbability)/3;
+        document.querySelector('#successful-takeoff-probability').value=successfulTakeoffProbability;
+
         document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
         document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
 
         // hide complete gui
         document.querySelector('#game-gui-popup').style.display="none";
         document.querySelector('#headup-gui-container').style.display="none";
+
+        document.querySelector('#energy-value-prepare-takeoff-popup').innerHTML=energy+'/50 HU';
+        document.querySelector('#weight-value-prepare-takeoff-popup').innerHTML=weight+'/150 t';
+        document.querySelector('#wear-value-prepare-takeoff-popup').innerHTML=wear+'/100 %';
+        document.querySelector('#successful-takeoff-probability').innerHTML=(100*parseFloat(document.querySelector('#successful-takeoff-probability').value)).toFixed(2)+' %';
 
         document.querySelector("#prepare-takeoff-popup").style.display="block"; // show the prepare-takeoff-popup
 
