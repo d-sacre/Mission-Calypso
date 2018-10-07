@@ -46,13 +46,13 @@ function init() {
 	drillObj = buildDrill();
 	scene.add(drillObj);
 	let start = drillObj.position.clone();
-	console.log("start position: " + start.x + ", " + start.y + ", " + start.z);
+	//console.log("start position: " + start.x + ", " + start.y + ", " + start.z);
 	//targetDrillPos = drillObj.position.clone();
 	
 	drillObj1 = buildInnerDrill();
 	scene.add(drillObj1);
 	let start1 = drillObj1.position.clone();
-	console.log("start position 1: " + start1.x + ", " + start1.y + ", " + start1.z);
+	//console.log("start position 1: " + start1.x + ", " + start1.y + ", " + start1.z);
 	
 	let directLight1 = getDirectLight();
 	scene.add( directLight1 );
@@ -187,10 +187,10 @@ function updateFigPostitions(posPlayer,posTarget) {
 
 function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
 	let dX = targetPlayerPos.x - currentPlayerPos.x;
-	console.log("dX: "+ dX);
-	console.log("speed: "+ speedFig);
-	console.log("target: "+ targetPlayerPos.x);
-	console.log("current: "+ currentPlayerPos.x);
+	//console.log("dX: "+ dX);
+	//console.log("speed: "+ speedFig);
+	//console.log("target: "+ targetPlayerPos.x);
+	//console.log("current: "+ currentPlayerPos.x);
 	
 	
 	if(dX < speedFig) {
@@ -202,12 +202,12 @@ function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
 		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y)));
 		currentPlayerPos.x += speedFig;
 		figure.position.copy(currentPlayerPos);
-		console.log("delete");
+		//console.log("delete");
 	}
 	if(dX <= speedFig && dX >= -speedFig) {
 		currentPlayerPos.x = targetPlayerPos.x;
 		figure.position.copy(currentPlayerPos);
-		console.log("end");
+		//console.log("end");
 	}
 }
 
@@ -246,19 +246,19 @@ function onWindowResize() {
 function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
-	console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
+	//console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
 	let currentStage = getCurrentStage(currentDrillPos);
 	writeCurrentMainDrillPosition(currentStage);
-	console.log("currentStage: " +  currentStage);
+	//console.log("currentStage: " +  currentStage);
 	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	//stages = 7;
-	console.log("stages: " + stages);
+	//console.log("stages: " + stages);
 	let targetDrillPos = getTargetDrillPos(stages);
-	console.log("targetDrillPos: " + targetDrillPos.x + ", " + targetDrillPos.y + ", " + targetDrillPos.z);
+	//console.log("targetDrillPos: " + targetDrillPos.x + ", " + targetDrillPos.y + ", " + targetDrillPos.z);
 	
 	
 	if(currentDrillPos.equals(targetDrillPos)) {
-		console.log("if 1");
+		//console.log("if 1");
 		return;}
 	
 	
@@ -272,14 +272,14 @@ function updateDrillPosition(){
 		//drill(currentDrillPos.y / -BOXSIZE.y);
 		drill((Math.round(currentDrillPos.y / -BOXSIZE.y)));
 		//drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
-		console.log("if 2");
+		//console.log("if 2");
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
-		console.log("if 3");
+		//console.log("if 3");
 
 	}
 	
@@ -287,7 +287,7 @@ function updateDrillPosition(){
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
 		drillObj1.position.copy(currentDrillPos);
-		console.log("if 4");
+		//console.log("if 4");
 	}
 }
 

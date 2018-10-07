@@ -1,7 +1,7 @@
 
 function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
-	console.log("Block: " + x, y);
+	//console.log("Block: " + x, y);
 	
 	if (cube != null){
 		let material = cube.userData.material;
