@@ -17,6 +17,7 @@ class ResourcesSystem{
 		document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value;
 		document.querySelector('#copper-ingot-value').value=0;
 		document.querySelector('#copper-max').value=15;
+		document.querySelector('.wear-value').value=0;
 
 		/* write initial storage values in innerHTML */
 		document.querySelector('.energy-value').innerHTML=Energy+'/'+Energy+' HU';
@@ -317,6 +318,8 @@ class ResourcesSystem{
 		updateStorageDisplay();//function defined in js/resourcesystem/resource_system_storage-and-refinery.js
 
 		this.time += 1;
+		/*this.w+= 0.1*(v**2);
+		this.w=parseFloat(this.w).toFixed(2);*/
 
 		//Rückgabewerte
 		return {
@@ -327,7 +330,9 @@ class ResourcesSystem{
 			productivity,
 			carbonizerReductionCalculationValue,
 			CopperStatemachine: this.CopperStatemachine,
-			weight: this.Weight
+			weight: this.Weight,
+			wear: this.w,
+			speed: v
 		};
 
 	}
