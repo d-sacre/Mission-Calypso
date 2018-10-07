@@ -294,10 +294,15 @@
 			Commander Been, I calculated the nessecary parameters for the take-off.
 			</br>
 			</br>
-			energy: 500 HU weight: 150/150 t wear: 90%
+			energy: <span id="energy-value-prepare-takeoff-popup" class="energy-value" value=""></span>,
+			</br>
+			weight: <span id="weight-value-prepare-takeoff-popup" class="weight-value" value=""></span>,
+			</br>
+			wear: <span id="wear-value-prepare-takeoff-popup" class="wear-value" value=""></span>,
 			</br>
 			</br>
-			The Mechanical Colossus Computer (MCC) determined a probability of 50 %
+			The Mechanical Colossus Computer (MCC) determined a probability of
+			<span id="successful-takeoff-probability" value=""></span>
 			for sucessful take-off. We could relief weight to enlarge the probability or give
 			a dam and take off.
 			</br>
@@ -307,7 +312,7 @@
 		</div>
 
 		<div id="weight-relief-popup" class="weight-relief-popup">
-				<h1> storage: 100/150 t </h1>
+				<h1> weight: 100/150 t </h1>
 					</br>
 					<table>
 							<tr>
@@ -373,44 +378,6 @@
 							</tr>
 					</table>
 
-				<!--</br>
-				<table>
-						<tr>
-							<th> caloricum <th>
-							<th> current </th>
-							<th> relief </th>
-							<th> after </th>
-						</tr>
-
-						<tr>
-								<th>
-										<div id="weight-relief-storage-caloricum" class="drag-and-drop-menu-material-container">
-												<img id="caloricum-ore" src="../pictures/gamepopupmenu/storageitems/caloricum_green.png" class="storage-popupmenu-draganddrop-icon">
-										</div>
-								</th>
-
-								<th>
-										<input name="caloricum-reliefweight-slider" id="caloricum-reliefweight-slider" type="range" min="0" max="2" step="0.5" default value="1">
-								</th>
-
-								<th>
-										<span id="reliefweight-caloricum-storage-value" type="text" value="">15 t </span>
-								</th>
-
-								<th>
-										<span id="caloricum-reliefweight-slidervalue" type="text" value="">5 t</span>
-								</th>
-
-								<th>
-										<span id="reliefweight-caloricum-after-value" type="text" value="">10 t</span>
-								</th>
-						</tr>
-				</table>
-			</br>-->
-
-
-
-
 				</br>
 				</br>
 				</br>
@@ -422,20 +389,12 @@
 	</body>
 
 	<script src="../js/resourcesystem/resource_system_storage-and-refinery.js"></script>
-
-	<script src="../js/resourcesystem/resource_system_main.js">
-	</script>
-
-	<script src="../js/resourcesystem/resource_system_storage-and-refinery.js">
-	</script>
-
+	<script src="../js/resourcesystem/resource_system_main.js"></script>
+	<script src="../js/resourcesystem/resource_system_storage-and-refinery.js"></script>
 	<script src="../js/gameloop.js"> </script>
 
-	<script src="../js/userinteraction/game_button_interaction.js">
-	</script>
-
-	<script src="../js/userinteraction/warnings/audio-visualwarning.js">
-	</script>
+	<script src="../js/userinteraction/game_button_interaction.js"></script>
+	<script src="../js/userinteraction/warnings/audio-visualwarning.js"></script>
 
 	<script src="../js/threejs/three.js"></script>
 	<script src="../js/threejs/threejs_gui_interface.js" ></script>
