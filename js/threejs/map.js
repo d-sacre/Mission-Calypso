@@ -100,8 +100,8 @@ function buildModel() {
 	
 	//creation of the underground boxes
 	group = new THREE.Group();
-	group2 = new THREE.Group();
-	let groups = [group, group2];
+	//group2 = new THREE.Group();
+	//let groups = [group, group2];
 
 	//set probability of rescourses
 	function randMat(){
@@ -125,6 +125,57 @@ function buildModel() {
 			return returnVal;
 		}
 	}
+	
+	
+	for(let x=-NUMELEMENTS; x<NUMELEMENTS; x++){
+		for(let y=0; y<NUMELEMENTS; y++){
+			let material;
+			let materialMapContent=randMat();
+			
+				if (materialMapContent==0){
+					material = matUnderground.clone();
+				}
+				if (materialMapContent==1){
+					material = matCal.clone();
+				}
+				if (materialMapContent==2){
+					material = matCop.clone();
+				}
+				if (materialMapContent==3){
+					material = matPot.clone();
+				}
+			
+			let meshUnderground = new THREE.Mesh( geoUnderground, material );
+			let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, 0*BOXSIZE.z);
+			meshUnderground.position.copy(pos);
+			
+			let name = "(" + x + "|" + y + ")";
+			meshUnderground.name= name;
+			meshUnderground.userData.positionX = x;
+			meshUnderground.userData.positionY = y;
+			meshUnderground.userData.material = materialMapContent;
+			
+			meshUnderground.receiveShadow = true;
+			meshUnderground.castShadow = true;
+			group.add( meshUnderground );
+		}
+	}
+	
+	
+	model.add(group);
+	
+	
+	//creation of the second cube row as one surface
+	let geoSecondRowCubes = new THREE.BoxBufferGeometry( (2*NUMELEMENTS)*BOXSIZE.x, NUMELEMENTS*BOXSIZE.y, BOXSIZE.z);
+	let meshSecondRowCubes = new THREE.Mesh( geoSecondRowCubes, matUnderground );
+	let posSecondRowCubes = new THREE.Vector3(-0.5*BOXSIZE.x, -((NUMELEMENTS*BOXSIZE.y)/2-BOXSIZE.y/2), -1*BOXSIZE.z);
+	meshSecondRowCubes.position.copy(posSecondRowCubes);
+	meshSecondRowCubes.receiveShadow = true;
+	meshSecondRowCubes.castShadow = true;
+	model.add( meshSecondRowCubes );
+
+	
+/*
 
 	for(let z=0; z<2; z++){
 		for(let x=-NUMELEMENTS; x<NUMELEMENTS; x++){
@@ -173,7 +224,7 @@ function buildModel() {
 	model.add(groups[1]);
 
 
-
+*/
 
 	
 	
