@@ -1,5 +1,3 @@
-"use strict";
-
 var group, group2, groupSurface;
 var NUMELEMENTS=20;
 var BOXSIZE = new THREE.Vector3(200, 200, 200);
@@ -8,7 +6,7 @@ var ROCKHIGHT=5;
 
 function buildModel() {
 
-	let mesh, mesh1, mesh2, model;
+	let model;
 
 	let texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_512x512px.jpg" );
 	let texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_edge_128x128.jpg" );
@@ -26,9 +24,25 @@ function buildModel() {
 	let texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/metal_plate_bump_1k.jpg" );
 
 
+	
 
+	let geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
+	let geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
+	let geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
 
+	
+	
 
+	let matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+	let matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+	let matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+
+	//resources
+	let matPot = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
+	let matCal = new THREE.MeshPhongMaterial( { map: texCaloricum, wireframe: false});
+	let matCop = new THREE.MeshPhongMaterial( { map: texCopper, wireframe: false});
+	
+	
 	let matMetalGreen = new THREE.MeshStandardMaterial( {
 		color: 0x888888,
 		roughness: 1,
@@ -47,51 +61,43 @@ function buildModel() {
 
 	let matMetalSilver = new THREE.MeshPhongMaterial( { map: texMetalPlateBump, wireframe: false});
 
+	
+	
 
-
-	let matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
-	var matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
-
-	//resources
-	let matPot = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
-	let matCal = new THREE.MeshPhongMaterial( { map: texCaloricum, wireframe: false});
-	let matCop = new THREE.MeshPhongMaterial( { map: texCopper, wireframe: false});
-
-	let matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
-	let geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
-	let geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
-	let geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
-
-
-	//creation of the edge
 	model = new THREE.Group();
+	
+	//creation of the edge	
 	groupSurface= new THREE.Group();
 	let numberRows =2;
 	for(let x=-NUMELEMENTS; x<NUMELEMENTS; x++){
 			for(let z=0; z<numberRows; z++){
-				mesh1 = new THREE.Mesh( geoEdge, matEdge );
-				let pos1 = new THREE.Vector3(x*BOXSIZE.x, 0.75*BOXSIZE.y, -z*BOXSIZE.x);
-				mesh1.position.copy(pos1);
+				let meshEdge = new THREE.Mesh( geoEdge, matEdge );
+				let posEdge = new THREE.Vector3(x*BOXSIZE.x, 0.75*BOXSIZE.y, -z*BOXSIZE.x);
+				meshEdge.position.copy(posEdge);
 				if(z===0) {
 					let name = "(" + x + ")";
-					mesh1.name= name;
+					meshEdge.name= name;
 				}
 				
-				mesh1.receiveShadow = true;
-				mesh1.castShadow = true;
-				groupSurface.add( mesh1 );
+				meshEdge.receiveShadow = true;
+				meshEdge.castShadow = true;
+				groupSurface.add( meshEdge );
 		}
 	}
-	model.add(groupSurface);
+	
 
 	//creation of the plain big surface
-	mesh2 = new THREE.Mesh( geoSurface, matSurface );
-	let pos2 = new THREE.Vector3(0, 0.75*BOXSIZE.y, -((SURFACEMULTI*BOXSIZE.y)/2+BOXSIZE.z*3/2));
-	mesh2.position.copy(pos2);
-	mesh2.receiveShadow = true;
-	mesh2.castShadow = true;
-	groupSurface.add( mesh2 );
+	let meshSurface = new THREE.Mesh( geoSurface, matSurface );
+	let posSurface = new THREE.Vector3(0, 0.75*BOXSIZE.y, -((SURFACEMULTI*BOXSIZE.y)/2+BOXSIZE.z*3/2));
+	meshSurface.position.copy(posSurface);
+	meshSurface.receiveShadow = true;
+	meshSurface.castShadow = true;
+	groupSurface.add( meshSurface );
+	
+	model.add(groupSurface);
 
+	
+	
 	//creation of the underground boxes
 	group = new THREE.Group();
 	group2 = new THREE.Group();
@@ -145,26 +151,34 @@ function buildModel() {
 			}
 
 
-				mesh = new THREE.Mesh( geoUnderground, material );
+				let meshUnderground = new THREE.Mesh( geoUnderground, material );
 				let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, -z*BOXSIZE.z);
-				mesh.position.copy(pos);
+				meshUnderground.position.copy(pos);
 				if(z===0) {
 					let name = "(" + x + "|" + y + ")";
-					mesh.name= name;
-					mesh.userData.positionX = x;
-					mesh.userData.positionY = y;
-					mesh.userData.material = materialMapContent;
+					meshUnderground.name= name;
+					meshUnderground.userData.positionX = x;
+					meshUnderground.userData.positionY = y;
+					meshUnderground.userData.material = materialMapContent;
 				}
-				mesh.receiveShadow = true;
-				mesh.castShadow = true;
-				groups[z].add( mesh );
+				meshUnderground.receiveShadow = true;
+				meshUnderground.castShadow = true;
+				groups[z].add( meshUnderground );
 			}
 		}
 	}
+	
+	
+	model.add(groups[0]);
+	model.add(groups[1]);
 
 
 
-	//other stuff like rocket...
+
+	
+	
+	
+	
 
 
 	//Rocket-body:
@@ -236,7 +250,7 @@ function buildModel() {
 	meshRocketTank.position.copy(posRocketCube1);
 	groupRocket.add( meshRocketTank );
 	*/
-	group.add( groupRocket );
+	
 	// Rocket bottom:
 	let geoRocketBottom = new THREE.RingBufferGeometry( 1.9*BOXSIZE.x, 5, 32 );
 	let matRocketBottom = new THREE.MeshBasicMaterial( { map: texRocketCube, side: THREE.DoubleSide,  } );
@@ -270,8 +284,8 @@ function buildModel() {
 	groupRocket.add( meshRocketTank );
 	group.add( groupRocket );
 	*/
-	model.add(groups[0]);
-	model.add(groups[1]);
+
+	model.add( groupRocket );
 
 	return model;
 }
