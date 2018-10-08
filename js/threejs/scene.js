@@ -103,14 +103,24 @@ function initSky() {
 	scene.add( sunSphere );
 	/// GUI
 	var effectController  = {
-		turbidity: 2.8,
+		turbidity: 10,
+		rayleigh: 1.5,
+		mieCoefficient: 0.005,
+		mieDirectionalG: 0.78,
+		luminance: 1,
+		inclination: 0.49, // elevation / inclination
+		azimuth: 0.265, // Facing front,
+		sun: ! true
+		
+		
+		/*turbidity: 2.8,
 		rayleigh: 0.252,
 		mieCoefficient: 0.051,
 		mieDirectionalG: 0.981,
 		luminance: 1.1,
 		inclination: 0.4, // elevation / inclination
 		azimuth: 0.3, // Facing front,
-		sun: ! true
+		sun: ! true*/
 	};
 	var distance = 40000000000;
 	function guiChanged() {
