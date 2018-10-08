@@ -6,7 +6,7 @@ var camera, controls, scene, renderer;
 var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
-var SPEED=5;
+var SPEED=10;
 var currentStage; //That shows the stages, where the figure can drill. The drill is one stage lower. Maximum is 8, because 9 rows are visible and the slider goes to 8.
 
 
