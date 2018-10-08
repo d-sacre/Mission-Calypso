@@ -6,8 +6,8 @@ var camera, controls, scene, renderer;
 var sky, sunSphere;
 var targetPosition;
 var verticalMode = true;
-var SPEED=5; //only multiples of 5 allowed
-var stages; //maximum 9 allowed, because max 9 rows are visible
+var SPEED=5;
+var currentStage; //That shows the stages, where the figure can drill. The drill is one stage lower. Maximum is 8, because 9 rows are visible and the slider goes to 8.
 
 
 init();
@@ -49,9 +49,9 @@ function init() {
 	//console.log("start position: " + start.x + ", " + start.y + ", " + start.z);
 	//targetDrillPos = drillObj.position.clone();
 	
-	drillObj1 = buildInnerDrill();
-	scene.add(drillObj1);
-	let start1 = drillObj1.position.clone();
+	innerDrillObj = buildInnerDrill();
+	scene.add(innerDrillObj);
+	let start1 = innerDrillObj.position.clone();
 	//console.log("start position 1: " + start1.x + ", " + start1.y + ", " + start1.z);
 	
 	let directLight1 = getDirectLight();
@@ -149,7 +149,7 @@ function getTargetPosition(event){
 	let targetBlocks = scene.children[2].children[1];
 	var intersections = raycaster.intersectObjects( targetBlocks.children );
 
-	if(intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
+	if(intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
 		let pos = intersections[0].object.position.clone();
 		return pos;
 	}
@@ -247,10 +247,10 @@ function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
 	//console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
-	let currentStage = getCurrentStage(currentDrillPos);
+	currentStage = getCurrentStage(currentDrillPos); //global variable
 	writeCurrentMainDrillPosition(currentStage);
 	//console.log("currentStage: " +  currentStage);
-	stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
+	let stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	//stages = 7;
 	//console.log("stages: " + stages);
 	let targetDrillPos = getTargetDrillPos(stages);
@@ -267,7 +267,7 @@ function updateDrillPosition(){
 	if(dY < speedDrill) {
 		currentDrillPos.y -= speedDrill;
 		drillObj.position.copy(currentDrillPos);
-		drillObj1.position.copy(currentDrillPos);
+		innerDrillObj.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
 		//drill(currentDrillPos.y / -BOXSIZE.y);
 		drill((Math.round(currentDrillPos.y / -BOXSIZE.y)));
@@ -278,7 +278,7 @@ function updateDrillPosition(){
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
-		drillObj1.position.copy(currentDrillPos);
+		innerDrillObj.position.copy(currentDrillPos);
 		//console.log("if 3");
 
 	}
@@ -286,7 +286,7 @@ function updateDrillPosition(){
 	if(dY <= speedDrill && dY >= -speedDrill) {
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
-		drillObj1.position.copy(currentDrillPos);
+		innerDrillObj.position.copy(currentDrillPos);
 		//console.log("if 4");
 	}
 }
@@ -377,7 +377,7 @@ function render() {
 	intersects[0].object.material.emissive.setHex( 0xff0000 );
 	}
 */
-			if ( intersections.length > 0 && intersections[0].object.userData.positionY < stages) {
+			if ( intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
 				if ( intersected != intersections[ 0 ].object ) {
 					if ( intersected ) intersected.material.color.setHex( 0xffffff );
 					intersected = intersections[ 0 ].object;
