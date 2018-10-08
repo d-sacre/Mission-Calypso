@@ -173,7 +173,7 @@ function buildModel() {
 	let texRocketCube = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/mainrocket_texture.jpg" );
 	let matRocketCube1 = new THREE.MeshPhongMaterial( { map: texRocketCube, wireframe: false});
 	
-	let texRocketCube2 = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/rocket_side_texture.jpg" );
+	let texRocketCube2 = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/rocket_side_texture_small.jpg" );
 	let matRocketCube2 = new THREE.MeshPhongMaterial( { map: texRocketCube2, wireframe: false});
 	
 	let geoRocketCube1 = new THREE.BoxBufferGeometry( BOXSIZE.x*0.3 , BOXSIZE.y,  BOXSIZE.z);
