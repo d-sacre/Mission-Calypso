@@ -42,10 +42,7 @@ class ResourcesSystem{
 		this.EnergyStartValue=Energy;
 		this.WeightStartValue=Weight;
 
-
-
 		this.CopperStatemachine="not-enough";//"enough-prepare-takeoff";//has to be set to default "not-enough";
-
 
 		this.N = WorkerTotal;
 		this.nIdle=this.N;
@@ -167,7 +164,6 @@ class ResourcesSystem{
 		//console.log("\ncaloricum: "+this.caloricum+ " \ncaloricumProcessingOreConsumption: "+caloricumProcessingOreConsumption+"\nenergy: "+this.energy+"\ncaloricumProcessingEnergyConsumption: "+caloricumProcessingEnergyConsumption)
 		if ((this.caloricum-caloricumProcessingOreConsumption>=0) && (this.energy-caloricumProcessingEnergyConsumption>=0)){
 				document.querySelector('#raw-caloricum-storage-value').value=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2);
-				document.querySelector('#raw-caloricum-storage-value').innerHTML=(this.caloricum-caloricumProcessingOreConsumption).toFixed(2)+ '/15 t';
 				document.querySelector('#caloricum-rate-equation').innerHTML=caloricumProcessingEnergyConsumption.toFixed(2)+' t caloricum + ' + caloricumProcessingOreConsumption.toFixed(2) +' HU → '+ caloricumProcessingOutput.toFixed(2) +' HU';
 		}
 
@@ -323,16 +319,16 @@ class ResourcesSystem{
 
 		//Rückgabewerte
 		return {
-			time: this.time,
-			energy: this.energy,
-			carbondioxid: this.carbondioxid,
-			oxygen: this.oxygen,
-			productivity,
-			carbonizerReductionCalculationValue,
-			CopperStatemachine: this.CopperStatemachine,
-			weight: this.Weight,
-			wear: this.w,
-			speed: v
+				time: this.time,
+				energy: this.energy,
+				carbondioxid: this.carbondioxid,
+				oxygen: this.oxygen,
+				productivity,
+				carbonizerReductionCalculationValue,
+				CopperStatemachine: this.CopperStatemachine,
+				weight: this.Weight,
+				wear: this.w,
+				speed: v
 		};
 
 	}
