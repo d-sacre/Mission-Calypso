@@ -177,7 +177,7 @@ function buildModel() {
 		for(let y=1.5; y<5.5*ROCKHIGHT; y++){
 			let meshRocketCube1;
 			let posRocketCube1 = new THREE.Vector3(x*BOXSIZE.x, y*BOXSIZE.y, BOXSIZE.y*0);
-			meshRocketCube1 = new THREE.Mesh( geoRocketCube1, matMetalSilver );
+			meshRocketCube1 = new THREE.Mesh( geoRocketCube1, matRocketCube1 );
 			meshRocketCube1.position.copy(posRocketCube1);
 			meshRocketCube1.receiveShadow = true;
 			meshRocketCube1.castShadow = true;
