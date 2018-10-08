@@ -10,39 +10,45 @@ function setMiningTime() {
     let weight=system.weight;
     let wear=data.wear;
 
-    weight=parseFloat(system.caloricum)+0.5*parseFloat(system.energy)+parseFloat(document.querySelector('#copper-ore-value').value)+parseFloat(document.querySelector('#pottasium-ore-value').value)/1000+parseFloat(document.querySelector('#decarbonizer-storage-value').value)/1000+parseFloat(document.querySelector('#copper-ingot-value').value);
+    weight=parseFloat(system.caloricum)+0.5*parseFloat(system.energy)+parseFloat(document.querySelector('#copper-ore-value').value)+parseFloat(document.querySelector('#pottasium-ore-value').value)/1000+parseFloat(document.querySelector('#decarbonizer-storage-value').value)/1000+parseFloat(document.querySelector('#copper-ingot-value').value)+50; //50 t=eigenvalue of spaceship
     weight=weight.toFixed(2);
+
+    let weightStorage=weight-50;
+    document.querySelector('#weight-storage-value').value=weightStorage;
+
 
     wear=0.0675*(data.speed**2)+parseFloat(document.querySelector('.wear-value').value);
     wear=wear.toFixed(2);
 
     document.querySelector('.weight-value').value=weight;
-    document.querySelector('.weight-value').innerHTML=weight+'/'+ system.WeightStartValue +' t';
+    //document.querySelector('.weight-value').innerHTML=weight+'/'+ system.WeightStartValue +' t';
 
     document.querySelector('.wear-value').value=wear;
-    document.querySelector('.wear-value').innerHTML=wear+'/100 %';
+    //document.querySelector('.wear-value').innerHTML=wear+'/100 %';
 
-    document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+system.EnergyStartValue+' HU';
+    //document.querySelector('.energy-value').innerHTML=energy.toFixed(2)+'/'+system.EnergyStartValue+' HU';
     document.querySelector('.energy-value').value=energy.toFixed(2); // storing value in html for easier access without js-interfaces
     // readout of headup-gui-energy value and copying to storage energy value
-    document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+system.EnergyStartValue+' HU';
+    //document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+'/'+system.EnergyStartValue+' HU';
 
     document.querySelector('.productivity-value').innerHTML=(100*productivity).toFixed(2)+'/100 %';
     document.querySelector('.productivity-value').value=productivity;
 
-    document.querySelector('.time-value').innerHTML= time + 's';
     document.querySelector('.time-value').value= time;
 
-    document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
-    document.querySelector('.carbondioxide-beforeuseitem-value').innerHTML=carbondioxid.toFixed(2) + '/8.00 %';
+    /*document.querySelector('.carbondioxide-value').innerHTML= carbondioxid.toFixed(2) + '/8.00 %';
+    document.querySelector('.carbondioxide-beforeuseitem-value').innerHTML=carbondioxid.toFixed(2) + '/8.00 %';*/
     document.querySelector('.carbondioxide-value').value= carbondioxid.toFixed(2);
 
     document.querySelector('.carbondioxide-afteruseitem-value').innerHTML=co2ReduxTheo.toFixed(2)+ '/8.00 %';
     document.querySelector('.carbondioxide-afteruseitem-value').value=co2ReduxTheo.toFixed(2);
 
-    document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
+    //document.querySelector('.oxygen-value').innerHTML= oxygen.toFixed(2) + '/21.00 %';
     document.querySelector('.oxygen-value').value= oxygen.toFixed(2);
 
+
+    udpateHeadupDisplay(); // function defined in js/resourcesystem/resource_system_storage-and-refinery.js
+    updateStorageDisplay(); // function defined in js/resourcesystem/resource_system_storage-and-refinery.js
 
     // Play warning-audio and change font-color
     if((!(carbondioxid<=6) && (carbondioxid<=8)) || (!(oxygen>=14.5)  && !(oxygen<=10.5)) || (!(energy>=50) && !(energy<50))) {
@@ -50,62 +56,62 @@ function setMiningTime() {
     }
 
     if(carbondioxid<3){
-      document.querySelector('.carbondioxide-value').style.color="white";
-      document.querySelector('.carbondioxide-beforeuseitem-value').style.color="white";
+        document.querySelector('.carbondioxide-value').style.color="white";
+        document.querySelector('.carbondioxide-beforeuseitem-value').style.color="white";
     }
 
     if(3<=carbondioxid){
-      if (carbondioxid<=6){
-        document.querySelector('.carbondioxide-value').style.color="orange";
-        document.querySelector('.carbondioxide-beforeuseitem-value').style.color="orange";
-      } else {
-        document.querySelector('.carbondioxide-value').style.color="red";
-        document.querySelector('.carbondioxide-beforeuseitem-value').style.color="red";
-      }
+        if (carbondioxid<=6){
+            document.querySelector('.carbondioxide-value').style.color="orange";
+            document.querySelector('.carbondioxide-beforeuseitem-value').style.color="orange";
+        } else {
+            document.querySelector('.carbondioxide-value').style.color="red";
+            document.querySelector('.carbondioxide-beforeuseitem-value').style.color="red";
+        }
     }
 
     if(oxygen<=14){
-      if (oxygen>=12){
-        document.querySelector('.oxygen-value').style.color="orange";
-      } else {
-        document.querySelector('.oxygen-value').style.color="red";
-      }
+        if (oxygen>=12){
+            document.querySelector('.oxygen-value').style.color="orange";
+        } else {
+            document.querySelector('.oxygen-value').style.color="red";
+        }
     }
 
     if (75<energy) {
-      document.querySelector('.energy-value').style.color="white";
-      document.querySelector('.energy-storage-value').style.color="white";
+        document.querySelector('.energy-value').style.color="white";
+        document.querySelector('.energy-storage-value').style.color="white";
     }
 
     if(energy<=75){
-      if (energy>=60){
-        document.querySelector('.energy-value').style.color="orange";
-        document.querySelector('.energy-storage-value').style.color="orange";
-      } else {
-        document.querySelector('.energy-value').style.color="red";
-        document.querySelector('.energy-storage-value').style.color="red";
-      }
+        if (energy>=60){
+            document.querySelector('.energy-value').style.color="orange";
+            document.querySelector('.energy-storage-value').style.color="orange";
+        } else {
+            document.querySelector('.energy-value').style.color="red";
+            document.querySelector('.energy-storage-value').style.color="red";
+        }
     }
 
     if ((carbondioxid<3) && (oxygen>14) && (energy=>75)) {
-      stopAudioById('warning');
+        stopAudioById('warning');
     }
 
     if(!(carbondioxid<=8) || !(oxygen>=10.5) || (energy<=50)){
-      document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
-      document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
+        document.removeEventListener( 'mousemove', onDocumentMouseMove, false ); // prevents that three.js-enviroment is still reacting to mouse even when game is ended
+        document.removeEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
 
-      // unbind gameGUIPopup-buttons
-      document.querySelector('#to-rocket-menu-clickbox').removeEventListener("click",gameGUIPopupMenuAnimation);
-      document.querySelector('#return-to-game-popup-button').removeEventListener("click", gameGUIPopupMenuAnimation);
+        // unbind gameGUIPopup-buttons
+        document.querySelector('#to-rocket-menu-clickbox').removeEventListener("click",gameGUIPopupMenuAnimation);
+        document.querySelector('#return-to-game-popup-button').removeEventListener("click", gameGUIPopupMenuAnimation);
 
-      // hide complete gui
-      document.querySelector('#game-gui-popup').style.display="none";
-      document.querySelector('#headup-gui-container').style.display="none";
+        // hide complete gui
+        document.querySelector('#game-gui-popup').style.display="none";
+        document.querySelector('#headup-gui-container').style.display="none";
 
-      document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
-      stopAudioById('warning'); // stop warning buzzer
-      this.paused=true; // end game loop
+        document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
+        stopAudioById('warning'); // stop warning buzzer
+        this.paused=true; // end game loop
     }
 
   }
@@ -156,7 +162,7 @@ function setStorageTime(){
 
 // Initialize the resource-system
 // resource system defined in js/resourcesystem/resource_system_main.js
-let system = new ResourcesSystem(500,150,3,15,5,10,5);// order of arguments: Energy, Weight,WorkerTotal,CaloricumStart,CopperOreStart,PottasiumOreStart,DecarbStart
+let system = new ResourcesSystem(200,150,3,0,0,0,5);// order of arguments: Energy (old:150,500), Weight,WorkerTotal,CaloricumStart (old:15),CopperOreStart (old:5),PottasiumOreStart (old: 10),DecarbStart
 
 // Define finite Statemachine acting as game loop
 let timeUnit = setInterval(function() {
