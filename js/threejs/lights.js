@@ -6,7 +6,7 @@ function getHemiLight(){
 }
 
 function getDirectLight(){
-	var directLight = new THREE.DirectionalLight( 0xffffff, 1 );
+	let directLight = new THREE.DirectionalLight( 0xffffff, 1 );
 	directLight.position.set( 0, 100, 100 );
 	directLight.castShadow = true;
 	return directLight;
@@ -21,17 +21,17 @@ function getPointLight(){
 
 
 function getRectLight(){
-	var width = 0.2*BOXSIZE.x;
-	var height = 4*BOXSIZE.y;
-	var intensity = 6;
-	var rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
+	let width = 0.2*BOXSIZE.x;
+	let height = 4*BOXSIZE.y;
+	let intensity = 6;
+	let rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
 	rectLight.position.set( 0 * BOXSIZE.x, 5 * BOXSIZE.y, -1.34 * BOXSIZE.z );
 	rectLight.lookAt( 0 * BOXSIZE.x, 5 * BOXSIZE.y, 2 * BOXSIZE.z );
 	return rectLight;
 }
 
 function getSpotLight(){
-	var spotLight = new THREE.SpotLight( 0xffffff );
+	let spotLight = new THREE.SpotLight( 0xffffff );
 	spotLight.position.set( 0 * BOXSIZE.x, 13 * BOXSIZE.y, 0 * BOXSIZE.z );
 	spotLight.intensity=3;
 	spotLight.castShadow = true;

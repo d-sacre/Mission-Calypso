@@ -66,10 +66,6 @@ function init() {
 	scene.add( pointLight );
 	pointLight.position.set(targetPosition.x, (targetPosition.y + 1*BOXSIZE.x), targetPosition.z);
 	
-	var sphereSize = 300;
-	var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-	//scene.add( pointLightHelper );
-	
 	let spotLight = getSpotLight();
 	scene.add( spotLight );
 	
@@ -146,6 +142,19 @@ function onMouseClick(event){
 	targetPosition = getTargetPosition(event);
 }
 
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	render();
+}
+
 function getPlayerPosition(){
 	let currentPlayerPos = figure.position.clone();
 	return currentPlayerPos;
@@ -157,7 +166,7 @@ function getTargetPosition(event){
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
 	let targetBlocks = scene.children[2].children[1];
-	var intersections = raycaster.intersectObjects( targetBlocks.children );
+	let intersections = raycaster.intersectObjects( targetBlocks.children );
 
 	if(intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
 		let pos = intersections[0].object.position.clone();
@@ -239,18 +248,7 @@ function playerGotoY(currentPlayerPos, targetPlayerPos, speedFig) {
 	}
 }
 
-function onDocumentMouseMove( event ) {
-	event.preventDefault();
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}
 
-function onWindowResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	render();
-}
 
 
 function updateDrillPosition(){
@@ -301,18 +299,7 @@ function updateDrillPosition(){
 	}
 }
 
-/*
-function getTargetDrillPos(stages){
-	let cubeObj = scene.getObjectByName( "(" + 0 + "|" + stages + ")");
-	if(cubeObj != null){
-			let targetPosDrill = cubeObj.position.clone();
-			//console.log(targetPosDrill);
-			return targetPosDrill;	
-	}
-	//console.log(drillObj.position.clone());
-	return drillObj.position.clone();
-}
-*/
+
 
 function getTargetDrillPos(stages){	
 	let targetPosDrill = new THREE.Vector3(drillObj.position.clone().x, (-stages * BOXSIZE.y), drillObj.position.clone().z);
@@ -378,26 +365,20 @@ function render() {
 
 	// calculate objects intersecting the picking ray
 	let targetBlocks = scene.children[2].children[1]
-	var intersections = raycaster.intersectObjects( targetBlocks.children );
+	let intersections = raycaster.intersectObjects( targetBlocks.children );
 
-		/*
-	if(intersects[0].object.name !== "") {
-	//targetBlocks.remove(intersects[0].object);
 
-	intersects[0].object.material.emissive.setHex( 0xff0000 );
+	if ( intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
+		if ( intersected != intersections[ 0 ].object ) {
+			if ( intersected ) intersected.material.color.setHex( 0xffffff );
+			intersected = intersections[ 0 ].object;
+			intersected.material.color.setHex( 0xff0000 );
+		}
 	}
-*/
-			if ( intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
-				if ( intersected != intersections[ 0 ].object ) {
-					if ( intersected ) intersected.material.color.setHex( 0xffffff );
-					intersected = intersections[ 0 ].object;
-					intersected.material.color.setHex( 0xff0000 );
-				}
-			}
-			else if ( intersected ) {
-				intersected.material.color.setHex( 0xffffff );
-				intersected = null;
-			}
+	else if ( intersected ) {
+		intersected.material.color.setHex( 0xffffff );
+		intersected = null;
+	}
 
 
 	renderer.render( scene, camera );
