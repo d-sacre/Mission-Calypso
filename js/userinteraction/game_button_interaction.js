@@ -67,11 +67,13 @@ document.querySelector("#continue-mining-popup-button").addEventListener("click"
 /* Button for directly preparing take-off when copper limit is reached*/
 document.querySelector("#order-to-takeoff-popup-button").addEventListener("click",function(){
     document.querySelector("#enough-copper-popup").style.display="none";
+    stopAudioById('warning');
     system.CopperStatemachine="enough-prepare-takeoff";
 });
 
 /* Button for preparing take-off after continuing mining */
 document.querySelector("#back-to-prepare-takeoff-button").addEventListener("click", function(){
+    stopAudioById('warning');
     system.CopperStatemachine="enough-prepare-takeoff";
 });
 
