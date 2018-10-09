@@ -14,7 +14,8 @@ function buildModel() {
 	let texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_512x512px.jpg" );
 	let texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_edge_128x128.jpg" );
 	let texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_top_512x512_compress.jpg" );
-
+	let texUndergroundPlain = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_highres_plain.jpg" );
+	
 	//textures of resources
 	let texPotassium = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_caloricum_512x512px.jpg" );
 	let texCaloricum = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_copper_512x512px.jpg" );
@@ -37,6 +38,7 @@ function buildModel() {
 	
 	//material of cubes and surface
 	let matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
+	let matUndergroundPlain = new THREE.MeshPhongMaterial( { map: texUndergroundPlain, wireframe: false});
 	let matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	let matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 
@@ -168,7 +170,7 @@ function buildModel() {
 	
 	//creation of the second cube row as one surface
 	let geoSecondRowCubes = new THREE.BoxBufferGeometry( (2*NUMELEMENTS)*BOXSIZE.x, NUMELEMENTS*BOXSIZE.y, BOXSIZE.z);
-	let meshSecondRowCubes = new THREE.Mesh( geoSecondRowCubes, matUnderground );
+	let meshSecondRowCubes = new THREE.Mesh( geoSecondRowCubes, matUndergroundPlain );
 	let posSecondRowCubes = new THREE.Vector3(-0.5*BOXSIZE.x, -((NUMELEMENTS*BOXSIZE.y)/2-BOXSIZE.y/2), -1*BOXSIZE.z);
 	meshSecondRowCubes.position.copy(posSecondRowCubes);
 	meshSecondRowCubes.receiveShadow = true;
