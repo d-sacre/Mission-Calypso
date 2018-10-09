@@ -36,9 +36,14 @@ function writeCurrentMainDrillPosition(position){
     document.querySelector('#drill-storey-slider-current-value').value=position;
     document.querySelector('#drill-storey-slider-current-value').innerHTML=document.querySelector('#drill-storey-slider-current-value').value;
     if (position!==parseFloat(document.querySelector('#drill-storey-slider-target-value').value)) {
-        document.querySelector('#current-main-drill-state').innerHTML='drilling - floor '+position;
+        if (position==0) {
+            document.querySelector('#current-main-drill-state').innerHTML='idle @ start – floor '+position;
+        } else {
+            document.querySelector('#current-main-drill-state').innerHTML='drilling – floor '+position;
+        }
+
     } else {
-        document.querySelector('#current-main-drill-state').innerHTML='idle @ target - floor '+position;
+        document.querySelector('#current-main-drill-state').innerHTML='idle @ target – floor '+position;
     }
 
 }
