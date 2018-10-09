@@ -10,6 +10,9 @@ function setMiningTime() {
     let weight=system.weight;
     let wear=data.wear;
 
+
+    system.refineryProductionCalculation();
+
     weight=parseFloat(system.caloricum)+0.5*parseFloat(system.energy)+parseFloat(document.querySelector('#copper-ore-value').value)+parseFloat(document.querySelector('#pottasium-ore-value').value)/1000+parseFloat(document.querySelector('#decarbonizer-storage-value').value)/1000+parseFloat(document.querySelector('#copper-ingot-value').value)+50; //50 t=eigenvalue of spaceship
     weight=weight.toFixed(2);
 
@@ -173,17 +176,17 @@ let timeUnit = setInterval(function() {
           data=setMiningTime();
           let copperStorageValue=parseFloat(document.querySelector('#copper-ingot-value').value)+0.5*parseFloat(document.querySelector('#copper-ore-value').value);
 
-          console.log("copperStorageValue:" + copperStorageValue);
+          //console.log("copperStorageValue:" + copperStorageValue);
           if (copperStorageValue>=document.querySelector('#copper-max').value){
               system.CopperStatemachine="enough";
 
           }
 
-          console.log("case not-enough");
+          //console.log("case not-enough");
           break;
       case "enough": // reached the specified amount of copper
           data=setStorageTime();
-          console.log("case enough");
+          //console.log("case enough");
           break;
 
       case "enough-but-continue-mining": // reached the specified amount of copper, but player wants to continue mining
@@ -191,12 +194,12 @@ let timeUnit = setInterval(function() {
           document.addEventListener( 'click', onMouseClick, false); // event listeners defined in js/threejs/scene.js
           document.querySelector('#back-to-prepare-takeoff-button').style.display="block";
           system.CopperStatemachine="not-enough";
-          console.log("case enough-but-continue-mining");
+          //console.log("case enough-but-continue-mining");
           break;
 
       case "enough-prepare-takeoff": //reached the specified amount of copper (or even exceeded), order to prepare take-off==sucessful end of game
           data=setTakeoffTime();
-          console.log("case enough-prepare-takeoff");
+          //console.log("case enough-prepare-takeoff");
           break;
     }
 
