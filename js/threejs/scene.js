@@ -1,12 +1,13 @@
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2(), intersected;
-var figure, drillObj, pointLight;
 var container;
 var camera, controls, scene, renderer;
 var sky, sunSphere;
-var targetPosition;
 var verticalMode = true;
-var SPEED=10;
+
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2(), intersected;
+var figure, drillObj, innerDrillObj, pointLight;
+var targetPosition;
+var SPEED=10; //Constant multiplied by the speed setting
 var currentStage; //That shows the stages, where the figure can drill. The drill is one stage lower. Maximum is 8, because 9 rows are visible and the slider goes to 8.
 
 
@@ -23,7 +24,6 @@ function init() {
 	//PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
 	camera.position.set( 0, 3*BOXSIZE.x, 100*BOXSIZE.x );
 	camera.lookAt( 0, 0, 0 );
-	//camera.setLens(20);
 
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
@@ -35,10 +35,13 @@ function init() {
 	controls.enablePan = false;
 	initSky();
 
-		
+	
+	//Adding the model with cubes, surface and rocket to the scene	
 	let model = buildModel();
 	scene.add(model);
 	
+	
+	//Adding figure and the two objects for the drill to the scene
 	figure = buildFigure();
 	scene.add(figure);
 	targetPosition = getPlayerPosition();
@@ -46,14 +49,13 @@ function init() {
 	drillObj = buildDrill();
 	scene.add(drillObj);
 	let start = drillObj.position.clone();
-	//console.log("start position: " + start.x + ", " + start.y + ", " + start.z);
-	//targetDrillPos = drillObj.position.clone();
 	
 	innerDrillObj = buildInnerDrill();
 	scene.add(innerDrillObj);
 	let start1 = innerDrillObj.position.clone();
-	//console.log("start position 1: " + start1.x + ", " + start1.y + ", " + start1.z);
 	
+	
+	//Adding lights to the scene
 	let directLight1 = getDirectLight();
 	scene.add( directLight1 );
 	
@@ -62,7 +64,7 @@ function init() {
 	directLight1.intensity=0.3;
 	scene.add( directLight2 );
 	
-	pointLight = getPointLight();
+	pointLight = getPointLight(); //is attached to the figure (global variable)
 	scene.add( pointLight );
 	pointLight.position.set(targetPosition.x, (targetPosition.y + 1*BOXSIZE.x), targetPosition.z);
 	
@@ -77,6 +79,7 @@ function init() {
 	rectLightMesh.scale.y = rectLight.height;
 	rectLight.add( rectLightMesh );
 
+	//EventListener for highlighting the cubes and for clicking the cubes
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 	document.addEventListener( 'click', onMouseClick, false);
 
@@ -104,8 +107,8 @@ function initSky() {
 		mieCoefficient: 0.005,
 		mieDirectionalG: 0.78,
 		luminance: 1,
-		inclination: 0.49, // elevation / inclination
-		azimuth: 0.265, // Facing front,
+		inclination: 0.49,
+		azimuth: 0.265,
 		sun: ! true
 		
 		
@@ -138,10 +141,12 @@ function initSky() {
 	guiChanged();
 }
 
+//for clicking the cubes
 function onMouseClick(event){
 	targetPosition = getTargetPosition(event);
 }
 
+//for highlighting the cubes
 function onDocumentMouseMove( event ) {
 	event.preventDefault();
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -155,16 +160,13 @@ function onWindowResize() {
 	render();
 }
 
-function getPlayerPosition(){
-	let currentPlayerPos = figure.position.clone();
-	return currentPlayerPos;
-}
-
+//get the position of the clicked cube, this is the target for the figure where to move
 function getTargetPosition(event){
 	event.preventDefault();
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
+	//only the front of cubes are clickable and only cubes over the current stage of the drill are clickable
 	let targetBlocks = scene.children[2].children[1];
 	let intersections = raycaster.intersectObjects( targetBlocks.children );
 
@@ -175,9 +177,16 @@ function getTargetPosition(event){
 	return targetPosition;
 }
 
+//get the current position of the figure
+function getPlayerPosition(){
+	let currentPlayerPos = figure.position.clone();
+	return currentPlayerPos;
+}
 
 
-
+//function for the movement of the figure
+//figur moves only on the x coordinate plane for the mining of the blocks
+//in order to get deeper, the figure has to go back to the tunnel and moves on the y coordinate plane
 function updateFigPostitions(posPlayer,posTarget) {
 	if(posPlayer.equals(posTarget)) {
 		return;}
@@ -213,12 +222,12 @@ function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
 	
 	
 	if(dX < speedFig) {
-		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y)));
+		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y))); //round to get the name of the cubes which are our given coordinates
 		currentPlayerPos.x -= speedFig;
 		figure.position.copy(currentPlayerPos);
 	}
 	if(dX > speedFig) {
-		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y)));
+		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y))); //round to get the name of the cubes which are our given coordinates
 		currentPlayerPos.x += speedFig;
 		figure.position.copy(currentPlayerPos);
 		//console.log("delete");
@@ -250,13 +259,13 @@ function playerGotoY(currentPlayerPos, targetPlayerPos, speedFig) {
 
 
 
-
+//function for the movement of the drill
 function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
 	//console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
-	currentStage = getCurrentStage(currentDrillPos); //global variable
-	writeCurrentMainDrillPosition(currentStage);
+	currentStage = getCurrentStage(currentDrillPos); //global variable, important for the function of highlighting the cubes
+	writeCurrentMainDrillPosition(currentStage); //./threejs_gui_interface.js
 	//console.log("currentStage: " +  currentStage);
 	let stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
 	//stages = 7;
@@ -300,14 +309,17 @@ function updateDrillPosition(){
 }
 
 
-
+//calculating the target position of the drill
+//y-coordinate: entered stage multiplied by boxsize
 function getTargetDrillPos(stages){	
 	let targetPosDrill = new THREE.Vector3(drillObj.position.clone().x, (-stages * BOXSIZE.y), drillObj.position.clone().z);
 	return targetPosDrill;	
 }
 
 
-
+//intervals for the declaration of the current stage of the drill
+//Return value shows the stages, where the figure can drill. The drill is one stage lower. Maximum is 8, because 9 rows are visible and the slider goes to 8.
+//case 0 to 9 (one case more than necessary)
 function getCurrentStage(currentDrillPos){
 	switch (true){
 
@@ -360,13 +372,12 @@ function getCurrentStage(currentDrillPos){
 
 function render() {
 	// update the picking ray with the camera and mouse position
-
 	raycaster.setFromCamera( mouse, camera );
 
 	// calculate objects intersecting the picking ray
+	//only the front of cubes are clickable and only cubes over the current stage of the drill are clickable
 	let targetBlocks = scene.children[2].children[1]
 	let intersections = raycaster.intersectObjects( targetBlocks.children );
-
 
 	if ( intersections.length > 0 && intersections[0].object.userData.positionY < currentStage) {
 		if ( intersected != intersections[ 0 ].object ) {

@@ -1,4 +1,5 @@
 
+//function for deleting the cubes and transferring the material to the gui interface
 function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
 	//console.log("Block: " + x, y);
@@ -13,7 +14,7 @@ function deleteCubeUnderground(x, y){
 
 
 
-
+//function for deleting the cubes at the edge
 function deleteCubeEdge(x){
 	let cube = scene.getObjectByName( "(" + x + ")");
 	groupSurface.remove(cube);
@@ -21,7 +22,7 @@ function deleteCubeEdge(x){
 
 
 
-
+//function for the tunnel of the drill
 function drill(stage) {
 	let cubeEdge = scene.getObjectByName( "(" + 0 + ")");
 	if (cubeEdge != null){

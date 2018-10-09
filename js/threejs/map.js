@@ -7,12 +7,15 @@ var ROCKHIGHT=5;
 function buildModel() {
 
 	let model;
+	model = new THREE.Group();
 
+	
+	//textures of cubes and surface
 	let texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_512x512px.jpg" );
 	let texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_edge_128x128.jpg" );
 	let texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_top_512x512_compress.jpg" );
 
-	//Resources
+	//textures of resources
 	let texPotassium = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_caloricum_512x512px.jpg" );
 	let texCaloricum = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_copper_512x512px.jpg" );
 	let texCopper = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_pottasium_512x512px.jpg" );
@@ -25,19 +28,19 @@ function buildModel() {
 
 
 	
-
+	//geometry of cubes and surface
 	let geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
 	let geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
 	let geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
 
 	
 	
-
+	//material of cubes and surface
 	let matUnderground = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	let matEdge = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 	let matSurface = new THREE.MeshPhongMaterial( { map: texUnderground, wireframe: false});
 
-	//resources
+	//material of resources
 	let matPot = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
 	let matCal = new THREE.MeshPhongMaterial( { map: texCaloricum, wireframe: false});
 	let matCop = new THREE.MeshPhongMaterial( { map: texCopper, wireframe: false});
@@ -62,9 +65,6 @@ function buildModel() {
 	let matMetalSilver = new THREE.MeshPhongMaterial( { map: texMetalPlateBump, wireframe: false});
 
 	
-	
-
-	model = new THREE.Group();
 	
 	//creation of the edge	
 	groupSurface= new THREE.Group();
@@ -103,6 +103,7 @@ function buildModel() {
 	//group2 = new THREE.Group();
 	//let groups = [group, group2];
 
+	
 	//set probability of rescourses
 	function randMat(){
 		let ranNum=Math.random();
@@ -149,11 +150,11 @@ function buildModel() {
 			let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, 0*BOXSIZE.z);
 			meshUnderground.position.copy(pos);
 			
-			let name = "(" + x + "|" + y + ")";
+			let name = "(" + x + "|" + y + ")"; //set name to get object for drilling function (delete cubes), (scene.getObjectByName)
 			meshUnderground.name= name;
 			meshUnderground.userData.positionX = x;
-			meshUnderground.userData.positionY = y;
-			meshUnderground.userData.material = materialMapContent;
+			meshUnderground.userData.positionY = y; //used for function to highlight the cubes
+			meshUnderground.userData.material = materialMapContent; //used for transferring the material to the gui interface
 			
 			meshUnderground.receiveShadow = true;
 			meshUnderground.castShadow = true;
