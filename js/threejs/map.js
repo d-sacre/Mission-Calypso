@@ -1,4 +1,4 @@
-var group, group2, groupSurface;
+var group, groupSurface;
 var NUMELEMENTS=20;
 var BOXSIZE = new THREE.Vector3(200, 200, 200);
 var SURFACEMULTI = 1000;
@@ -12,9 +12,9 @@ function buildModel() {
 	
 	//textures of cubes and surface
 	let texUnderground = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_512x512px.jpg" );
+	let texUndergroundPlain = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_plain.jpg" );
 	let texEdge = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_edge_128x128.jpg" );
 	let texSurface = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sand_highres_top_512x512_compress.jpg" );
-	let texUndergroundPlain = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_plain.jpg" );
 	
 	//textures of resources
 	let texPotassium = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_caloricum_512x512px.jpg" );
@@ -31,8 +31,9 @@ function buildModel() {
 	
 	//geometry of cubes and surface
 	let geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
-	let geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
+	let geoUndergroundPlain = new THREE.BoxBufferGeometry( (2*NUMELEMENTS)*BOXSIZE.x, NUMELEMENTS*BOXSIZE.y, BOXSIZE.z);
 	let geoEdge = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y/2, BOXSIZE.z );
+	let geoSurface = new THREE.BoxBufferGeometry( SURFACEMULTI*BOXSIZE.x , BOXSIZE.y/2, SURFACEMULTI*BOXSIZE.y );
 
 	
 	
@@ -102,8 +103,6 @@ function buildModel() {
 	
 	//creation of the underground boxes
 	group = new THREE.Group();
-	//group2 = new THREE.Group();
-	//let groups = [group, group2];
 
 	
 	//set probability of rescourses
@@ -169,65 +168,12 @@ function buildModel() {
 	
 	
 	//creation of the second cube row as one surface
-	let geoSecondRowCubes = new THREE.BoxBufferGeometry( (2*NUMELEMENTS)*BOXSIZE.x, NUMELEMENTS*BOXSIZE.y, BOXSIZE.z);
-	let meshSecondRowCubes = new THREE.Mesh( geoSecondRowCubes, matUndergroundPlain );
-	let posSecondRowCubes = new THREE.Vector3(-0.5*BOXSIZE.x, -((NUMELEMENTS*BOXSIZE.y)/2-BOXSIZE.y/2), -1*BOXSIZE.z);
-	meshSecondRowCubes.position.copy(posSecondRowCubes);
-	meshSecondRowCubes.receiveShadow = true;
-	meshSecondRowCubes.castShadow = true;
-	model.add( meshSecondRowCubes );
-
-	
-/*
-
-	for(let z=0; z<2; z++){
-		for(let x=-NUMELEMENTS; x<NUMELEMENTS; x++){
-			let xt=x+20;
-			for(let y=0; y<NUMELEMENTS; y++){
-				let material;
-				let materialMapContent=randMat();
-				if (z===0){
-					let xyt=xt+y;
-					if (materialMapContent==0){
-						material = matUnderground.clone();
-					}
-					if (materialMapContent==1){
-						material = matCal.clone();
-					}
-					if (materialMapContent==2){
-						material = matCop.clone();
-					}
-					if (materialMapContent==3){
-						material = matPot.clone();
-					}
-				} else {
-					material= matUnderground.clone();
-			}
-
-
-				let meshUnderground = new THREE.Mesh( geoUnderground, material );
-				let pos = new THREE.Vector3(x*BOXSIZE.x, -y*BOXSIZE.y, -z*BOXSIZE.z);
-				meshUnderground.position.copy(pos);
-				if(z===0) {
-					let name = "(" + x + "|" + y + ")";
-					meshUnderground.name= name;
-					meshUnderground.userData.positionX = x;
-					meshUnderground.userData.positionY = y;
-					meshUnderground.userData.material = materialMapContent;
-				}
-				meshUnderground.receiveShadow = true;
-				meshUnderground.castShadow = true;
-				groups[z].add( meshUnderground );
-			}
-		}
-	}
-	
-	
-	model.add(groups[0]);
-	model.add(groups[1]);
-
-
-*/
+	let meshUndergroundPlain = new THREE.Mesh( geoUndergroundPlain, matUndergroundPlain );
+	let posUndergroundPlain = new THREE.Vector3(-0.5*BOXSIZE.x, -((NUMELEMENTS*BOXSIZE.y)/2-BOXSIZE.y/2), -1*BOXSIZE.z);
+	meshUndergroundPlain.position.copy(posUndergroundPlain);
+	meshUndergroundPlain.receiveShadow = true;
+	meshUndergroundPlain.castShadow = true;
+	model.add( meshUndergroundPlain );
 
 	
 	

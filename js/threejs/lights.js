@@ -14,7 +14,6 @@ function getDirectLight(){
 
 function getPointLight(){
 	let pointLight = new THREE.PointLight( 0xffffff, 1, BOXSIZE.y*10);
-	//pointLight.position.set(0,100,0);
 	pointLight.decay=2;
 	return pointLight;
 }

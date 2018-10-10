@@ -2,7 +2,6 @@
 //function for deleting the cubes and transferring the material to the gui interface
 function deleteCubeUnderground(x, y){
 	let cube = scene.getObjectByName( "(" + x + "|" + y + ")");
-	//console.log("Block: " + x, y);
 	
 	if (cube != null){
 		let material = cube.userData.material;

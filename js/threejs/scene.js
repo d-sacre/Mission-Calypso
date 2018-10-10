@@ -110,16 +110,6 @@ function initSky() {
 		inclination: 0.49,
 		azimuth: 0.265,
 		sun: ! true
-		
-		
-		/*turbidity: 2.8,
-		rayleigh: 0.252,
-		mieCoefficient: 0.051,
-		mieDirectionalG: 0.981,
-		luminance: 1.1,
-		inclination: 0.4, // elevation / inclination
-		azimuth: 0.3, // Facing front,
-		sun: ! true*/
 	};
 	var distance = 40000000000;
 	function guiChanged() {
@@ -215,12 +205,7 @@ function updateFigPostitions(posPlayer,posTarget) {
 
 function playerGotoX(currentPlayerPos, targetPlayerPos, speedFig) {
 	let dX = targetPlayerPos.x - currentPlayerPos.x;
-	//console.log("dX: "+ dX);
-	//console.log("speed: "+ speedFig);
-	//console.log("target: "+ targetPlayerPos.x);
-	//console.log("current: "+ currentPlayerPos.x);
-	
-	
+		
 	if(dX < speedFig) {
 		deleteCubeUnderground((Math.round(currentPlayerPos.x / BOXSIZE.x)), (Math.round(currentPlayerPos.y / -BOXSIZE.y))); //round to get the name of the cubes which are our given coordinates
 		currentPlayerPos.x -= speedFig;
@@ -263,19 +248,13 @@ function playerGotoY(currentPlayerPos, targetPlayerPos, speedFig) {
 function updateDrillPosition(){
 	let speedDrill = SPEED * getActualMainDrillSpeed(); //./threejs_gui_interface.js
 	let currentDrillPos = drillObj.position.clone();
-	//console.log("currentDrillPos: " + currentDrillPos.x + ", " + currentDrillPos.y + ", " + currentDrillPos.z);
 	currentStage = getCurrentStage(currentDrillPos); //global variable, important for the function of highlighting the cubes
 	writeCurrentMainDrillPosition(currentStage); //./threejs_gui_interface.js
-	//console.log("currentStage: " +  currentStage);
 	let stages = getMainDrillDestination().destination; //./threejs_gui_interface.js
-	//stages = 7;
-	//console.log("stages: " + stages);
 	let targetDrillPos = getTargetDrillPos(stages);
-	//console.log("targetDrillPos: " + targetDrillPos.x + ", " + targetDrillPos.y + ", " + targetDrillPos.z);
 	
 	
 	if(currentDrillPos.equals(targetDrillPos)) {
-		//console.log("if 1");
 		return;}
 	
 	
@@ -286,25 +265,19 @@ function updateDrillPosition(){
 		drillObj.position.copy(currentDrillPos);
 		innerDrillObj.position.copy(currentDrillPos);
 		drillObj.rotation.y += speedDrill*100;
-		//drill(currentDrillPos.y / -BOXSIZE.y);
 		drill((Math.round(currentDrillPos.y / -BOXSIZE.y)));
-		//drill((Math.round(currentDrillPos.y )/ (-BOXSIZE.y)));
-		//console.log("if 2");
 	}
 
 	if(dY > speedDrill) {
 		currentDrillPos.y += speedDrill;
 		drillObj.position.copy(currentDrillPos);
 		innerDrillObj.position.copy(currentDrillPos);
-		//console.log("if 3");
-
 	}
 	
 	if(dY <= speedDrill && dY >= -speedDrill) {
 		currentDrillPos.y = targetDrillPos.y;
 		drillObj.position.copy(currentDrillPos);
 		innerDrillObj.position.copy(currentDrillPos);
-		//console.log("if 4");
 	}
 }
 
@@ -398,10 +371,8 @@ function render() {
 
 function animate() {
 	requestAnimationFrame( animate );
-	//updateDrillPosition(drillObj.position.clone(), getTargetDrillPos());
 	updateDrillPosition();
 	updateFigPostitions(getPlayerPosition(),targetPosition);
-	//console.log(getPlayerPosition().x);
 	pointLight.position.set(getPlayerPosition().x, (getPlayerPosition().y + 0.41*BOXSIZE.y), getPlayerPosition().z+ 0.0*BOXSIZE.z);
 	render();
 	controls.update();
