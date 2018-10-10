@@ -55,10 +55,10 @@ function storeMinedResources(resource){//resource=elementID (still to be defined
     }
 
     if (resource==1){
-        document.querySelector('#copper-ore-value').value=document.querySelector('#copper-ore-value').value+1;
+        document.querySelector('#copper-ore-value').value=parseFloat(document.querySelector('#copper-ore-value').value)+1;
     }
 
     if (resource==2){
-        document.querySelector('#pottasium-ore-value').value=document.querySelector('#pottasium-ore-value').value+1;
+        document.querySelector('#pottasium-ore-value').value=parseFloat(document.querySelector('#pottasium-ore-value').value)+1;
     }
 }
