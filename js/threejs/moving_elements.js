@@ -1,7 +1,37 @@
 
 function buildFigure(){
 	let texFig = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/spacer_try3_flame.png" ); //old: "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/flametest_256x256px.png"
-	let matFig = new THREE.MeshPhongMaterial( { map: texFig, transparent: true, opacity: 1}); //transparent texture with png
+	
+	//png only on one side of the cube, other sides are transparent
+	var matFig = [
+		new THREE.MeshPhongMaterial({
+			transparent: true, //left
+			opacity: 0
+		}),
+		new THREE.MeshPhongMaterial({
+			transparent: true, //right
+			opacity: 0
+		}),
+		new THREE.MeshPhongMaterial({
+			transparent: true, // top
+			opacity: 0
+		}),
+		new THREE.MeshPhongMaterial({
+			transparent: true, // bottom
+			opacity: 0
+		}),
+		new THREE.MeshPhongMaterial({
+			map: texFig, //front
+			transparent: true,
+			opacity: 1
+		}),
+		new THREE.MeshPhongMaterial({
+			transparent: true, //back
+			opacity: 0
+		})
+	];
+	
+		
 	let geoFig = new THREE.BoxBufferGeometry( BOXSIZE.x, BOXSIZE.y,  BOXSIZE.z/2);
 	let meshFig = new THREE.Mesh( geoFig, matFig );
 	
