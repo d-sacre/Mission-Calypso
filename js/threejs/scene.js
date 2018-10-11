@@ -28,11 +28,11 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
-	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	/*controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.addEventListener( 'change', render );
 	controls.maxPolarAngle = Math.PI / 2;
 	controls.enableZoom = false;
-	controls.enablePan = false;
+	controls.enablePan = false;*/
 	initSky();
 
 	
