@@ -22,13 +22,6 @@ function buildModel() {
 	let texCopper = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/sandstone_pottasium_512x512px.jpg" );
 
 
-	let texMetalGreenNor = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/green_metal_rust_Nor_1k.jpg" );
-	let texMetalGreenAo = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/green_metal_rust_AO_1k.jpg" );
-	let texMetalGreenRu = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/green_metal_rust_rough_1k.jpg" );
-	let texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/metal_plate_bump_1k.jpg" );
-	
-
-	
 	//geometry of cubes and surface
 	let geoUnderground = new THREE.BoxBufferGeometry( BOXSIZE.x , BOXSIZE.y,  BOXSIZE.z);
 	let geoUndergroundPlain = new THREE.BoxBufferGeometry( (2*NUMELEMENTS)*BOXSIZE.x, NUMELEMENTS*BOXSIZE.y, BOXSIZE.z);
@@ -47,28 +40,7 @@ function buildModel() {
 	let matPot = new THREE.MeshPhongMaterial( { map: texPotassium, wireframe: false});
 	let matCal = new THREE.MeshPhongMaterial( { map: texCaloricum, wireframe: false});
 	let matCop = new THREE.MeshPhongMaterial( { map: texCopper, wireframe: false});
-	
-	
-	let matMetalGreen = new THREE.MeshStandardMaterial( {
-		color: 0x888888,
-		roughness: 1,
-		metalness: 0.4,
-		normalMap: texMetalGreenNor,
-		normalScale: new THREE.Vector2( 1, - 1 ), // why does the normal map require negation in this case?
-		aoMap: texMetalGreenAo,
-		aoMapIntensity: 1,
-		//displacementMap: displacementMap,
-		//displacementScale: settings.displacementScale,
-		//displacementBias: - 0.428408, // from original model
-		//envMap: reflectionCube,
-		//envMapIntensity: settings.envMapIntensity,
-		side: THREE.DoubleSide
-	} );
 
-	let matMetalSilver = new THREE.MeshPhongMaterial( { map: texMetalPlateBump, wireframe: false});
-
-	
-	
 	//creation of the edge	
 	groupSurface= new THREE.Group();
 	let numberRows =2;
