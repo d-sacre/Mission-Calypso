@@ -118,3 +118,33 @@
             0.5px 2px 0px var(--calypsobrass)
           ;
 }
+
+.outro-sucess-button{
+    background: var(--calypsobrass);
+    background:
+        linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+        linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+        linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+        linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+
+    padding-top: 4px;
+    padding-bottom: 15px;
+
+    width: 500px;
+    height: auto;
+}
+
+.outro-sucess-button.round{
+    background-image:
+        radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+        radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+        radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+        radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px);
+
+    font: Thaoma;
+    font-size: 30px;
+    color: rgb(200, 117, 51);
+
+}
