@@ -47,7 +47,6 @@ function buildFigure(){
 //drill consists of two elements, a yellow-brown core and the outer lines
 //outer lines
 function buildDrill(){
-	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
 	let matDrill = new THREE.MeshBasicMaterial( {color:0x535353, wireframe: true});
 	let geoDrill = new THREE.CylinderBufferGeometry( 0.5*BOXSIZE.x, 0*BOXSIZE.x, 1.0*BOXSIZE.x, 32 );
 	let meshDrill = new THREE.Mesh( geoDrill, matDrill );
@@ -62,7 +61,6 @@ function buildDrill(){
 
 //yellow-brown core
 function buildInnerDrill(){
-	let texDrill = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/drill_texture.png" );
 	let matDrill = new THREE.MeshBasicMaterial( {color:0xFFD700, wireframe: false});
 	let geoDrill = new THREE.CylinderBufferGeometry( 0.45*BOXSIZE.x, 0*BOXSIZE.x, 0.9*BOXSIZE.x, 32 );
 	let meshDrill = new THREE.Mesh( geoDrill, matDrill );

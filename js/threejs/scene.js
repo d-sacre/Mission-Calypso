@@ -375,5 +375,5 @@ function animate() {
 	updateFigPostitions(getPlayerPosition(),targetPosition);
 	pointLight.position.set(getPlayerPosition().x, (getPlayerPosition().y + 0.41*BOXSIZE.y), getPlayerPosition().z+ 0.0*BOXSIZE.z);
 	render();
-	controls.update();
+	//controls.update();
 }

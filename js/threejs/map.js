@@ -26,7 +26,7 @@ function buildModel() {
 	let texMetalGreenAo = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/green_metal_rust_AO_1k.jpg" );
 	let texMetalGreenRu = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/green_metal_rust_rough_1k.jpg" );
 	let texMetalPlateBump = new THREE.TextureLoader().load( "https://raw.githubusercontent.com/vinzentp/Mission-Calypso/abgabe/pictures/textures/metal_plate_bump_1k.jpg" );
-
+	
 
 	
 	//geometry of cubes and surface
