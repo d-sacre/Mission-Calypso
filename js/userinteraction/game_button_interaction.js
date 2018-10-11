@@ -82,9 +82,9 @@ document.querySelector('#takeoff-button').addEventListener("click", function(){
     let ranNum=Math.random(); // generate random number
     let successfulTakeoffProbability=document.querySelector('#successful-takeoff-probability').value; // get calculated probability for successful take-off
     if(ranNum<=successfulTakeoffProbability){ // if ranNum is smaller/equal than calculated probaility -> player wins
-        alert("success");
+        window.location='./game_outro-sucess.html';
     } else { //player fails
-        alert("fail");
+        window.location='./game_outro-fail.html';
     }
 
 });
