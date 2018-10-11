@@ -113,6 +113,7 @@ function setMiningTime() {
         document.querySelector('#headup-gui-container').style.display="none";
 
         document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
+		document.querySelector('#machine-speed-slider').value=0; // prevent everything from working/moving
         stopAudioById('warning'); // stop warning buzzer
         playAudioById('game-over-song');
         this.paused=true; // end game loop
@@ -166,7 +167,7 @@ function setStorageTime(){
 
 // Initialize the resource-system
 // resource system defined in js/resourcesystem/resource_system_main.js
-let system = new ResourcesSystem(200,150,3,0,0,0,5);// order of arguments: Energy (old:150,500), Weight,WorkerTotal,CaloricumStart (old:15),CopperOreStart (old:5),PottasiumOreStart (old: 10),DecarbStart
+let system = new ResourcesSystem(500,150,3,0,0,0,5);// order of arguments: Energy (old:150,500,300), Weight,WorkerTotal,CaloricumStart (old:15),CopperOreStart (old:5),PottasiumOreStart (old: 10),DecarbStart
 
 // Define finite Statemachine acting as game loop
 let timeUnit = setInterval(function() {

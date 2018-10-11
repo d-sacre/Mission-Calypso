@@ -139,10 +139,10 @@ class ResourcesSystem{
 		this.nIdle=SliderValues.workerIdle;
 		this.nWork=SliderValues.workerMining+SliderValues.workerRefinery;
 		this.v = SliderValues.machineSpeed;
-		this.workingConsumptionO = 0.02;
-		this.idleConsumptionO = 0.01;
-		this.idleProductionCO = 0.02;
-		this.workingProductionCO = 0.03;
+		this.workingConsumptionO = 0.0025; // 0.02; 0.005
+		this.idleConsumptionO = 0.00125; // 0.01; 0.0025;
+		this.idleProductionCO = 0.0025; // 0.01; 0.05;
+		this.workingProductionCO = 0.00375; // 0.03; 0.0075
 		this.userselectNCarbonizer=SliderValues.userselectNCarbonizer;
 	}
 
