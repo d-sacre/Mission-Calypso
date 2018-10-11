@@ -19,6 +19,9 @@ class ResourcesSystem{
 		document.querySelector('#copper-max').value=7.5;
 		document.querySelector('.wear-value').value=0;
 
+		document.querySelector('#worker-idle-slidervalue').value=3;
+		document.querySelector('#worker-mining-slidervalue').value=0;
+
 		/* write initial storage values in innerHTML */
 		document.querySelector('.energy-value').innerHTML=Energy+'/'+Energy+' HU';
 		document.querySelector('#raw-caloricum-storage-value').innerHTML=CaloricumStart + '/15 t';
@@ -72,8 +75,8 @@ class ResourcesSystem{
 		document.querySelector('#drill-storey-slider-target-value').value=document.querySelector('#drill-storey-slider').value;
 
 		let machineSpeed=document.querySelector('#machine-speed-slider').value;
-		let workerIdle=document.querySelector('#worker-idle-slider').value;
-		let workerMining=document.querySelector('#worker-mining-slider').value;
+		let workerIdle=document.querySelector('#worker-idle-slidervalue').value;
+		let workerMining=document.querySelector('#worker-mining-slidervalue').value;
 		let workerRefinery=document.querySelector('#worker-refinery-slider').value;
 
 		let userselectNCarbonizer=document.querySelector('#use-decarbonizer-slider').value;
@@ -100,10 +103,17 @@ class ResourcesSystem{
 
 		let SliderValues=this.getSliderValue();
 
+		let workerIdleValue=this.N-SliderValues.workerMining-SliderValues.workerRefinery;
+		let workerRefineryMax=workerIdleValue+SliderValues.workerRefinery;
+		workerIdleValue=this.N-SliderValues.workerMining-SliderValues.workerRefinery;
+
+		//document.querySelector('#worker-refinery-slider').max=workerRefineryMax;
+
 		document.querySelector('#drill-storey-slider-target-value').innerHTML='/'+document.querySelector('#drill-storey-slider-target-value').value+' floors';
 
+
 		document.querySelector('#machine-speed-slidervalue').innerHTML=SliderValues.machineSpeed+'&times;';
-		document.querySelector('#worker-idle-slidervalue').innerHTML=SliderValues.workerIdle;
+		document.querySelector('#worker-idle-slidervalue').innerHTML=workerIdleValue;//SliderValues.workerIdle;
 		document.querySelector('#worker-mining-slidervalue').innerHTML=SliderValues.workerMining;
 		document.querySelector('#worker-refinery-slidervalue').innerHTML=SliderValues.workerRefinery;
 
@@ -153,8 +163,8 @@ class ResourcesSystem{
 		this.productivity=parseFloat(document.querySelector('.productivity-value').value).toFixed(2);
 		this.energy=parseFloat(document.querySelector('.energy-value').value).toFixed(2);
 		this.caloricum=parseFloat(document.querySelector('#raw-caloricum-storage-value').value).toFixed(2);
-		//this.copperOre=parseFloat(document.querySelector('#copper-ore-value').value).toFixed(2);
-		//this.copperIngot=parseFloat(document.querySelector('#copper-ingot-value').value).toFixed(2);
+		this.copperOre=parseFloat(document.querySelector('#copper-ore-value').value).toFixed(2);
+		this.copperIngot=parseFloat(document.querySelector('#copper-ingot-value').value).toFixed(2);
 
 		let caloricumProcessingEnergyConsumption=this.productivity*this.caloricumProcessing*this.workerRefinery*0.2;
 		//let copperProcessingEnergyConsumption=this.productivity*this.copperProcessing*this.workerRefinery*0.4;
