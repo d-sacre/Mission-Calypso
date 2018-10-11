@@ -103,11 +103,15 @@ class ResourcesSystem{
 
 		let SliderValues=this.getSliderValue();
 
-		let workerIdleValue=this.N-SliderValues.workerMining-SliderValues.workerRefinery;
-		let workerRefineryMax=workerIdleValue+SliderValues.workerRefinery;
-		workerIdleValue=this.N-SliderValues.workerMining-SliderValues.workerRefinery;
 
-		//document.querySelector('#worker-refinery-slider').max=workerRefineryMax;
+		let workerIdleValue=parseFloat(3-SliderValues.workerMining-SliderValues.workerRefinery);
+		let workerRefineryMax=parseFloat(3-SliderValues.workerMining);
+		document.querySelector('#worker-idle-slidervalue').value=workerIdleValue;
+		//workerIdleValue=this.N-SliderValues.workerMining-SliderValues.workerRefinery;
+
+
+
+		document.querySelector('#worker-refinery-slider').max=workerRefineryMax;
 
 		document.querySelector('#drill-storey-slider-target-value').innerHTML='/'+document.querySelector('#drill-storey-slider-target-value').value+' floors';
 
@@ -125,6 +129,8 @@ class ResourcesSystem{
 		document.querySelector('#use-decarbonizer-slider').max=parseFloat(document.querySelector('#decarbonizer-storage-value').value);
 
 		this.testSliderValues(SliderValues);
+
+		//document.querySelector('#worker-idle-slidervalue').value=workerIdleValue;
 
 	}
 
