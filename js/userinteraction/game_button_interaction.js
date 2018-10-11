@@ -11,6 +11,24 @@ document.querySelector('#back-to-mainmenu-popup-button').addEventListener("click
 document.querySelector('#start-main-drill-button').addEventListener("click", function(){
     document.querySelector('#drill-start-confirmed').value=1;
     document.querySelector('#drill-storey-slider').min=document.querySelector('#drill-storey-slider').value;
+
+    let wisv=parseFloat(document.querySelector('#worker-idle-slidervalue').value);
+    let wmsv=parseFloat(document.querySelector('#worker-mining-slidervalue').value);
+    let wrsv=parseFloat(document.querySelector('#worker-refinery-slidervalue').value);
+
+    console.log("wisv: "+wisv);
+
+    if (wisv!==0) {
+        document.querySelector('#worker-idle-slidervalue').value=parseFloat(wisv)-1;
+        document.querySelector('#worker-mining-slidervalue').value=parseFloat(wmsv)+1;
+    } else {
+        console.log("else-case: ");
+        document.querySelector('#worker-idle-slidervalue').value=parseFloat(wisv)+1;
+        document.querySelector('#worker-refinery-slidervalue').value=parseFloat(wrsv)-1;
+
+        document.querySelector('#worker-mining-slidervalue').value=parseFloat(wmsv)+1;
+    }
+    system.refreshSliderDisplay();
 });
 
 /* button for carbonizer useage */
