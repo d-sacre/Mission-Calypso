@@ -98,8 +98,3 @@ document.querySelector('#relief-weight-button').addEventListener("click", functi
 document.querySelector('#no-relief-weight-button').addEventListener("click", function(){
     document.querySelector("#weight-relief-popup").style.display="none";
 });
-
-/* Button for committing changes of weight-relief and redirection back to prepare take-off after probability calulation*/
-document.querySelector('#yes-relief-weight-button').addEventListener("click", function(){
-    document.querySelector("#weight-relief-popup").style.display="none";
-});
