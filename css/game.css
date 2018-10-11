@@ -551,17 +551,19 @@ audio {
   border-radius: 10px;
 
   box-shadow: 10px 10px 5px;
+  box-shado
 
 
   margin-left: 5px;
-  margin-right: 0px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  margin-right: 5px;
+  padding-top: 10vh;
+  padding-bottom: 5vh;
   padding-left: 2.5vw;
-  padding-right: 5px;
+  padding-right: 2.5vw;
 
-  font-size: 12px;
+  font-size: 24px;
   color: black;
+  font-family: Thaoma;
 
   height: 84vh;
   width: 90vw;
@@ -569,7 +571,7 @@ audio {
   z-index: 21;
 
   display: none;
-  text-align: center;
+  text-align: justify;
 
 }
 
@@ -580,6 +582,12 @@ audio {
  .weight-relief-popup th{
     min-width: 5vw;
 
+}
+
+#no-relief-weight-button{
+    position: absolute;
+    bottom: 8vh;
+    left: 35vw;
 }
 
 #enough-copper-popup{
@@ -616,6 +624,7 @@ audio {
 
   text-align: center;
 }
+
 /* ########################################################################## */
 /* ############ class-system gui ########################################### */
 /* ########################################################################## */
