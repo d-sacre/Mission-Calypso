@@ -16,7 +16,7 @@ class ResourcesSystem{
 		document.querySelector('#decarbonizer-storage-value').value=DecarbStart;
 		document.querySelector('#use-decarbonizer-slider').max=document.querySelector('#decarbonizer-storage-value').value;
 		document.querySelector('#copper-ingot-value').value=0;
-		document.querySelector('#copper-max').value=15;
+		document.querySelector('#copper-max').value=7.5;
 		document.querySelector('.wear-value').value=0;
 
 		/* write initial storage values in innerHTML */
