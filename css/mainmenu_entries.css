@@ -16,6 +16,16 @@ body {
   color: var(--calypsobrass);
 }
 
+button{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+
+  cursor:pointer;
+  overflow: hidden;
+}
+
 
 /* Little intro story */
 /*source: https://codepen.io/efost/pen/rrjvkk */

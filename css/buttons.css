@@ -5,13 +5,11 @@
 
 }
 
-/* ######################################################################## */
-/* ###### Layout-Einstellungen für die Buttons im Hauptmenü ############### */
-/* ######################################################################## */
+/*########################################################################*/
+/*#############  General button settings #################################*/
+/*########################################################################*/
 
-#menu button {
-  padding: 0px 0px 0px 0px;
-  margin: 10px 10px 10px 10px;
+button {
 
   background-color: Transparent;
   background-repeat:no-repeat;
@@ -23,45 +21,43 @@
 
 }
 
-#game-gui-popup button {
+/*########################################################################*/
+/*######### General settings for inverted round buttons  #################*/
+/*########################################################################*/
+
+/* negative rounded background adapted from: http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/ */
+
+.mainmenu-button, .mainmenu-entry-button-left, .mainmenu-entry-button-right, .popupmenu-button, .outro-sucess-button{
+    background: var(--calypsobrass);
+    background:
+      linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
+      linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
+      linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
+      linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.mainmenu-button.round, .mainmenu-entry-button-left.round, .mainmenu-entry-button-right.round, .popupmenu-button.round, .outro-sucess-button.round{
+    background-image:
+      radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
+      radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px);
+}
+
+
+/* ######################################################################## */
+/* ###### Layout-rules for buttons in main menu  ########################## */
+/* ######################################################################## */
+
+#menu button {
   padding: 0px 0px 0px 0px;
   margin: 10px 10px 10px 10px;
 
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  outline:none;
-
-  cursor: pointer;
-  overflow: hidden;
-
 }
-
-#weight-relief-popup button {
-  padding: 0px 0px 0px 0px;
-  margin: 10px 10px 10px 10px;
-
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  outline:none;
-
-  cursor: pointer;
-  overflow: hidden;
-
-}
-
-/* negativ abgerundeter Background nach http://lea.verou.me/2011/03/beveled-corners-negative-border-radius-with-css3-gradients/ */
 
 .mainmenu-button {
-	background: var(--calypsobrass);
-	background:
-		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
-		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
-		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
-		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
-	background-size: 50% 50%;
-	background-repeat: no-repeat;
 
   padding-top: 4px;
   padding-bottom: 15px;
@@ -72,11 +68,6 @@
 }
 
 .mainmenu-button.round {
-	background-image:
-		radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px);
 
     font: Thaoma;
     font-size: 50px;
@@ -86,15 +77,44 @@
           ;
 }
 
+/* defining the buttons for main menu entries */
+.mainmenu-entry-button-left{
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    position: fixed;
+    left: 1.25vw;
+    top: 45vh;
+    width: 200px;
+    height: 62px;
+
+}
+
+.mainmenu-entry-button-right{
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    position: fixed;
+    right: 2.5vw;
+    top: 45vh;
+    width: 200px;
+    height: 62px;
+
+}
+
+.mainmenu-entry-button-left.round, .mainmenu-entry-button-right.round{
+
+      font: Thaoma;
+      font-size: 25px;
+      color: rgb(200, 117, 51);
+}
+
+/*########################################################################################*/
+/*########################### Styling of the in game buttons #############################*/
+/*########################################################################################*/
+
 .popupmenu-button {
-	background: var(--calypsobrass);
-	background:
-		linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
-		linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
-		linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
-		linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
-	background-size: 50% 50%;
-	background-repeat: no-repeat;
 
   padding-top: 4px;
   padding-bottom: 16px;
@@ -105,11 +125,6 @@
 }
 
 .popupmenu-button.round {
-	background-image:
-		radial-gradient(circle at 0 0, rgba(204,0,0,0) 10px, var(--calypsobrass) 11px),
-		radial-gradient(circle at 100% 0, rgba(204,0,0,0) 10px, var(--calypsobrass) 11px),
-		radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 10px, var(--calypsobrass) 11px),
-		radial-gradient(circle at 0 100%, rgba(204,0,0,0) 10px, var(--calypsobrass) 11px);
 
     font: Thaoma;
     font-size: 20px;
@@ -119,15 +134,20 @@
           ;
 }
 
+/* definition of singel in-game elements */
+#game-gui-popup button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+}
+
+#weight-relief-popup button {
+  padding: 0px 0px 0px 0px;
+  margin: 10px 10px 10px 10px;
+
+}
+
 .outro-sucess-button{
-    background: var(--calypsobrass);
-    background:
-        linear-gradient(135deg, transparent 10px, var(--calypsobrass) 0) top left,
-        linear-gradient(225deg, transparent 10px, var(--calypsobrass) 0) top right,
-        linear-gradient(315deg, transparent 10px, var(--calypsobrass) 0) bottom right,
-        linear-gradient(45deg,  transparent 10px, var(--calypsobrass) 0) bottom left;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
 
     padding-top: 4px;
     padding-bottom: 15px;
@@ -137,11 +157,6 @@
 }
 
 .outro-sucess-button.round{
-    background-image:
-        radial-gradient(circle at 0 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-        radial-gradient(circle at 100% 0, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-        radial-gradient(circle at 100% 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px),
-        radial-gradient(circle at 0 100%, rgba(204,0,0,0) 14px, var(--calypsobrass) 15px);
 
     font: Thaoma;
     font-size: 30px;
