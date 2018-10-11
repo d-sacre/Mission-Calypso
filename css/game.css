@@ -451,8 +451,8 @@ audio {
   top:33vh;
   left: 30vw;
 
-  width: 40vw;
-  height: 37vh; /*37vh 15vw*/
+  width: 45vw;
+  height: 45vh; /*37vh 15vw*/
   /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
 
   background: var(--calypsobrass);
@@ -495,11 +495,11 @@ audio {
 
 .prepare-takeoff-popup{
   position: absolute;
-  top:33vh;
+  top:25vh;
   left: 30vw;
 
-  width: 40vw;
-  height: 45vh; /*37vh 15vw*/
+  width: 45vw;
+  height: 50vh; /*37vh 15vw*/
   /* Chrome has problems with rendering gradients properly; this magic number guarentees error free rendering in Chrome as long as not in fullscreen mode*/
 
   background: var(--calypsobrass);
@@ -574,7 +574,7 @@ audio {
 }
 
 .weight-relief-popup table{
-    padding-left: 5vw; 
+    padding-left: 5vw;
 }
 
  .weight-relief-popup th{
