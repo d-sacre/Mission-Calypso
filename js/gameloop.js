@@ -114,6 +114,7 @@ function setMiningTime() {
 
         document.querySelector('#supplies-game-over-popup').style.display="block"; // show supplies-game-over-popup
         stopAudioById('warning'); // stop warning buzzer
+        playAudioById('game-over-song');
         this.paused=true; // end game loop
     }
 
