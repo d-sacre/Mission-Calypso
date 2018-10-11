@@ -63,7 +63,7 @@ button {
       font-size: 25px;
 
       width: 220px;
-      height: 50px;
+      min-height: 50px;
 }
 .popupmenu-button-inverted.round{
     background-image:
