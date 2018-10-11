@@ -167,7 +167,7 @@ function setStorageTime(){
 
 // Initialize the resource-system
 // resource system defined in js/resourcesystem/resource_system_main.js
-let system = new ResourcesSystem(500,150,3,0,0,0,5);// order of arguments: Energy (old:150,500,300), Weight,WorkerTotal,CaloricumStart (old:15),CopperOreStart (old:5),PottasiumOreStart (old: 10),DecarbStart
+let system = new ResourcesSystem(800,150,3,0,0,0,5);// order of arguments: Energy (old:150,500,300,800), Weight,WorkerTotal,CaloricumStart (old:15),CopperOreStart (old:5),PottasiumOreStart (old: 10),DecarbStart
 
 // Define finite Statemachine acting as game loop
 let timeUnit = setInterval(function() {
