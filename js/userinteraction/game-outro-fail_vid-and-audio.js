@@ -1,9 +1,10 @@
 
-var video = document.getElementsByTagName('video')[0];
+var video = document.getElementsByTagName('video')[0]; // get the video 
 
-video.onended = function(e) {
-    playAudioById("fail-music");
+video.onended = function(e) {// when rocket explode video is ended
+	
+    playAudioById("fail-music"); // play fail music
 
-    document.querySelector('#rocket-explode-popup').style.display="block";
-    document.querySelector('#rocket-explode-video').style.display="none";
+    document.querySelector('#rocket-explode-popup').style.display="block"; // show popup
+    document.querySelector('#rocket-explode-video').style.display="none"; // hide video
 }
