@@ -1,0 +1,51 @@
+Projektstatistik:
+
+Verwendete html-Dateien: 
+Pfad/Name
+                                                              Zeilen, davon Kommentare
+                               ./additionalhtml/credits.html 	231		1
+                                  ./additionalhtml/game.html 	381		3
+                            ./additionalhtml/game_intro.html 	77		5
+                       ./additionalhtml/game_outro-fail.html 	44		0
+                     ./additionalhtml/game_outro-sucess.html 	59		3
+                                  ./additionalhtml/help.html 	183		0
+                                      ./mission-calypso.html 	78		3
+
+Verwendete css-Dateien: 
+Pfad/Name
+                                                              Zeilen, davon Kommentare
+                                           ./css/buttons.css 	191		17
+                                  ./css/game-intro-outro.css 	168		9
+                                              ./css/game.css 	633		34
+                                          ./css/mainmenu.css 	66		0
+                                  ./css/mainmenu_entries.css 	49		4
+
+Verwendete js-Dateien: 
+Pfad/Name
+                                                              Zeilen, davon Kommentare
+                                            ./js/gameloop.js 	217		65
+                 ./js/resourcesystem/resource_system_main.js 	354		53
+ ./js/resourcesystem/resource_system_storage-and-refinery.js 	30		17
+                                     ./js/threejs/actions.js 	38		4
+                                      ./js/threejs/lights.js 	49		1
+                                         ./js/threejs/map.js 	263		40
+                             ./js/threejs/moving_elements.js 	78		12
+                               ./js/threejs/OrbitControls.js 	1050		112
+                                       ./js/threejs/scene.js 	379		60
+                                         ./js/threejs/Sky.js 	222		51
+                                       ./js/threejs/three.js 	48008		3302
+                       ./js/threejs/threejs_gui_interface.js 	64		8
+       ./js/userinteraction/game-intro_button_interaction.js 	23		13
+       ./js/userinteraction/game-outro-fail_vid-and-audio.js 	10		5
+             ./js/userinteraction/game_button_interaction.js 	118		71
+         ./js/userinteraction/mainmenu_button_interaction.js 	16		11
+        ./js/userinteraction/warnings/audio-visualwarning.js 	21		2
+
+
+Zusammenfassung:
+Anzahl der erstellten html-/css-/js-Dateien:	7	5	16
+
+Gesamte geschriebene html-Zeilenanzahl/ Kommentare:     1053  /   15
+Gesamte geschriebene css-Zeilenanzahl/ Kommentare:     1107  /   64
+Gesamte geschriebene js-Zeilenanzahl/ Kommentare:     1882  /   413
+Gesamte geschriebene Zeilenanzahl/ Kommentare:     4042  /   492
