@@ -1,3 +1,8 @@
+/*##############################################################################################################################################*/
+/*##################### centralized routines for updating the gui-dispaly values ###############################################################*/
+/*##############################################################################################################################################*/
+
+// function to update the storage display
 function updateStorageDisplay(){
     document.querySelector('.energy-storage-value').innerHTML=document.querySelector('.energy-value').value+' HU';
     document.querySelector('#raw-caloricum-storage-value').innerHTML=document.querySelector('#raw-caloricum-storage-value').value+' t';
@@ -12,7 +17,7 @@ function updateStorageDisplay(){
     document.querySelector('#weight-storage-value').innerHTML=parseFloat(document.querySelector('#weight-storage-value').value).toFixed(2)+' t';
 }
 
-
+// function to update the head-up gui
 function udpateHeadupDisplay(){
     document.querySelector('.weight-value').innerHTML=document.querySelector('.weight-value').value+'/'+ system.WeightStartValue +' t';
     document.querySelector('.wear-value').innerHTML=document.querySelector('.wear-value').value +'/100 %';
