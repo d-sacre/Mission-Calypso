@@ -15,8 +15,7 @@ h1 {
   position: absolute;
   font-size: 50pt;
   color: yellow;
-  /*top: 10px;
-  left: 425px;*/
+
   top: -20px;
   left: 350px;
 }
@@ -26,7 +25,6 @@ h1 {
   left: 26vw;
   top: 0vw;
 
-  /*height: 100vh;*/
   width: 74vw;
 
   z-index: -1;

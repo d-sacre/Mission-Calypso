@@ -110,25 +110,10 @@ audio {
 }
 
 
-/*#back-to-mainmenu-popup-button{
-
-  position: absolute;
-  bottom: 10vh;
-
-}
-
-#return-to-game-popup-button{
-  position: absolute;
-  bottom: 0vh;
-}*/
-
-
 .clickbox-popupmenu{
   position: absolute;
   bottom: 80vh;
   left: -6vw;
-
-  /*background-color: red;*/
 
   width: 106vw;
   height: 10vh;
@@ -143,16 +128,9 @@ audio {
   width: 100vw;
   height: 20vh;
 
-  /*background-color: red;*/
-
-  /*background: var(--calypsobrass);*/
-	background-image:
-    linear-gradient(to bottom, var(--headupgui-stop),var(--headupgui-start));
-	background-repeat: no-repeat;
-
-    /*linear-gradient(
-      red, #f06d06
-    );*/
+  background-image:
+  linear-gradient(to bottom, var(--headupgui-stop),var(--headupgui-start));
+  background-repeat: no-repeat;
 
   z-index=20;
 }
@@ -423,13 +401,10 @@ audio {
 
   font-size: 20px;
   color: var(--calypsocopper);
-  /*background-color: var(--calypsobrass);*/
 
-  /*display: none;*/
 
   z-index: 20;
 
-  /*pointer-events:none;*/
 }
 
 .game-over-popup h1{
