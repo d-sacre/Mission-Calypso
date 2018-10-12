@@ -96,6 +96,18 @@ body button{
     left: 7.5vw;
 }
 
+#rocket-explode-video {
+    position: absolute;
+    bottom: 5vh;
+    left: 12.5vw;
+
+    width: 960px;
+    height: 540px;
+
+    border: 10px var(--calypsocopper) solid;
+    border-radius: 50px;
+}
+
 /* Popup to inform about the task*/
 .task-popup{
   position: absolute;
